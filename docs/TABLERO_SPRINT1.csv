@@ -1,7 +1,7 @@
 ID,Actividad visible en la captura,Estado,Iniciales responsable,Sprint
-SCRUM-50,"Diseñar wireframes de inicio, catálogo, detalle de centro, acceso, perfil y re…",En curso,FR,1
-SCRUM-51,"Crear identidad visual con colores, tipografía, iconos y componentes consis…",En curso,IM,1
-SCRUM-52,"Definir arquitectura del sitio, tecnologías, estructura de carpetas y estrategi…",Por hacer,AM,1
-SCRUM-53,"Diseñar el modelo de datos para centros, materiales, usuarios y entregas de…",En curso,AM,1
-SCRUM-54,"Preparar repositorio Git, tablero de tareas, convenciones de código y ambiente…",En revisión,AM,1
-SCRUM-83,"Mostrar en el perfil del usuario los puntos acumulados por sus entregas real…",En curso,RC,1
+SCRUM-50,"Diseñar wireframes de inicio, catálogo, detalle de centro, acceso, perfil y re…",En curso,Fátima,1
+SCRUM-51,"Crear identidad visual con colores, tipografía, iconos y componentes consis…",En curso,Isabella,1
+SCRUM-52,"Definir arquitectura del sitio, tecnologías, estructura de carpetas y estrategi…",Por hacer,Arantza,1
+SCRUM-53,"Diseñar el modelo de datos para centros, materiales, usuarios y entregas de…",En curso,Alan,1
+SCRUM-54,"Preparar repositorio Git, tablero de tareas, convenciones de código y ambiente…",En revisión,Arantza,1
+SCRUM-83,"Mostrar en el perfil del usuario los puntos acumulados por sus entregas real…",En curso,Renata,1
