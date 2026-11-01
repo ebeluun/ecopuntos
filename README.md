@@ -39,3 +39,7 @@ Para iniciar, abre la carpeta en VS Code y ejecuta `index.html` en el navegador.
 Consulta [CONTRIBUTING.md](CONTRIBUTING.md), [convenciones](docs/CONVENCIONES.md) y [tablero de Sprint 1](docs/TABLERO_SPRINT1.csv).
 
 > El tablero oficial y los estados de trabajo se mantienen en la herramienta Scrum del equipo. El CSV es una copia de referencia, no un tablero sincronizado.
+
+
+## Arquitectura y versiones
+Consulta la [arquitectura del sitio](docs/ARQUITECTURA.md) y la [estrategia de versiones](docs/ESTRATEGIA_VERSIONES.md) para conocer las tecnologías propuestas, organización del proyecto y flujo de Git.
