@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi perfil | EcoPuntos</title>
+
+    <!-- Conexión con los estilos CSS -->
+    <link rel="stylesheet" href="css/perfil.css">
+
+    <!-- Conexión con JavaScript -->
+    <script src="js/perfil.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>EcoPuntos</h1>
+        <p>Mi perfil</p>
+    </header>
+
+    <main>
+
+        <!-- Información del usuario -->
+        <section class="perfil">
+            <div class="avatar">U</div>
+
+            <div>
+                <h2>Hola, Usuario</h2>
+                <p class="texto-secundario">
+                    Este es tu espacio en EcoPuntos.
+                </p>
+            </div>
+        </section>
+
+        <!-- Puntos acumulados -->
+        <section class="tarjeta-puntos">
+            <p class="etiqueta">Mis puntos acumulados</p>
+
+            <p class="total-puntos">
+                <span id="total-puntos">350</span> puntos
+            </p>
+
+            <p class="nota-puntos">
+                Puntos obtenidos por tus entregas registradas.
+            </p>
+        </section>
+
+        <!-- Historial de entregas -->
+        <section class="seccion-entregas">
+
+            <div class="encabezado-seccion">
+                <h2>Mis entregas</h2>
+                <span id="cantidad-entregas" class="contador">
+                    3 entregas
+                </span>
+            </div>
+
+            <div id="lista-entregas" class="lista-entregas">
+                <!-- JavaScript mostrará las entregas aquí -->
+            </div>
+
+            <p class="aviso">
+                Estos datos son de demostración. Los puntos reales
+                se mostrarán cuando se conecte el sistema de entregas.
+            </p>
+
+        </section>
+
+        <a class="volver" href="index.html">Volver al inicio</a>
+
+    </main>
+
+    <footer>
+        <p>EcoPuntos | Cada entrega cuenta para cuidar el planeta.</p>
+    </footer>
+
+</body>
+</html>
+

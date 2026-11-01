@@ -1,0 +1,193 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #20352b;
+    background: #f7fbf8;
+    line-height: 1.6;
+}
+
+header {
+    padding: 28px 8%;
+    background: #e6f3e9;
+    color: #15583e;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p {
+    margin: 4px 0 0;
+}
+
+main {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.avatar {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #15583e;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.perfil h2,
+.seccion-entregas h2 {
+    margin: 0;
+}
+
+.texto-secundario,
+.nota-puntos,
+.aviso {
+    color: #607268;
+}
+
+.texto-secundario {
+    margin: 2px 0 0;
+}
+
+.tarjeta-puntos {
+    padding: 26px;
+    border-radius: 14px;
+    background: #e6f3e9;
+    border: 1px solid #cfe5d5;
+}
+
+.etiqueta {
+    margin: 0;
+    color: #15583e;
+    font-weight: bold;
+}
+
+.total-puntos {
+    margin: 6px 0;
+    color: #15583e;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.total-puntos span:last-child {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.nota-puntos {
+    margin: 0;
+    font-size: 14px;
+}
+
+.seccion-entregas {
+    margin-top: 36px;
+}
+
+.encabezado-seccion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.contador {
+    color: #15583e;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.lista-entregas {
+    display: grid;
+    gap: 12px;
+}
+
+.entrega {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+    background: white;
+    border: 1px solid #dce9df;
+    border-radius: 10px;
+}
+
+.entrega h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.entrega p {
+    margin: 3px 0 0;
+    color: #607268;
+    font-size: 13px;
+}
+
+.puntos-entrega {
+    color: #15583e;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.aviso {
+    margin-top: 14px;
+    font-size: 12px;
+}
+
+.volver {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: #15583e;
+    color: white;
+    text-decoration: none;
+}
+
+.volver:hover {
+    background: #10452f;
+}
+
+footer {
+    margin-top: 48px;
+    padding: 20px 8%;
+    background: #15583e;
+    color: white;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+@media (max-width: 520px) {
+    main {
+        margin-top: 28px;
+        padding: 0 16px;
+    }
+
+    .total-puntos {
+        font-size: 32px;
+    }
+
+    .entrega {
+        align-items: flex-start;
+    }
+}
