@@ -3,7 +3,7 @@
 Proyecto académico para facilitar la consulta de centros de reciclaje y fomentar hábitos sustentables.
 
 ## Sprint 1
-**Periodo:** 26 de octubre al 9 de noviembre.  
+**Periodo:** 26 de octubre al 2 de noviembre.  
 **Alcance:** seis work items registrados en el tablero del equipo. Este repositorio apoya el trabajo de Sprint 1; no sustituye el tablero oficial.
 
 ### Equipo
