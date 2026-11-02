@@ -8,10 +8,10 @@ Proyecto académico para facilitar la consulta de centros de reciclaje y fomenta
 
 ### Equipo
 - Arantza Acevedo Martínez — Scrum Master
-- Renata de la Garza Contel — Product Owner
-- Isabella Hernández Montalvo — Desarrollo Frontend
-- Alan Emiliano Ramírez Mata — Desarrollo Backend
-- Fátima Ramírez Rivera — Diseño UX/UI
+- Renata de la Garza Contel
+- Isabella Hernández Montalvo
+- Alan Emiliano Ramírez Mata
+- Fátima Ramírez Rivera
 
 ## Objetivo de este repositorio
 Preparar el repositorio Git, organizar los archivos iniciales, establecer convenciones de código y documentar cómo ejecutar y colaborar en el proyecto.
