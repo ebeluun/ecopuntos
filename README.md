@@ -36,6 +36,4 @@ Para iniciar, abre la carpeta en VS Code y ejecuta `index.html` en el navegador.
 - `feature/nombre-tarea`: nuevas funcionalidades.
 - `fix/nombre-error`: correcciones.
 
-Consulta [CONTRIBUTING.md](CONTRIBUTING.md), [convenciones](docs/CONVENCIONES.md) y [tablero de Sprint 1](docs/TABLERO_SPRINT1.csv).
-
 > El tablero oficial y los estados de trabajo se mantienen en la herramienta Scrum del equipo. El CSV es una copia de referencia, no un tablero sincronizado.
