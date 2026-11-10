@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Consulta centros de reciclaje y los materiales que reciben.">
+  <title>Centros de reciclaje | EcoPuntos</title>
+  <link rel="stylesheet" href="css/centros.css">
+  <script src="js/centros.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="EcoPuntos, ir al inicio">
+      <span class="brand-icon" aria-hidden="true">♻️</span>
+      <span>EcoPuntos</span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <span aria-hidden="true">|</span>
+      <a href="centros.html" aria-current="page">Centros</a>
+      <span aria-hidden="true">|</span>
+      <a href="index.html#login-dialog">Iniciar Sesion</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-heading" aria-labelledby="page-title">
+      <h1 id="page-title">Centros de reciclaje</h1>
+      <p>Encuentra un lugar para llevar tus materiales y contribuir con el planeta</p>
+    </section>
+
+    <section class="centers-search" aria-label="Buscar centros de reciclaje">
+      <label class="search-box" for="search-centers">
+        <span aria-hidden="true">🔍</span>
+        <input id="search-centers" type="search" placeholder="Buscar por nombre o ubicacion..." autocomplete="off">
+      </label>
+
+      <div class="filter-buttons" role="group" aria-label="Filtrar por material">
+        <button class="filter-button active" type="button" data-filter="todos" aria-pressed="true">Todos</button>
+        <button class="filter-button" type="button" data-filter="plastico" aria-pressed="false">Plastico</button>
+        <button class="filter-button" type="button" data-filter="papel" aria-pressed="false">Papel</button>
+        <button class="filter-button" type="button" data-filter="vidrio" aria-pressed="false">Vidrio</button>
+        <button class="filter-button" type="button" data-filter="metal" aria-pressed="false">Metal</button>
+      </div>
+
+      <p class="results-message" id="results-message" aria-live="polite"></p>
+
+      <div class="centers-grid" id="centers-grid">
+        <article class="center-card">
+          <h2>🌱 Centro Verde</h2>
+          <p class="location">📍 Monterrey, Nuevo Leon</p>
+          <p class="materials-title">♻️ Materiales que recibe:</p>
+          <p class="materials-list">Plastico, Papel y Carton</p>
+          <button class="details-button" type="button" data-details="centro-verde">Ver detalles</button>
+        </article>
+        <article class="center-card">
+          <h2>♻️ EcoRecicla</h2>
+          <p class="location">📍 San Nicolas, Nuevo Leon</p>
+          <p class="materials-title">♻️ Materiales que recibe:</p>
+          <p class="materials-list">Vidrio, Metal y Plastico</p>
+          <button class="details-button" type="button" data-details="ecorecicla">Ver detalles</button>
+        </article>
+        <article class="center-card">
+          <h2>🌎 Punto Limpio</h2>
+          <p class="location">📍 Guadalupe, Nuevo Leon</p>
+          <p class="materials-title">♻️ Materiales que recibe:</p>
+          <p class="materials-list">Papel, Carton y Electronicos</p>
+          <button class="details-button" type="button" data-details="punto-limpio">Ver detalles</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>EcoPuntos | Cuidar el planeta esta en nuestras manos</p>
+  </footer>
+
+  <dialog class="details-dialog" id="details-dialog">
+    <button class="dialog-close" type="button" aria-label="Cerrar">×</button>
+    <div id="details-content"></div>
+  </dialog>
+</body>
+</html>
