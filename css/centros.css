@@ -339,3 +339,21 @@ input:focus-visible {
     margin: 0 14px 14px;
   }
 }
+
+
+.materials-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background-color: var(--green);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+
+.materials-link:hover {
+  background-color: var(--green-dark);
+}
