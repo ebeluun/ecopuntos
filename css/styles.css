@@ -341,3 +341,342 @@ main {
     min-height: 145px;
   }
 }
+
+
+/* Secciones adicionales de la página principal. */
+.eyebrow {
+  margin: 0 0 9px;
+  color: #4c8a68;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.welcome {
+  padding-top: 48px;
+  padding-bottom: 12px;
+}
+
+.welcome-text {
+  max-width: 720px;
+  margin-top: 16px;
+}
+
+.hero-note {
+  margin: 16px auto 0;
+  color: #668c7a;
+  font-size: 13px;
+}
+
+.feature-grid {
+  margin-top: 38px;
+  margin-bottom: 70px;
+  gap: 28px;
+}
+
+.feature-card {
+  min-height: 190px;
+  padding: 22px 18px;
+}
+
+.feature-card h2 {
+  font-size: 20px;
+}
+
+.feature-card p {
+  max-width: 250px;
+  font-size: 13px;
+}
+
+.card-link {
+  margin-top: auto;
+  padding-top: 14px;
+  font-size: 13px;
+}
+
+.how-section,
+.materials-section,
+.faq-section {
+  width: min(100% - 60px, 1050px);
+  margin: 0 auto 72px;
+}
+
+.section-heading {
+  max-width: 700px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.section-heading h2,
+.impact-copy h2,
+.final-cta h2 {
+  margin: 0 0 12px;
+  color: var(--green);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(25px, 3vw, 32px);
+}
+
+.section-heading > p:last-child {
+  margin: 0;
+  color: #557b69;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.step-card {
+  position: relative;
+  min-height: 205px;
+  padding: 25px 22px;
+  border: 1px solid #d9eadf;
+  border-radius: 10px;
+  background: #f8fcf9;
+  text-align: center;
+}
+
+.step-number {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.step-icon {
+  display: block;
+  margin: 4px 0 12px;
+  font-size: 32px;
+}
+
+.step-card h3,
+.material-card h3 {
+  margin: 0 0 8px;
+  color: var(--green);
+  font-size: 17px;
+}
+
+.step-card p,
+.material-card p {
+  margin: 0;
+  color: #557b69;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.materials-section {
+  padding: 48px 32px;
+  border-radius: 14px;
+  background: #f3f9f4;
+}
+
+.materials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.material-card {
+  min-height: 150px;
+  padding: 20px 16px;
+  border: 1px solid #dcece0;
+  border-radius: 9px;
+  background: #fff;
+  text-align: center;
+}
+
+.material-card > span {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 29px;
+}
+
+.section-action {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.secondary-button {
+  min-height: 43px;
+  padding: 12px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--green);
+  border-radius: 5px;
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.secondary-button:hover {
+  background: var(--mint);
+}
+
+.impact-section {
+  width: min(100% - 60px, 1050px);
+  margin: 0 auto 72px;
+  padding: 38px 44px;
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  align-items: center;
+  gap: 30px;
+  border-radius: 13px;
+  background: var(--mint);
+}
+
+.impact-copy h2 {
+  max-width: 570px;
+}
+
+.impact-copy > p:not(.eyebrow) {
+  max-width: 620px;
+  margin: 0 0 22px;
+  color: #426b5d;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.impact-copy .primary-button {
+  min-height: 45px;
+  padding: 12px 18px;
+  font-size: 13px;
+}
+
+.impact-illustration {
+  min-height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: clamp(35px, 5vw, 58px);
+}
+
+.impact-illustration span:nth-child(2) {
+  font-size: clamp(55px, 7vw, 82px);
+}
+
+.faq-section details {
+  margin: 10px 0;
+  padding: 17px 19px;
+  border: 1px solid #d9eadf;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.faq-section summary {
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.faq-section details p {
+  margin: 12px 0 0;
+  color: #557b69;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.final-cta {
+  margin: 0 12px 25px;
+  padding: 42px 20px;
+  border-radius: 10px;
+  background: #f3f9f4;
+  text-align: center;
+}
+
+.final-cta p {
+  margin: 0 0 20px;
+  color: #557b69;
+  font-size: 14px;
+}
+
+.final-cta .primary-button {
+  min-height: 45px;
+  padding: 12px 20px;
+  font-size: 13px;
+}
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 13px 15px;
+}
+
+.site-footer a {
+  color: #fff;
+  font-size: 11px;
+  text-decoration: underline;
+}
+
+.login-form .form-button {
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .welcome {
+    padding-top: 38px;
+  }
+
+  .feature-grid,
+  .how-section,
+  .materials-section,
+  .faq-section,
+  .impact-section {
+    width: min(100% - 36px, 500px);
+  }
+
+  .feature-grid {
+    gap: 14px;
+    margin-bottom: 55px;
+  }
+
+  .steps-grid,
+  .materials-grid,
+  .impact-section {
+    grid-template-columns: 1fr;
+  }
+
+  .step-card {
+    min-height: 175px;
+  }
+
+  .materials-section {
+    padding: 34px 17px;
+  }
+
+  .impact-section {
+    padding: 30px 22px;
+  }
+
+  .impact-illustration {
+    min-height: 100px;
+  }
+
+  .how-section,
+  .materials-section,
+  .faq-section {
+    margin-bottom: 52px;
+  }
+
+  .final-cta {
+    padding: 34px 18px;
+  }
+}
