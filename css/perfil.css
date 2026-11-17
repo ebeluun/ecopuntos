@@ -5,6 +5,88 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background: #f7fbf8;
+    color: #20352b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Encabezado */
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: #26734d;
+    color: white;
+}
+
+.encabezado h1 {
+    margin: 0;
+}
+
+.encabezado a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Contenido principal */
+.contenedor {
+    width: 85%;
+    max-width: 900px;
+    margin: 35px auto;
+    flex: 1;
+}
+
+/* Presentación del perfil */
+.perfil {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.perfil h2 {
+    color: #26734d;
+    font-size: 28px;
+}
+
+.perfil h3 {
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+/* Puntos acumulados */
+.puntos {
+    background: #e2f3e8;
+    text-align: center;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.puntos h2 {
+    margin-top: 0;
+}
+
+.cantidad {
+    color: #26734d;
+    font-size: 38px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Historial de entregas */
+.entregas {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.entregas h2 {
+    color: #26734d;
+    margin-top: 0;
     color: #20352b;
     background: #f7fbf8;
     line-height: 1.6;
@@ -122,6 +204,55 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e8e2;
+}
+
+.entrega:last-child {
+    border-bottom: none;
+}
+
+.entrega h3 {
+    margin: 0 0 5px;
+}
+
+.entrega p {
+    margin: 0;
+    color: #68776d;
+}
+
+.entrega strong {
+    color: #26734d;
+}
+
+/* Aviso */
+.aviso {
+    text-align: center;
+    color: #68776d;
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+/* Pie de página */
+footer {
+    background: #20352b;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+    .contenedor {
+        width: 92%;
+    }
+
+    .encabezado {
+        padding: 18px 5%;
+    }
+
+    .entrega {
+        gap: 15px;
     gap: 16px;
     padding: 16px 18px;
     background: white;

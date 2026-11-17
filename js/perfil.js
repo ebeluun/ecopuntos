@@ -1,3 +1,6 @@
+
+// Datos de demostración de las entregas del usuario
+
 // Datos de demostración para mostrar cómo se verá el perfil.
 // Después se podrán reemplazar por los datos reales del usuario.
 const entregas = [
@@ -18,6 +21,19 @@ const entregas = [
     }
 ];
 
+// Calcular los puntos acumulados
+let totalPuntos = 0;
+
+entregas.forEach(function(entrega) {
+    totalPuntos += entrega.puntos;
+});
+
+// Mostrar el total de puntos en la página
+const cantidadPuntos = document.querySelector(".cantidad");
+
+if (cantidadPuntos) {
+    cantidadPuntos.textContent = totalPuntos + " puntos";
+}
 // Sumamos los puntos de todas las entregas.
 let totalPuntos = 0;
 

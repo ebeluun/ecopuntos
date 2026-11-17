@@ -32,6 +32,24 @@ const centersGrid = document.getElementById("centers-grid");
 const searchInput = document.getElementById("search-centers");
 const filterButtons = document.querySelectorAll(".filter-button");
 const resultsMessage = document.getElementById("results-message");
+
+let activeFilter = "todos";
+
+// Mostrar los centros según la búsqueda y el filtro seleccionado.
+function showCenters() {
+  const searchText = searchInput.value
+    .trim()
+    .toLocaleLowerCase("es");
+
+  const filteredCenters = centers.filter((center) => {
+    const searchableText = (
+      center.name + " " + center.location
+    ).toLocaleLowerCase("es");
+
+    const matchesSearch = searchableText.includes(searchText);
+
+    const matchesMaterial =
+      activeFilter === "todos" ||
 const detailsDialog = document.getElementById("details-dialog");
 const detailsContent = document.getElementById("details-content");
 let activeFilter = "todos";
@@ -54,6 +72,9 @@ function showCenters() {
   if (filteredCenters.length === 0) {
     const message = document.createElement("p");
     message.className = "no-results";
+    message.textContent =
+      "No se encontraron centros. Intenta con otra búsqueda.";
+
     message.textContent = "No se encontraron centros. Intenta con otra busqueda.";
     centersGrid.appendChild(message);
   } else {
@@ -82,11 +103,26 @@ function showCenters() {
       detailsButton.textContent = "Ver detalles";
       detailsButton.dataset.details = center.id;
 
+      card.append(
+        title,
+        location,
+        materialsTitle,
+        materials,
+        detailsButton
+      );
+
       card.append(title, location, materialsTitle, materials, detailsButton);
       centersGrid.appendChild(card);
     });
   }
 
+  resultsMessage.textContent =
+    filteredCenters.length === 1
+      ? "1 centro encontrado"
+      : filteredCenters.length + " centros encontrados";
+}
+
+// Activar los filtros de materiales.
   resultsMessage.textContent = filteredCenters.length === 1
     ? "1 centro encontrado"
     : filteredCenters.length + " centros encontrados";
@@ -98,6 +134,7 @@ filterButtons.forEach((button) => {
 
     filterButtons.forEach((item) => {
       const isActive = item === button;
+
       item.classList.toggle("active", isActive);
       item.setAttribute("aria-pressed", String(isActive));
     });
@@ -106,6 +143,28 @@ filterButtons.forEach((button) => {
   });
 });
 
+// Actualizar resultados al escribir.
+searchInput.addEventListener("input", showCenters);
+
+// Abrir la página del centro seleccionado.
+centersGrid.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-details]");
+
+  if (!button) return;
+
+  const centerId = button.dataset.details;
+
+  const selectedCenter = centers.find(
+    (center) => center.id === centerId
+  );
+
+  if (!selectedCenter) return;
+
+  window.location.href =
+    "detalle-centro.html?id=" + encodeURIComponent(centerId);
+});
+
+// Mostrar los centros al cargar la página.
 searchInput.addEventListener("input", showCenters);
 
 centersGrid.addEventListener("click", (event) => {

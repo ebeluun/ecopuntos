@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -6,6 +7,7 @@
   <meta name="description" content="Consulta centros de reciclaje y los materiales que reciben.">
   <title>Centros de reciclaje | EcoPuntos</title>
   <link rel="stylesheet" href="css/centros.css">
+  <script src="js/centros-data.js" defer></script>
   <script src="js/centros.js" defer></script>
 </head>
 <body>
@@ -14,6 +16,14 @@
       <span class="brand-icon" aria-hidden="true">♻️</span>
       <span>EcoPuntos</span>
     </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <span aria-hidden="true">|</span>
+      <a href="centros.html" aria-current="page">Centros</a>
+      <span aria-hidden="true">|</span>
+      <a href="materiales.html">Materiales</a>
+      <span aria-hidden="true">|</span>
     <nav class="main-nav" aria-label="Navegación principal">
       <a href="index.html#inicio">Inicio</a>
       <span aria-hidden="true">|</span>
@@ -32,11 +42,23 @@
     <section class="centers-search" aria-label="Buscar centros de reciclaje">
       <label class="search-box" for="search-centers">
         <span aria-hidden="true">🔍</span>
+        <input
+          id="search-centers"
+          type="search"
+          placeholder="Buscar por nombre o ubicación..."
+          autocomplete="off"
+        >
         <input id="search-centers" type="search" placeholder="Buscar por nombre o ubicacion..." autocomplete="off">
       </label>
 
       <div class="filter-buttons" role="group" aria-label="Filtrar por material">
         <button class="filter-button active" type="button" data-filter="todos" aria-pressed="true">Todos</button>
+        <button class="filter-button" type="button" data-filter="plastico" aria-pressed="false">Plástico</button>
+        <button class="filter-button" type="button" data-filter="papel" aria-pressed="false">Papel</button>
+        <button class="filter-button" type="button" data-filter="vidrio" aria-pressed="false">Vidrio</button>
+        <button class="filter-button" type="button" data-filter="metal" aria-pressed="false">Metal</button>
+        <button class="filter-button" type="button" data-filter="carton" aria-pressed="false">Cartón</button>
+        <button class="filter-button" type="button" data-filter="electronicos" aria-pressed="false">Electrónicos</button>
         <button class="filter-button" type="button" data-filter="plastico" aria-pressed="false">Plastico</button>
         <button class="filter-button" type="button" data-filter="papel" aria-pressed="false">Papel</button>
         <button class="filter-button" type="button" data-filter="vidrio" aria-pressed="false">Vidrio</button>
@@ -46,6 +68,7 @@
       <p class="results-message" id="results-message" aria-live="polite"></p>
 
       <div class="centers-grid" id="centers-grid">
+        <!-- Las tarjetas se generan desde js/centros.js -->
         <article class="center-card">
           <h2>🌱 Centro Verde</h2>
           <p class="location">📍 Monterrey, Nuevo Leon</p>
@@ -72,6 +95,7 @@
   </main>
 
   <footer class="site-footer">
+    <p>EcoPuntos | Cuidar el planeta está en nuestras manos</p>
     <p>EcoPuntos | Cuidar el planeta esta en nuestras manos</p>
   </footer>
 
