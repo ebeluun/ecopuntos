@@ -188,8 +188,13 @@ centersGrid.addEventListener("click", (event) => {
   const description = document.createElement("p");
   description.textContent = center.description;
 
-  detailsContent.append(title, location, materials, description);
-  detailsDialog.showModal();
+  const materialsLink = document.createElement("a");
+  materialsLink.href = "materiales.html";
+  materialsLink.textContent = "Conocer materiales reciclables";
+  materialsLink.className = "materials-link";
+
+detailsContent.append(title, location, materials, description, materialsLink);
+detailsDialog.showModal();
 });
 
 detailsDialog.querySelector(".dialog-close").addEventListener("click", () => {

@@ -1,0 +1,143 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7faf7;
+    color: #155b43;
+}
+
+.header {
+    background-color: #e5f2e8;
+    padding: 22px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+    color: #155b43;
+}
+
+.header nav {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.header nav a {
+    text-decoration: none;
+    color: #155b43;
+    font-weight: bold;
+}
+
+.header nav a:hover,
+.header nav a.active {
+    color: #26966b;
+}
+
+.materials-intro {
+    text-align: center;
+    padding: 65px 20px 45px;
+}
+
+.materials-intro h1 {
+    font-family: Georgia, serif;
+    font-size: 38px;
+    margin-bottom: 18px;
+}
+
+.materials-intro p {
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.7;
+    color: #52675b;
+}
+
+.materials-container {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 20px 25px 65px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.material-card {
+    background-color: #e5f2e8;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 12px rgba(21, 91, 67, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.material-card:hover {
+    transform: translateY(-5px);
+}
+
+.material-icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.material-card h2 {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.material-card p {
+    color: #52675b;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.material-card h3 {
+    font-size: 16px;
+    margin: 18px 0 10px;
+}
+
+.material-card ul {
+    padding-left: 22px;
+    color: #52675b;
+    line-height: 1.8;
+}
+
+footer {
+    background-color: #155b43;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+@media (max-width: 850px) {
+    .materials-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .materials-container {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        justify-content: center;
+    }
+
+    .header nav {
+        justify-content: center;
+    }
+
+    .materials-intro h1 {
+        font-size: 30px;
+    }
+}
