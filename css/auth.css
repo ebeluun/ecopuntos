@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7fbf8;
+    color: #20352b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Encabezado */
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 8%;
+    background: #e6f3e9;
+}
+
+.logo {
+    color: #15583e;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: #15583e;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Formulario */
+.contenedor {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.formulario {
+    width: 100%;
+    max-width: 440px;
+    padding: 35px;
+    background: white;
+    border: 1px solid #dce9df;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.formulario h1 {
+    text-align: center;
+    color: #15583e;
+    margin-top: 0;
+    margin-bottom: 28px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+input {
+    padding: 13px;
+    border: 1px solid #cbd9ce;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: 2px solid #77aa88;
+    border-color: #15583e;
+}
+
+button {
+    margin-top: 18px;
+    padding: 14px;
+    background: #15583e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #10452f;
+}
+
+.recuperar {
+    text-align: right;
+    color: #15583e;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.enlace-registro {
+    margin-top: 22px;
+    text-align: center;
+}
+
+.enlace-registro a {
+    color: #15583e;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#mensaje {
+    text-align: center;
+    color: #15583e;
+}
+
+/* Pie de página */
+footer {
+    padding: 20px;
+    background: #15583e;
+    color: white;
+    text-align: center;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+    .encabezado {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .formulario {
+        padding: 25px 20px;
+    }
+}
