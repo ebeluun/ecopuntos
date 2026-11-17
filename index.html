@@ -3,15 +3,146 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EcoPuntos</title>
+  <meta name="description" content="Encuentra centros de reciclaje, conoce los materiales y registra tus entregas en EcoPuntos.">
+  <title>EcoPuntos | Reciclar nunca fue tan fácil</title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="js/app.js" defer></script>
 </head>
 <body>
-  <header><h1>♻ EcoPuntos</h1><p>Encuentra dónde reciclar y ayuda a cuidar el planeta.</p></header>
+  <header class="site-header" id="inicio">
+    <a class="brand" href="#inicio" aria-label="EcoPuntos, ir al inicio">
+      <span class="brand-icon" aria-hidden="true">♻️</span><span>EcoPuntos</span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#inicio" aria-current="page">Inicio</a><span aria-hidden="true">|</span>
+      <a href="centros.html">Centros</a><span aria-hidden="true">|</span>
+      <button class="nav-login" type="button" data-open-dialog="login-dialog">Iniciar sesión</button>
+    </nav>
+  </header>
+
   <main>
-    <h2>Bienvenido a EcoPuntos</h2>
-    <p>Este es el ambiente inicial del proyecto. Aquí se integrarán el catálogo de centros, sus detalles y las funciones que desarrolle el equipo.</p>
+    <section class="welcome" aria-labelledby="welcome-title">
+      <p class="eyebrow">Pequeñas acciones, grandes cambios</p>
+      <h1 id="welcome-title">¡Reciclar nunca fue tan fácil!</h1>
+      <p class="welcome-text">Encuentra centros de reciclaje cerca de ti, conoce qué materiales reciben y ayuda a cuidar el planeta.</p>
+      <div class="hero-action">
+        <span class="decoration" aria-hidden="true">♻️</span>
+        <a class="primary-button" href="centros.html">Explorar centros de reciclaje</a>
+        <span class="decoration" aria-hidden="true">♻️</span>
+      </div>
+      <p class="hero-note">Empieza hoy: separa, busca un centro y dale una nueva vida a tus materiales.</p>
+    </section>
+
+    <section class="feature-grid" id="opciones" aria-label="Explora EcoPuntos">
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">♻️</span>
+        <h2>Encuentra centros</h2>
+        <p>Busca lugares donde puedas llevar tus materiales para reciclarlos.</p>
+        <a class="card-link" href="centros.html">Explorar centros</a>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">🌱</span>
+        <h2>Conoce los materiales</h2>
+        <p>Aprende qué puedes separar y cómo prepararlo antes de reciclar.</p>
+        <a class="card-link" href="#materiales">Ver materiales</a>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">⭐</span>
+        <h2>Registra tus entregas</h2>
+        <p>Consulta el ejemplo de un perfil y conoce cómo se acumulan puntos.</p>
+        <a class="card-link" href="perfil.html">Conocer mis puntos</a>
+      </article>
+    </section>
+
+    <section class="how-section" aria-labelledby="how-title">
+      <div class="section-heading">
+        <p class="eyebrow">Comienza en tres pasos</p>
+        <h2 id="how-title">¿Cómo funciona EcoPuntos?</h2>
+        <p>Reciclar puede ser sencillo cuando sabes qué hacer y dónde llevar tus materiales.</p>
+      </div>
+      <div class="steps-grid">
+        <article class="step-card">
+          <span class="step-number">1</span><span class="step-icon" aria-hidden="true">🧺</span>
+          <h3>Separa tus materiales</h3>
+          <p>Clasifica tus residuos y procura que estén limpios y secos cuando sea posible.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-number">2</span><span class="step-icon" aria-hidden="true">📍</span>
+          <h3>Encuentra un centro</h3>
+          <p>Explora los centros disponibles y revisa qué materiales recibe cada uno.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-number">3</span><span class="step-icon" aria-hidden="true">⭐</span>
+          <h3>Registra tu entrega</h3>
+          <p>Consulta tu perfil de ejemplo y lleva un seguimiento de tus entregas.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="materials-section" id="materiales" aria-labelledby="materials-title">
+      <div class="section-heading">
+        <p class="eyebrow">Dales una nueva oportunidad</p>
+        <h2 id="materials-title">¿Qué materiales puedes reciclar?</h2>
+        <p>Identifica algunos materiales comunes y recuerda verificar las reglas del centro al que acudirás.</p>
+      </div>
+      <div class="materials-grid">
+        <article class="material-card"><span aria-hidden="true">📰</span><h3>Papel</h3><p>Hojas, periódicos y revistas limpios y secos.</p></article>
+        <article class="material-card"><span aria-hidden="true">📦</span><h3>Cartón</h3><p>Cajas y empaques sin restos de comida o grasa.</p></article>
+        <article class="material-card"><span aria-hidden="true">🥤</span><h3>Plástico</h3><p>Envases y botellas aceptados por el centro.</p></article>
+        <article class="material-card"><span aria-hidden="true">🍾</span><h3>Vidrio</h3><p>Frascos y botellas de vidrio, manejados con cuidado.</p></article>
+        <article class="material-card"><span aria-hidden="true">🥫</span><h3>Metal</h3><p>Latas y otros envases metálicos limpios.</p></article>
+        <article class="material-card"><span aria-hidden="true">🔌</span><h3>Electrónicos</h3><p>Aparatos y accesorios que requieren acopio especial.</p></article>
+      </div>
+      <div class="section-action"><a class="secondary-button" href="centros.html">Consultar centros de reciclaje</a></div>
+    </section>
+
+    <section class="impact-section" aria-labelledby="impact-title">
+      <div class="impact-copy">
+        <p class="eyebrow">Cada acción cuenta</p>
+        <h2 id="impact-title">Un pequeño hábito puede hacer la diferencia</h2>
+        <p>Separar los residuos ayuda a que más materiales puedan aprovecharse y reduce la cantidad de basura que llega a los rellenos sanitarios. Comienza con lo que tienes en casa y avanza poco a poco.</p>
+        <a class="primary-button" href="centros.html">Encuentra dónde reciclar</a>
+      </div>
+      <div class="impact-illustration" aria-hidden="true">
+        <span>🌎</span><span>♻️</span><span>🌱</span>
+      </div>
+    </section>
+
+    <section class="faq-section" aria-labelledby="faq-title">
+      <div class="section-heading">
+        <p class="eyebrow">Resolvemos tus dudas</p>
+        <h2 id="faq-title">Preguntas frecuentes</h2>
+      </div>
+      <details><summary>¿Tengo que separar los materiales?</summary><p>Sí. Separarlos por tipo facilita su manejo. Revisa también las indicaciones del centro de reciclaje.</p></details>
+      <details><summary>¿Todos los centros reciben los mismos materiales?</summary><p>No necesariamente. Consulta la información de cada centro antes de llevar tus materiales.</p></details>
+      <details><summary>¿Cómo puedo consultar mis puntos?</summary><p>Entra a la sección Mi perfil para ver el ejemplo de puntos y entregas de EcoPuntos.</p></details>
+    </section>
+
+    <section class="final-cta">
+      <h2>¿Listo para comenzar?</h2>
+      <p>Encuentra un centro y convierte el reciclaje en parte de tu día a día.</p>
+      <a class="primary-button" href="centros.html">Explorar centros de reciclaje</a>
+    </section>
   </main>
-  <footer>Proyecto académico EcoPuntos · Sprint 1</footer>
+
+  <footer class="site-footer">
+    <p>EcoPuntos | ¡Cuidar el planeta está en nuestras manos!</p>
+    <a href="#inicio">Volver arriba ↑</a>
+  </footer>
+
+  <dialog class="info-dialog login-dialog" id="login-dialog">
+    <button class="dialog-close" type="button" aria-label="Cerrar">×</button>
+    <span class="dialog-icon" aria-hidden="true">👤</span>
+    <h2>Iniciar sesión</h2>
+    <p>Ingresa tus datos para continuar. Esta pantalla es una demostración y todavía no está conectada a un sistema de cuentas.</p>
+    <form class="login-form">
+      <label for="login-email">Correo electrónico</label>
+      <input id="login-email" name="email" type="email" placeholder="correo@ejemplo.com" required>
+      <label for="login-password">Contraseña</label>
+      <input id="login-password" name="password" type="password" placeholder="Tu contraseña" required>
+      <button class="primary-button form-button" type="submit">Continuar</button>
+    </form>
+    <p class="form-note" id="login-message" aria-live="polite">Demostración visual: no se guardan ni envían tus datos.</p>
+  </dialog>
 </body>
 </html>
