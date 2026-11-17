@@ -4,3 +4,31 @@ header { padding: 36px 8%; background: #e6f3e9; color: #15583e; }
 header h1 { margin: 0; }
 main { max-width: 850px; margin: 48px auto; padding: 0 24px; }
 footer { padding: 20px 8%; background: #15583e; color: white; }
+
+/* Accesos a las páginas de usuario */
+.accesos {
+  margin-top: 40px;
+  padding: 25px;
+  background: #e6f3e9;
+  border-radius: 12px;
+}
+
+.accesos h2 {
+  color: #15583e;
+  margin-top: 0;
+}
+
+.boton {
+  display: inline-block;
+  margin: 8px 8px 8px 0;
+  padding: 12px 22px;
+  background: #26734d;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.boton:hover {
+  background: #15583e;
+}
