@@ -36,3 +36,12 @@ if (loginForm) {
     message.textContent = "¡Gracias! El inicio de sesión se conectará cuando esté listo el backend.";
   });
 }
+
+
+// Permite abrir el acceso cuando se llega desde otra página con #login-dialog.
+if (window.location.hash === "#login-dialog") {
+  const loginDialog = document.getElementById("login-dialog");
+  if (loginDialog && typeof loginDialog.showModal === "function") {
+    loginDialog.showModal();
+  }
+}
