@@ -1,4 +1,15 @@
-// Validaciones y mensajes visuales para los formularios de EcoPuntos.
+
+// Funciones para registrar usuarios e iniciar sesión en EcoPuntos.
+
+// Obtener los usuarios guardados en el navegador.
+function obtenerUsuarios() {
+    return JSON.parse(localStorage.getItem("usuariosEcoPuntos")) || [];
+}
+
+// Guardar los usuarios en el navegador.
+function guardarUsuarios(usuarios) {
+    localStorage.setItem("usuariosEcoPuntos", JSON.stringify(usuarios));
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     const formulario = document.querySelector("#form-registro, #form-login");
@@ -43,18 +54,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const correo = formulario.querySelector("#correo");
         const contrasena = formulario.querySelector("#contrasena");
-        const primerCampoVacio = Array.from(campos).find(function (campo) {
-            return campo.required && !campo.value.trim();
-        });
+        const nombre = esRegistro ? formulario.querySelector("#nombre").value.trim() : "";
+        const usuario = esRegistro ? formulario.querySelector("#usuario").value.trim() : "";
 
         campos.forEach(function (campo) {
             campo.classList.remove("campo-error");
         });
 
-        if (primerCampoVacio) {
-            primerCampoVacio.classList.add("campo-error");
+        if (esRegistro && (!nombre || !usuario)) {
+            const campoVacio = !nombre
+                ? formulario.querySelector("#nombre")
+                : formulario.querySelector("#usuario");
+
+            campoVacio.classList.add("campo-error");
             mostrarMensaje("Por favor, completa todos los campos obligatorios.", "mensaje-error");
-            primerCampoVacio.focus();
+            campoVacio.focus();
+            return;
+        }
+
+        if (!correo.value.trim() || !contrasena.value.trim()) {
+            const campoVacio = !correo.value.trim() ? correo : contrasena;
+            campoVacio.classList.add("campo-error");
+            mostrarMensaje("Por favor, completa todos los campos obligatorios.", "mensaje-error");
+            campoVacio.focus();
             return;
         }
 
@@ -65,24 +87,59 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        if (esRegistro && !validarContrasena(contrasena.value)) {
-            contrasena.classList.add("campo-error");
-            mostrarMensaje("La contraseña debe tener mínimo 8 caracteres, al menos una letra y un número.", "mensaje-error");
-            contrasena.focus();
-            return;
-        }
-
-        if (!esRegistro && !contrasena.value.trim()) {
-            contrasena.classList.add("campo-error");
-            mostrarMensaje("Ingresa tu contraseña para continuar.", "mensaje-error");
-            contrasena.focus();
-            return;
-        }
-
         if (esRegistro) {
-            mostrarMensaje("¡Datos validados correctamente! El formulario de registro está listo.", "mensaje-exito");
+            if (!validarContrasena(contrasena.value)) {
+                contrasena.classList.add("campo-error");
+                mostrarMensaje("La contraseña debe tener mínimo 8 caracteres, al menos una letra y un número.", "mensaje-error");
+                contrasena.focus();
+                return;
+            }
+
+            const usuarios = obtenerUsuarios();
+
+            const existe = usuarios.some(function (persona) {
+                return persona.correo === correo.value.trim().toLowerCase() ||
+                    persona.usuario === usuario;
+            });
+
+            if (existe) {
+                mostrarMensaje("El correo o nombre de usuario ya está registrado.", "mensaje-error");
+                return;
+            }
+
+            const nuevoUsuario = {
+                nombre: nombre,
+                correo: correo.value.trim().toLowerCase(),
+                usuario: usuario,
+                contrasena: contrasena.value
+            };
+
+            usuarios.push(nuevoUsuario);
+            guardarUsuarios(usuarios);
+
+            mostrarMensaje("¡Registro exitoso! Ahora puedes iniciar sesión.", "mensaje-exito");
+            formulario.reset();
+
         } else {
-            mostrarMensaje("¡Datos validados correctamente! El formulario de inicio de sesión está listo.", "mensaje-exito");
+            const usuarios = obtenerUsuarios();
+
+            const usuarioEncontrado = usuarios.find(function (persona) {
+                return persona.correo === correo.value.trim().toLowerCase() &&
+                    persona.contrasena === contrasena.value;
+            });
+
+            if (!usuarioEncontrado) {
+                mostrarMensaje("Correo o contraseña incorrectos.", "mensaje-error");
+                return;
+            }
+
+            localStorage.setItem("usuarioActivo", JSON.stringify({
+                nombre: usuarioEncontrado.nombre,
+                correo: usuarioEncontrado.correo,
+                usuario: usuarioEncontrado.usuario
+            }));
+
+            window.location.href = "perfil.html";
         }
     });
 });

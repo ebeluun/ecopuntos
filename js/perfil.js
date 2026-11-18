@@ -1,8 +1,16 @@
+// Obtener los datos del usuario que inició sesión.
+const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
 
-// Datos de demostración de las entregas del usuario
+// Mostrar el nombre del usuario en el perfil.
+const nombrePerfil = document.getElementById("nombre-perfil");
 
-// Datos de demostración para mostrar cómo se verá el perfil.
-// Después se podrán reemplazar por los datos reales del usuario.
+if (usuarioActivo && nombrePerfil) {
+    nombrePerfil.textContent = "¡Hola, " + usuarioActivo.nombre + "!";
+} else if (nombrePerfil) {
+    nombrePerfil.textContent = "¡Hola, Usuario!";
+}
+
+// Datos de demostración de las entregas.
 const entregas = [
     {
         material: "Plástico",
@@ -21,45 +29,16 @@ const entregas = [
     }
 ];
 
-// Calcular los puntos acumulados
+// Calcular los puntos acumulados.
 let totalPuntos = 0;
 
 entregas.forEach(function(entrega) {
     totalPuntos += entrega.puntos;
 });
 
-// Mostrar el total de puntos en la página
+// Mostrar los puntos en el perfil.
 const cantidadPuntos = document.querySelector(".cantidad");
 
 if (cantidadPuntos) {
     cantidadPuntos.textContent = totalPuntos + " puntos";
 }
-// Sumamos los puntos de todas las entregas.
-let totalPuntos = 0;
-
-entregas.forEach(function(entrega) {
-    totalPuntos = totalPuntos + entrega.puntos;
-});
-
-// Mostramos el total de puntos y la cantidad de entregas.
-document.getElementById("total-puntos").textContent = totalPuntos;
-document.getElementById("cantidad-entregas").textContent =
-    entregas.length + (entregas.length === 1 ? " entrega" : " entregas");
-
-// Creamos una tarjeta visual para cada entrega.
-const listaEntregas = document.getElementById("lista-entregas");
-
-entregas.forEach(function(entrega) {
-    const tarjeta = document.createElement("article");
-    tarjeta.className = "entrega";
-
-    tarjeta.innerHTML = `
-        <div>
-            <h3>${entrega.material}</h3>
-            <p>${entrega.fecha}</p>
-        </div>
-        <span class="puntos-entrega">+${entrega.puntos} puntos</span>
-    `;
-
-    listaEntregas.appendChild(tarjeta);
-});
