@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,76 +7,54 @@
   <title>Registro de entregas | EcoPuntos</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/registro-entregas.css">
+  <script src="js/centros-data.js" defer></script>
   <script src="js/registro-entregas.js" defer></script>
 </head>
 <body>
-
   <header class="main-header">
     <a href="index.html" class="logo">EcoPuntos</a>
-
     <nav class="main-nav" aria-label="Navegación principal">
       <a href="index.html">Inicio</a>
+      <a href="centros.html">Centros</a>
+      <a href="materiales.html">Materiales</a>
       <a href="perfil.html">Mi perfil</a>
       <a href="registro-entregas.html" aria-current="page">Registro de entregas</a>
     </nav>
   </header>
 
   <main class="page-container">
-
     <section class="intro-section">
       <span class="intro-icon" aria-hidden="true">♻️</span>
       <h1>Registro de entregas</h1>
-      <p>
-        Cada material reciclado cuenta.
-        Registra tus entregas y contribuye a un planeta más limpio.
-      </p>
+      <p>Cada material reciclado cuenta. Registra tus entregas y contribuye a un planeta más limpio.</p>
     </section>
 
     <section class="form-card">
       <div class="form-heading">
         <h2>Nueva entrega</h2>
-        <p>Completa los siguientes datos.</p>
+        <p>Selecciona un centro para consultar únicamente los materiales que recibe.</p>
       </div>
 
       <form id="delivery-form">
-
         <div class="form-group">
           <label for="center">Centro de reciclaje</label>
           <select id="center" name="center" required>
             <option value="">Selecciona un centro</option>
-            <option value="Centro Verde">Centro Verde</option>
-            <option value="EcoRecicla">EcoRecicla</option>
-            <option value="Punto Limpio">Punto Limpio</option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="material">Material entregado</label>
-          <select id="material" name="material" required>
-            <option value="">Selecciona un material</option>
-            <option value="Plástico">Plástico</option>
-            <option value="Papel">Papel</option>
-            <option value="Cartón">Cartón</option>
-            <option value="Vidrio">Vidrio</option>
-            <option value="Metal">Metal</option>
-            <option value="Electrónicos">Electrónicos</option>
+          <select id="material" name="material" required disabled>
+            <option value="">Primero selecciona un centro</option>
           </select>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="quantity">Cantidad entregada</label>
-            <input
-              type="number"
-              id="quantity"
-              name="quantity"
-              min="0.01"
-              step="0.01"
-              placeholder="Ej. 2.5"
-              required
-            >
+            <input type="number" id="quantity" name="quantity" min="0.01" step="0.01" placeholder="Ej. 2.5" required>
           </div>
-
           <div class="form-group">
             <label for="unit">Unidad</label>
             <select id="unit" name="unit" required>
@@ -89,36 +66,16 @@
 
         <div class="form-group">
           <label for="date">Fecha de entrega</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            required
-          >
+          <input type="date" id="date" name="date" required>
         </div>
 
         <div class="form-group">
           <label for="notes">Observaciones (opcional)</label>
-          <textarea
-            id="notes"
-            name="notes"
-            rows="4"
-            maxlength="250"
-            placeholder="Agrega algún comentario sobre tu entrega..."
-          ></textarea>
+          <textarea id="notes" name="notes" rows="4" maxlength="250" placeholder="Agrega algún comentario sobre tu entrega..."></textarea>
         </div>
 
-        <button type="submit" class="submit-button">
-          Registrar entrega
-        </button>
-
-        <p
-          id="form-message"
-          class="form-message"
-          role="status"
-          aria-live="polite"
-        ></p>
-
+        <button type="submit" class="submit-button">Registrar entrega</button>
+        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
       </form>
     </section>
 
@@ -126,18 +83,13 @@
       <span aria-hidden="true">🌱</span>
       <div>
         <h2>¡Cada acción suma!</h2>
-        <p>
-          Separar y entregar tus residuos ayuda a reducir la contaminación
-          y aprovechar mejor nuestros recursos.
-        </p>
+        <p>Separar y entregar tus residuos ayuda a reducir la contaminación y aprovechar mejor nuestros recursos.</p>
       </div>
     </section>
-
   </main>
 
   <footer class="main-footer">
     <p>© 2026 EcoPuntos | Cuidar el planeta está en tus manos.</p>
   </footer>
-
 </body>
 </html>
