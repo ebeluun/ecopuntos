@@ -1,0 +1,31 @@
+/* Identificación del usuario activo en todos los encabezados EcoPuntos */
+.user-session {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: 10px;
+  font-style: normal;
+}
+.user-session-name {
+  padding: 7px 11px;
+  border-radius: 20px;
+  background: #e2f4e8;
+  color: #15583e;
+  font-size: 13px;
+  font-weight: 700;
+}
+.user-session-logout {
+  padding: 7px 11px !important;
+  border: 1px solid currentColor !important;
+  border-radius: 7px;
+  font-size: 12px !important;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+.user-session-logout:hover {
+  opacity: .78;
+}
+@media (max-width: 700px) {
+  .user-session { margin: 5px 0 0; }
+}
