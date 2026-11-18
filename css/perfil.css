@@ -156,3 +156,91 @@ footer {
         justify-content: center;
     }
 }
+
+
+/* Actividad real del usuario: estadísticas e historial dinámico */
+.resumen-actividad {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+}
+.estadistica {
+    padding: 20px 14px;
+    background: #e2f3e8;
+    border-radius: 12px;
+    text-align: center;
+}
+.estadistica strong {
+    display: block;
+    color: #26734d;
+    font-size: 27px;
+    margin-bottom: 6px;
+}
+.estadistica span {
+    color: #526c5b;
+    font-size: 13px;
+}
+.lista-entregas {
+    display: grid;
+    gap: 12px;
+}
+.entrega {
+    gap: 18px;
+}
+.entrega-detalle {
+    min-width: 0;
+}
+.entrega-detalle p + p {
+    margin-top: 5px;
+}
+.entrega-meta {
+    text-align: right;
+    flex-shrink: 0;
+}
+.entrega-meta strong {
+    display: block;
+}
+.entrega-meta span {
+    color: #68776d;
+    font-size: 12px;
+}
+.sin-entregas {
+    padding: 28px 18px;
+    border: 1px dashed #b8cdbd;
+    border-radius: 10px;
+    text-align: center;
+    color: #68776d;
+    line-height: 1.6;
+}
+.acciones-perfil {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0;
+}
+.acciones-perfil a {
+    display: inline-block;
+    padding: 11px 16px;
+    border-radius: 8px;
+    background: #26734d;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+}
+.acciones-perfil a.secundario {
+    background: #e2f3e8;
+    color: #15583e;
+}
+@media (max-width: 600px) {
+    .resumen-actividad {
+        grid-template-columns: 1fr;
+    }
+    .entrega {
+        align-items: flex-start;
+    }
+    .entrega-meta {
+        max-width: 42%;
+    }
+}
