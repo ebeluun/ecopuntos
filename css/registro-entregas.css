@@ -243,3 +243,134 @@ body {
     gap: 0;
   }
 }
+
+
+/* Confirmación visual de cada entrega registrada */
+.delivery-dialog {
+  width: min(92%, 480px);
+  max-width: 480px;
+  padding: 32px;
+  border: 0;
+  border-radius: 18px;
+  color: #263b30;
+  box-shadow: 0 18px 60px rgba(15, 55, 37, 0.25);
+}
+
+.delivery-dialog::backdrop {
+  background: rgba(12, 39, 27, 0.62);
+  backdrop-filter: blur(3px);
+}
+
+.confirmation-mark {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e2f4e8;
+  color: #187344;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.confirmation-eyebrow {
+  margin: 0 0 7px;
+  color: #21845a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.delivery-dialog h2 {
+  margin: 0 0 10px;
+  color: #15583e;
+  font-size: 25px;
+  text-align: center;
+}
+
+.confirmation-description {
+  margin: 0 auto 22px;
+  color: #65776b;
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.confirmation-details {
+  overflow: hidden;
+  border: 1px solid #dcebe0;
+  border-radius: 10px;
+  background: #f8fcf9;
+}
+
+.confirmation-details > div {
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  border-bottom: 1px solid #e4eee7;
+}
+
+.confirmation-details > div:last-child {
+  border-bottom: 0;
+}
+
+.confirmation-details span {
+  color: #65776b;
+  font-size: 12px;
+}
+
+.confirmation-details strong {
+  max-width: 58%;
+  color: #15583e;
+  font-size: 13px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.confirmation-details .confirmation-notes {
+  flex-direction: column;
+  gap: 6px;
+}
+
+.confirmation-details .confirmation-notes strong {
+  max-width: 100%;
+  text-align: left;
+  font-weight: 500;
+}
+
+.confirmation-close {
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  border: 0;
+  border-radius: 9px;
+  background: #15583e;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.confirmation-close:hover {
+  background: #21845a;
+}
+
+.confirmation-close:focus-visible {
+  outline: 3px solid #86c9a3;
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .delivery-dialog {
+    padding: 24px 18px;
+  }
+
+  .confirmation-details > div {
+    gap: 8px;
+  }
+}
