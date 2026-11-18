@@ -12,8 +12,8 @@
         <a href="index.html" class="logo">♻ EcoPuntos</a>
         <nav>
             <a href="index.html">Inicio</a>
-            <a href="centros.html">Centros</a>
-            <a href="login.html">Iniciar sesión</a>
+            <a href="registro.html">Registrarse</a>
+            <a href="perfil.html">Mi perfil</a>
         </nav>
     </header>
 
@@ -21,21 +21,21 @@
         <section class="formulario">
             <h1>Acceso a EcoPuntos</h1>
 
-            <form id="form-login">
-
+            <form id="form-login" novalidate>
                 <label for="correo">Correo electrónico</label>
-                <input type="email" id="correo"
-                    placeholder="Ingresa tu correo" required>
+                <input type="email" id="correo" name="correo"
+                    placeholder="Ingresa tu correo" autocomplete="email"
+                    spellcheck="false" required>
 
                 <label for="contrasena">Contraseña</label>
-                <input type="password" id="contrasena"
-                    placeholder="Ingresa tu contraseña" required>
+                <input type="password" id="contrasena" name="contrasena"
+                    placeholder="Ingresa tu contraseña" autocomplete="current-password"
+                    required>
 
                 <a href="#" class="recuperar">¿Olvidaste tu contraseña?</a>
 
                 <button type="submit">Iniciar sesión</button>
-
-                <p id="mensaje"></p>
+                <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
             </form>
 
             <p class="enlace-registro">
@@ -48,6 +48,6 @@
     <footer>
         EcoPuntos | ¡Cuidar el planeta está en nuestras manos!
     </footer>
-<script src="js/auth.js"></script>
+    <script src="js/auth.js"></script>
 </body>
 </html>

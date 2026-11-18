@@ -26,6 +26,12 @@ body {
     margin: 0;
 }
 
+.encabezado nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
 .encabezado a {
     color: white;
     text-decoration: none;
@@ -138,9 +144,15 @@ footer {
 
     .encabezado {
         padding: 18px 5%;
+        flex-direction: column;
+        gap: 15px;
     }
 
     .entrega {
         gap: 15px;
+    }
+
+    .encabezado nav {
+        justify-content: center;
     }
 }

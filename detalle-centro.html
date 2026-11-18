@@ -1,0 +1,43 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Conoce los detalles de los centros de reciclaje de EcoPuntos.">
+  <title>Detalle del centro | EcoPuntos</title>
+
+  <link rel="stylesheet" href="css/detalle-centro.css">
+
+  <script src="js/centros-data.js" defer></script>
+  <script src="js/detalle-centro.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="EcoPuntos, ir al inicio">
+      <span class="brand-icon" aria-hidden="true">♻️</span>
+      <span>EcoPuntos</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <span aria-hidden="true">|</span>
+      <a href="centros.html" aria-current="page">Centros</a>
+      <span aria-hidden="true">|</span>
+      <a href="materiales.html">Materiales</a>
+      <span aria-hidden="true">|</span>
+      <a href="index.html#login-dialog">Iniciar sesión</a>
+    </nav>
+  </header>
+
+  <main class="detail-main">
+    <section class="detail-container" id="center-detail" aria-live="polite">
+      <p class="loading-message">Cargando información del centro...</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>EcoPuntos | Cuidar el planeta está en nuestras manos</p>
+  </footer>
+</body>
+</html>

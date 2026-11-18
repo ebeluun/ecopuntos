@@ -1,4 +1,3 @@
-# EcoPuntos
 
 Proyecto académico para facilitar la consulta de centros de reciclaje y fomentar hábitos sustentables.
 

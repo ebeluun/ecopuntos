@@ -1,4 +1,3 @@
-
 // Obtener los datos del usuario que inició sesión.
 const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
 
