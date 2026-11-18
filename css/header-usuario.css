@@ -1,4 +1,4 @@
-/* Identificación del usuario activo en todos los encabezados EcoPuntos */
+/* Identificación y accesos del usuario activo en los encabezados EcoPuntos */
 .user-session {
   display: inline-flex;
   align-items: center;
@@ -15,7 +15,9 @@
   font-size: 13px;
   font-weight: 700;
 }
+.user-session-profile,
 .user-session-logout {
+  display: inline-block;
   padding: 7px 11px !important;
   border: 1px solid currentColor !important;
   border-radius: 7px;
@@ -23,6 +25,12 @@
   font-weight: 700;
   text-decoration: none !important;
 }
+.user-session-profile {
+  background: #26734d;
+  border-color: #26734d !important;
+  color: #fff !important;
+}
+.user-session-profile:hover,
 .user-session-logout:hover {
   opacity: .78;
 }
