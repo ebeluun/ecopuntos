@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -24,11 +23,6 @@
       <span aria-hidden="true">|</span>
       <a href="materiales.html">Materiales</a>
       <span aria-hidden="true">|</span>
-    <nav class="main-nav" aria-label="Navegación principal">
-      <a href="index.html#inicio">Inicio</a>
-      <span aria-hidden="true">|</span>
-      <a href="centros.html" aria-current="page">Centros</a>
-      <span aria-hidden="true">|</span>
       <a href="index.html#login-dialog">Iniciar sesión</a>
     </nav>
   </header>
@@ -48,7 +42,6 @@
           placeholder="Buscar por nombre o ubicación..."
           autocomplete="off"
         >
-        <input id="search-centers" type="search" placeholder="Buscar por nombre o ubicacion..." autocomplete="off">
       </label>
 
       <div class="filter-buttons" role="group" aria-label="Filtrar por material">
@@ -59,50 +52,18 @@
         <button class="filter-button" type="button" data-filter="metal" aria-pressed="false">Metal</button>
         <button class="filter-button" type="button" data-filter="carton" aria-pressed="false">Cartón</button>
         <button class="filter-button" type="button" data-filter="electronicos" aria-pressed="false">Electrónicos</button>
-        <button class="filter-button" type="button" data-filter="plastico" aria-pressed="false">Plastico</button>
-        <button class="filter-button" type="button" data-filter="papel" aria-pressed="false">Papel</button>
-        <button class="filter-button" type="button" data-filter="vidrio" aria-pressed="false">Vidrio</button>
-        <button class="filter-button" type="button" data-filter="metal" aria-pressed="false">Metal</button>
-        <button class="filter-button" type="button" data-filter="metal" aria-pressed="false">Metal</button>
       </div>
 
       <p class="results-message" id="results-message" aria-live="polite"></p>
 
       <div class="centers-grid" id="centers-grid">
-        <!-- Las tarjetas se generan desde js/centros.js -->
-        <article class="center-card">
-          <h2>🌱 Centro Verde</h2>
-          <p class="location">📍 Monterrey, Nuevo Leon</p>
-          <p class="materials-title">♻️ Materiales que recibe:</p>
-          <p class="materials-list">Plastico, Papel y Carton</p>
-          <button class="details-button" type="button" data-details="centro-verde">Ver detalles</button>
-        </article>
-        <article class="center-card">
-          <h2>♻️ EcoRecicla</h2>
-          <p class="location">📍 San Nicolas, Nuevo Leon</p>
-          <p class="materials-title">♻️ Materiales que recibe:</p>
-          <p class="materials-list">Vidrio, Metal y Plastico</p>
-          <button class="details-button" type="button" data-details="ecorecicla">Ver detalles</button>
-        </article>
-        <article class="center-card">
-          <h2>🌎 Punto Limpio</h2>
-          <p class="location">📍 Guadalupe, Nuevo Leon</p>
-          <p class="materials-title">♻️ Materiales que recibe:</p>
-          <p class="materials-list">Papel, Carton y Electronicos</p>
-          <button class="details-button" type="button" data-details="punto-limpio">Ver detalles</button>
-        </article>
+        <!-- Las tarjetas se generan desde js/centros.js con los datos de js/centros-data.js -->
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <p>EcoPuntos | Cuidar el planeta está en nuestras manos</p>
-    <p>EcoPuntos | Cuidar el planeta esta en nuestras manos</p>
   </footer>
-
-  <dialog class="details-dialog" id="details-dialog">
-    <button class="dialog-close" type="button" aria-label="Cerrar">×</button>
-    <div id="details-content"></div>
-  </dialog>
 </body>
 </html>

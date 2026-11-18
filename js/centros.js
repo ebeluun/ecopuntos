@@ -1,33 +1,4 @@
-const centers = [
-  {
-    id: "centro-verde",
-    name: "Centro Verde",
-    icon: "🌱",
-    location: "Monterrey, Nuevo Leon",
-    materials: ["plastico", "papel", "carton"],
-    materialText: "Plastico, Papel y Carton",
-    description: "Centro de ejemplo para recibir plastico, papel y carton."
-  },
-  {
-    id: "ecorecicla",
-    name: "EcoRecicla",
-    icon: "♻️",
-    location: "San Nicolas, Nuevo Leon",
-    materials: ["vidrio", "metal", "plastico"],
-    materialText: "Vidrio, Metal y Plastico",
-    description: "Centro de ejemplo para recibir vidrio, metal y plastico."
-  },
-  {
-    id: "punto-limpio",
-    name: "Punto Limpio",
-    icon: "🌎",
-    location: "Guadalupe, Nuevo Leon",
-    materials: ["papel", "carton", "electronicos"],
-    materialText: "Papel, Carton y Electronicos",
-    description: "Centro de ejemplo para recibir papel, carton y residuos electronicos."
-  }
-];
-
+// Los datos de los centros vienen de js/centros-data.js (variable "centers").
 const centersGrid = document.getElementById("centers-grid");
 const searchInput = document.getElementById("search-centers");
 const filterButtons = document.querySelectorAll(".filter-button");
@@ -37,32 +8,14 @@ let activeFilter = "todos";
 
 // Mostrar los centros según la búsqueda y el filtro seleccionado.
 function showCenters() {
-  const searchText = searchInput.value
-    .trim()
-    .toLocaleLowerCase("es");
-
-  const filteredCenters = centers.filter((center) => {
-    const searchableText = (
-      center.name + " " + center.location
-    ).toLocaleLowerCase("es");
-
-    const matchesSearch = searchableText.includes(searchText);
-
-    const matchesMaterial =
-      activeFilter === "todos" ||
-const detailsDialog = document.getElementById("details-dialog");
-const detailsContent = document.getElementById("details-content");
-let activeFilter = "todos";
-
-function showCenters() {
   const searchText = searchInput.value.trim().toLocaleLowerCase("es");
 
   const filteredCenters = centers.filter((center) => {
     const matchesSearch = (center.name + " " + center.location)
       .toLocaleLowerCase("es")
       .includes(searchText);
-    const matchesMaterial = activeFilter === "todos" ||
-      center.materials.includes(activeFilter);
+    const matchesMaterial =
+      activeFilter === "todos" || center.materials.includes(activeFilter);
 
     return matchesSearch && matchesMaterial;
   });
@@ -72,10 +25,7 @@ function showCenters() {
   if (filteredCenters.length === 0) {
     const message = document.createElement("p");
     message.className = "no-results";
-    message.textContent =
-      "No se encontraron centros. Intenta con otra búsqueda.";
-
-    message.textContent = "No se encontraron centros. Intenta con otra busqueda.";
+    message.textContent = "No se encontraron centros. Intenta con otra búsqueda.";
     centersGrid.appendChild(message);
   } else {
     filteredCenters.forEach((center) => {
@@ -103,14 +53,6 @@ function showCenters() {
       detailsButton.textContent = "Ver detalles";
       detailsButton.dataset.details = center.id;
 
-      card.append(
-        title,
-        location,
-        materialsTitle,
-        materials,
-        detailsButton
-      );
-
       card.append(title, location, materialsTitle, materials, detailsButton);
       centersGrid.appendChild(card);
     });
@@ -123,18 +65,12 @@ function showCenters() {
 }
 
 // Activar los filtros de materiales.
-  resultsMessage.textContent = filteredCenters.length === 1
-    ? "1 centro encontrado"
-    : filteredCenters.length + " centros encontrados";
-}
-
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     activeFilter = button.dataset.filter;
 
     filterButtons.forEach((item) => {
       const isActive = item === button;
-
       item.classList.toggle("active", isActive);
       item.setAttribute("aria-pressed", String(isActive));
     });
@@ -146,63 +82,14 @@ filterButtons.forEach((button) => {
 // Actualizar resultados al escribir.
 searchInput.addEventListener("input", showCenters);
 
-// Abrir la página del centro seleccionado.
+// Abrir la página de detalle del centro seleccionado.
 centersGrid.addEventListener("click", (event) => {
   const button = event.target.closest("[data-details]");
-
   if (!button) return;
 
-  const centerId = button.dataset.details;
-
-  const selectedCenter = centers.find(
-    (center) => center.id === centerId
-  );
-
-  if (!selectedCenter) return;
-
   window.location.href =
-    "detalle-centro.html?id=" + encodeURIComponent(centerId);
+    "detalle-centro.html?id=" + encodeURIComponent(button.dataset.details);
 });
 
 // Mostrar los centros al cargar la página.
-searchInput.addEventListener("input", showCenters);
-
-centersGrid.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-details]");
-  if (!button) return;
-
-  const center = centers.find((item) => item.id === button.dataset.details);
-  if (!center) return;
-
-  detailsContent.replaceChildren();
-
-  const title = document.createElement("h2");
-  title.textContent = center.icon + " " + center.name;
-
-  const location = document.createElement("p");
-  location.textContent = "📍 " + center.location;
-
-  const materials = document.createElement("p");
-  materials.textContent = "Materiales que recibe: " + center.materialText;
-
-  const description = document.createElement("p");
-  description.textContent = center.description;
-
-  const materialsLink = document.createElement("a");
-  materialsLink.href = "materiales.html";
-  materialsLink.textContent = "Conocer materiales reciclables";
-  materialsLink.className = "materials-link";
-
-detailsContent.append(title, location, materials, description, materialsLink);
-detailsDialog.showModal();
-});
-
-detailsDialog.querySelector(".dialog-close").addEventListener("click", () => {
-  detailsDialog.close();
-});
-
-detailsDialog.addEventListener("click", (event) => {
-  if (event.target === detailsDialog) detailsDialog.close();
-});
-
 showCenters();
