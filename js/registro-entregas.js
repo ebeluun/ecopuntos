@@ -4,6 +4,8 @@ const centerSelect = document.getElementById("center");
 const materialSelect = document.getElementById("material");
 const dateInput = document.getElementById("date");
 const formMessage = document.getElementById("form-message");
+const confirmationDialog = document.getElementById("delivery-confirmation");
+const closeConfirmationButton = document.getElementById("close-confirmation");
 
 // Relacionar las claves del catálogo con los nombres que verá el usuario.
 const materialNames = {
@@ -62,6 +64,39 @@ centerSelect.addEventListener("change", () => {
   materialSelect.disabled = false;
 });
 
+// Mostrar los datos de la entrega en la ventana de confirmación.
+function showDeliveryConfirmation(delivery) {
+  const formattedDate = new Date(
+    delivery.date + "T00:00:00"
+  ).toLocaleDateString("es-MX", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+  document.getElementById("confirm-center").textContent = delivery.center;
+  document.getElementById("confirm-material").textContent = delivery.material;
+  document.getElementById("confirm-quantity").textContent =
+    delivery.quantity + " " + (delivery.unit === "kg" ? "kg" : "piezas");
+  document.getElementById("confirm-date").textContent = formattedDate;
+  document.getElementById("confirm-notes").textContent =
+    delivery.notes || "Sin observaciones";
+
+  if (typeof confirmationDialog.showModal === "function") {
+    confirmationDialog.showModal();
+  }
+}
+
+closeConfirmationButton.addEventListener("click", () => {
+  confirmationDialog.close();
+});
+
+confirmationDialog.addEventListener("click", (event) => {
+  if (event.target === confirmationDialog) {
+    confirmationDialog.close();
+  }
+});
+
 // Procesar el formulario.
 deliveryForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -91,16 +126,21 @@ deliveryForm.addEventListener("submit", (event) => {
   };
 
   // Guardar el registro de demostración en el navegador.
-  const deliveries = JSON.parse(localStorage.getItem("entregasEcoPuntos")) || [];
+  let deliveries = [];
+  try {
+    deliveries = JSON.parse(localStorage.getItem("entregasEcoPuntos")) || [];
+  } catch (error) {
+    deliveries = [];
+  }
+
   deliveries.push(delivery);
   localStorage.setItem("entregasEcoPuntos", JSON.stringify(deliveries));
 
-  formMessage.textContent =
-    "¡Entrega registrada! Entregaste " +
-    delivery.quantity + " " + delivery.unit + " de " +
-    delivery.material + " en " + delivery.center + ".";
-
+  formMessage.textContent = "Tu entrega se registró correctamente.";
   formMessage.className = "form-message success";
+
+  // Mostrar la confirmación antes de limpiar el formulario.
+  showDeliveryConfirmation(delivery);
 
   deliveryForm.reset();
   dateInput.value = localDate;
