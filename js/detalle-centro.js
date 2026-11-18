@@ -58,7 +58,8 @@ function showCenterDetails(center) {
   const materialsList = document.createElement("div");
   materialsList.className = "material-tags";
 
-  center.materialText.split(", ").forEach((material) => {
+  // Separar "Vidrio, Metal y Plástico" en una etiqueta por material.
+  center.materialText.split(/, | y /).forEach((material) => {
     const tag = document.createElement("span");
     tag.className = "material-tag";
     tag.textContent = material;
