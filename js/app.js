@@ -22,16 +22,28 @@ document.querySelectorAll("dialog").forEach((dialog) => {
   });
 });
 
-// Este formulario es demostrativo: no existe todavía un sistema de autenticación.
+// SCRUM-63: el cuadro de inicio de sesión verifica los datos guardados en el navegador.
 const loginForm = document.querySelector(".login-form");
 
 if (loginForm) {
   loginForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const message = document.getElementById("login-message");
-    if (message) {
-      message.textContent = "Formulario de demostración: tus datos no se enviaron ni se guardaron. El acceso real se habilitará al conectar el sistema de cuentas.";
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+
+    const user = verificarCredenciales(email, password);
+
+    if (!user) {
+      message.textContent = "Correo o contraseña incorrectos. Si aún no tienes cuenta, regístrate.";
+      return;
     }
+
+    iniciarSesion(user);
+    message.textContent = "¡Bienvenido, " + user.nombre + "!";
+    setTimeout(() => {
+      window.location.href = "perfil.html";
+    }, 800);
   });
 }
 

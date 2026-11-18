@@ -121,25 +121,24 @@ document.addEventListener("DOMContentLoaded", function () {
             formulario.reset();
 
         } else {
-            const usuarios = obtenerUsuarios();
-
-            const usuarioEncontrado = usuarios.find(function (persona) {
-                return persona.correo === correo.value.trim().toLowerCase() &&
-                    persona.contrasena === contrasena.value;
-            });
+            // SCRUM-63: verificar los datos contra los usuarios registrados (js/sesion.js).
+            const usuarioEncontrado = verificarCredenciales(correo.value, contrasena.value);
 
             if (!usuarioEncontrado) {
+                correo.classList.add("campo-error");
+                contrasena.classList.add("campo-error");
                 mostrarMensaje("Correo o contraseña incorrectos.", "mensaje-error");
+                contrasena.focus();
                 return;
             }
 
-            localStorage.setItem("usuarioActivo", JSON.stringify({
-                nombre: usuarioEncontrado.nombre,
-                correo: usuarioEncontrado.correo,
-                usuario: usuarioEncontrado.usuario
-            }));
+            iniciarSesion(usuarioEncontrado);
+            mostrarMensaje("¡Bienvenido, " + usuarioEncontrado.nombre + "!", "mensaje-exito");
 
-            window.location.href = "perfil.html";
+            // Regresar a la página que pidió iniciar sesión, o al perfil.
+            setTimeout(function () {
+                window.location.href = paginaDeRegreso("perfil.html");
+            }, 800);
         }
     });
 });

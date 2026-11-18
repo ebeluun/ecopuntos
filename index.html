@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Encuentra centros de reciclaje, conoce los materiales y registra tus entregas en EcoPuntos.">
   <title>EcoPuntos | Reciclar nunca fue tan fácil</title>
+  <script src="js/sesion.js"></script>
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/app.js" defer></script>
 </head>
@@ -134,7 +135,7 @@
     <button class="dialog-close" type="button" aria-label="Cerrar">×</button>
     <span class="dialog-icon" aria-hidden="true">👤</span>
     <h2>Iniciar sesión</h2>
-    <p>Ingresa tus datos para continuar. Esta pantalla es una demostración y todavía no está conectada a un sistema de cuentas.</p>
+    <p>Ingresa los datos con los que te registraste. ¿No tienes cuenta? <a href="registro.html">Regístrate</a>.</p>
     <form class="login-form">
       <label for="login-email">Correo electrónico</label>
       <input id="login-email" name="email" type="email" placeholder="correo@ejemplo.com" required>
@@ -142,7 +143,7 @@
       <input id="login-password" name="password" type="password" placeholder="Tu contraseña" required>
       <button class="primary-button form-button" type="submit">Continuar</button>
     </form>
-    <p class="form-note" id="login-message" aria-live="polite">Demostración visual: no se guardan ni envían tus datos.</p>
+    <p class="form-note" id="login-message" aria-live="polite">Tus datos se guardan solo en este navegador.</p>
   </dialog>
 </body>
 </html>

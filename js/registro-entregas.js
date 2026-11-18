@@ -28,6 +28,24 @@ deliveryForm.addEventListener("submit", (event) => {
   const quantity = document.getElementById("quantity").value;
   const unit = document.getElementById("unit").value;
 
+  // SCRUM-67: guardar la entrega a nombre del usuario que inició sesión.
+  const activeUser = obtenerUsuarioActivo();
+
+  if (!activeUser) {
+    window.location.href = "login.html?volver=registro-entregas.html";
+    return;
+  }
+
+  guardarEntrega({
+    usuario: activeUser.correo,
+    centro: center,
+    material: material,
+    cantidad: Number(quantity),
+    unidad: unit,
+    fecha: dateInput.value,
+    notas: document.getElementById("notes").value.trim()
+  });
+
   formMessage.textContent =
     `¡Entrega registrada correctamente! Entregaste ${quantity} ${unit} de ${material} en ${center}.`;
 
