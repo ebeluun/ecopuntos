@@ -10,6 +10,18 @@ if (usuarioActivo && nombrePerfil) {
     nombrePerfil.textContent = "¡Hola, Usuario!";
 }
 
+// Cerrar la sesión del usuario.
+const botonCerrarSesion = document.getElementById("cerrar-sesion");
+
+if (botonCerrarSesion) {
+    botonCerrarSesion.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        localStorage.removeItem("usuarioActivo");
+        window.location.href = "login.html";
+    });
+}
+
 // Datos de demostración de las entregas.
 const entregas = [
     {
