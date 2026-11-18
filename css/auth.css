@@ -151,3 +151,47 @@ footer {
         padding: 25px 20px;
     }
 }
+
+/* Mensajes visuales y estados de validación */
+.mensaje {
+    display: none;
+    margin: 14px 0 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.mensaje-error,
+.mensaje-exito {
+    display: block;
+}
+
+.mensaje-error {
+    color: #9f2424;
+    background: #fff0f0;
+    border: 1px solid #efb7b7;
+}
+
+.mensaje-exito {
+    color: #15583e;
+    background: #eaf7ed;
+    border: 1px solid #b9dfc3;
+}
+
+input.campo-error {
+    border: 2px solid #c43d3d;
+    background: #fffafa;
+}
+
+input.campo-error:focus {
+    outline-color: #c43d3d;
+}
+
+.ayuda-campo {
+    margin-top: -4px;
+    color: #607268;
+    font-size: 12px;
+    line-height: 1.4;
+}
