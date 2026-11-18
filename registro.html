@@ -20,27 +20,31 @@
         <section class="formulario">
             <h1>Crear una cuenta</h1>
 
-            <form>
+            <form id="form-registro" novalidate>
                 <label for="nombre">Nombre completo</label>
                 <input type="text" id="nombre" name="nombre"
-                    placeholder="Escribe tu nombre">
+                    placeholder="Escribe tu nombre" autocomplete="name" required>
 
                 <label for="correo">Correo electrónico</label>
                 <input type="email" id="correo" name="correo"
-                    placeholder="ejemplo@correo.com">
+                    placeholder="ejemplo@correo.com" autocomplete="email"
+                    spellcheck="false" required>
 
                 <label for="usuario">Nombre de usuario</label>
                 <input type="text" id="usuario" name="usuario"
-                    placeholder="Elige un usuario">
+                    placeholder="Elige un usuario" autocomplete="username" required>
 
                 <label for="contrasena">Contraseña</label>
                 <input type="password" id="contrasena" name="contrasena"
-                    placeholder="Crea una contraseña">
+                    placeholder="Crea una contraseña" autocomplete="new-password"
+                    minlength="8" required aria-describedby="ayuda-contrasena">
+                <small id="ayuda-contrasena" class="ayuda-campo">
+                    Mínimo 8 caracteres, incluyendo al menos una letra y un número.
+                </small>
 
                 <button type="submit">Registrarme</button>
+                <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
             </form>
-
-            <p id="mensaje"></p>
 
             <p class="enlace-registro">
                 ¿Ya tienes una cuenta?
