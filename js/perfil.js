@@ -1,6 +1,17 @@
 
-// Datos de demostración de las entregas del usuario
+// Obtener los datos del usuario que inició sesión.
+const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
 
+// Mostrar el nombre del usuario en el perfil.
+const nombrePerfil = document.getElementById("nombre-perfil");
+
+if (usuarioActivo && nombrePerfil) {
+    nombrePerfil.textContent = "¡Hola, " + usuarioActivo.nombre + "!";
+} else if (nombrePerfil) {
+    nombrePerfil.textContent = "¡Hola, Usuario!";
+}
+
+// Datos de demostración de las entregas.
 const entregas = [
     {
         material: "Plástico",
@@ -19,14 +30,14 @@ const entregas = [
     }
 ];
 
-// Calcular los puntos acumulados
+// Calcular los puntos acumulados.
 let totalPuntos = 0;
 
 entregas.forEach(function(entrega) {
     totalPuntos += entrega.puntos;
 });
 
-// Mostrar el total de puntos en la página
+// Mostrar los puntos en el perfil.
 const cantidadPuntos = document.querySelector(".cantidad");
 
 if (cantidadPuntos) {
