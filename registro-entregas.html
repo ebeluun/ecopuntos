@@ -79,6 +79,21 @@
       </form>
     </section>
 
+    <dialog class="delivery-dialog" id="delivery-confirmation" aria-labelledby="confirmation-title">
+      <div class="confirmation-mark" aria-hidden="true">✓</div>
+      <p class="confirmation-eyebrow">Registro completado</p>
+      <h2 id="confirmation-title">¡Entrega registrada!</h2>
+      <p class="confirmation-description">Tu entrega se guardó correctamente. Estos son los datos del registro:</p>
+      <div class="confirmation-details">
+        <div><span>Centro de reciclaje</span><strong id="confirm-center"></strong></div>
+        <div><span>Material entregado</span><strong id="confirm-material"></strong></div>
+        <div><span>Cantidad</span><strong id="confirm-quantity"></strong></div>
+        <div><span>Fecha</span><strong id="confirm-date"></strong></div>
+        <div class="confirmation-notes"><span>Observaciones</span><strong id="confirm-notes"></strong></div>
+      </div>
+      <button type="button" class="confirmation-close" id="close-confirmation">Continuar</button>
+    </dialog>
+
     <section class="info-section">
       <span aria-hidden="true">🌱</span>
       <div>
