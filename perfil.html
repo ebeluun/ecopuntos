@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Consulta tu actividad y tus entregas de reciclaje en EcoPuntos.">
     <title>Mi perfil | EcoPuntos</title>
     <link rel="stylesheet" href="css/perfil.css">
-  <link rel="stylesheet" href="css/header-usuario.css">
-  <script src="js/header-usuario.js" defer></script>
+    <link rel="stylesheet" href="css/header-usuario.css">
+    <script src="js/header-usuario.js" defer></script>
 </head>
 <body>
-
     <header class="encabezado">
         <h1>EcoPuntos</h1>
-        <nav>
+        <nav aria-label="Navegación del perfil">
             <a href="index.html">Inicio</a>
-            <a href="login.html">Iniciar sesión</a>
-            <a href="registro.html">Registrarse</a>
+            <a href="centros.html">Centros</a>
+            <a href="registro-entregas.html">Registrar entrega</a>
             <a href="#" id="cerrar-sesion">Cerrar sesión</a>
         </nav>
     </header>
@@ -23,47 +23,37 @@
     <main class="contenedor">
         <section class="perfil">
             <h2>Mi perfil</h2>
-            <h3 id="nombre-perfil">¡Hola, Usuario!</h3>
-            <p>Este es tu espacio en EcoPuntos.</p>
+            <h3 id="nombre-perfil">¡Hola!</h3>
+            <p>Este es tu espacio personal en EcoPuntos.</p>
         </section>
 
-        <section class="puntos">
-            <h2>Mis puntos acumulados</h2>
-            <p class="cantidad">350 puntos</p>
-            <p>¡Gracias por ayudar al planeta!</p>
+        <section class="resumen-actividad" aria-label="Resumen de mi actividad">
+            <article class="estadistica">
+                <strong id="total-entregas">0</strong>
+                <span>Entregas registradas</span>
+            </article>
+            <article class="estadistica">
+                <strong id="total-kilos">0 kg</strong>
+                <span>Material por kilogramo</span>
+            </article>
+            <article class="estadistica">
+                <strong id="total-piezas">0</strong>
+                <span>Material por piezas</span>
+            </article>
         </section>
 
         <section class="entregas">
             <h2>Mis entregas</h2>
-
-            <div class="entrega">
-                <div>
-                    <h3>Plástico</h3>
-                    <p>12 de octubre de 2026</p>
-                </div>
-                <strong>+100 puntos</strong>
-            </div>
-
-            <div class="entrega">
-                <div>
-                    <h3>Cartón</h3>
-                    <p>18 de octubre de 2026</p>
-                </div>
-                <strong>+150 puntos</strong>
-            </div>
-
-            <div class="entrega">
-                <div>
-                    <h3>Aluminio</h3>
-                    <p>24 de octubre de 2026</p>
-                </div>
-                <strong>+100 puntos</strong>
+            <div class="lista-entregas" id="lista-entregas" aria-live="polite">
+                <p class="sin-entregas">Cargando tus entregas...</p>
             </div>
         </section>
 
-        <p class="aviso">
-            Estos datos son de demostración.
-        </p>
+        <div class="acciones-perfil">
+            <a href="registro-entregas.html">Registrar una entrega</a>
+            <a class="secundario" href="centros.html">Explorar centros</a>
+        </div>
+        <p class="aviso">Tu historial muestra únicamente las entregas registradas desde tu cuenta.</p>
     </main>
 
     <footer>
