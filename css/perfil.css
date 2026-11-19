@@ -156,3 +156,26 @@ footer {
         justify-content: center;
     }
 }
+
+
+/* Acceso al historial completo */
+
+.historial-link {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.historial-link a {
+    display: inline-block;
+    background: #26734d;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 13px 22px;
+    border-radius: 9px;
+    transition: background 0.2s;
+}
+
+.historial-link a:hover {
+    background: #15583e;
+}
