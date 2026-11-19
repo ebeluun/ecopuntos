@@ -310,3 +310,19 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+.historial-ayuda{color:#68776d;font-size:14px;margin-bottom:16px}
+.entrega-acciones{display:flex;gap:8px;margin-top:12px;justify-content:flex-end}
+.entrega-acciones button{border:0;border-radius:7px;padding:8px 12px;font-weight:bold;cursor:pointer}
+.entrega-acciones button:first-child{background:#e2f3e8;color:#15583e}
+.entrega-acciones button:last-child{background:#fff0ee;color:#b42318}
+.editar-dialog{width:min(92%,520px);max-height:90vh;overflow:auto;border:0;border-radius:14px;padding:0}
+.editar-dialog::backdrop{background:#102e2399}
+.editar-form{display:flex;flex-direction:column;gap:10px;padding:25px}
+.editar-form label{font-weight:bold;font-size:14px}
+.editar-form input,.editar-form select,.editar-form textarea{width:100%;padding:10px;border:1px solid #cbded1;border-radius:7px;font:inherit}
+.editar-fila{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.editar-fila>div{display:flex;flex-direction:column;gap:8px}
+.editar-acciones{display:flex;justify-content:flex-end;gap:10px}
+.editar-acciones button{padding:10px 14px;border:0;border-radius:7px;cursor:pointer}
+#editar-error{color:#b42318;font-size:13px}
