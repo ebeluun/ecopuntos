@@ -7,6 +7,8 @@
   <title>EcoPuntos | Reciclar nunca fue tan fácil</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/app.js" defer></script>
+  <link rel="stylesheet" href="css/header-usuario.css">
+  <script src="js/header-usuario.js" defer></script>
 </head>
 <body>
   <header class="site-header" id="inicio">
@@ -16,7 +18,8 @@
     <nav class="main-nav" aria-label="Navegación principal">
       <a href="#inicio" aria-current="page">Inicio</a><span aria-hidden="true">|</span>
       <a href="centros.html">Centros</a><span aria-hidden="true">|</span>
-      <button class="nav-login" type="button" data-open-dialog="login-dialog">Iniciar sesión</button>
+      <a href="login.html" class="nav-login">Iniciar sesión</a><span aria-hidden="true">|</span>
+      <a href="registro.html">Crear cuenta</a>
     </nav>
   </header>
 
@@ -130,19 +133,5 @@
     <a href="#inicio">Volver arriba ↑</a>
   </footer>
 
-  <dialog class="info-dialog login-dialog" id="login-dialog">
-    <button class="dialog-close" type="button" aria-label="Cerrar">×</button>
-    <span class="dialog-icon" aria-hidden="true">👤</span>
-    <h2>Iniciar sesión</h2>
-    <p>Ingresa tus datos para continuar. Esta pantalla es una demostración y todavía no está conectada a un sistema de cuentas.</p>
-    <form class="login-form">
-      <label for="login-email">Correo electrónico</label>
-      <input id="login-email" name="email" type="email" placeholder="correo@ejemplo.com" required>
-      <label for="login-password">Contraseña</label>
-      <input id="login-password" name="password" type="password" placeholder="Tu contraseña" required>
-      <button class="primary-button form-button" type="submit">Continuar</button>
-    </form>
-    <p class="form-note" id="login-message" aria-live="polite">Demostración visual: no se guardan ni envían tus datos.</p>
-  </dialog>
 </body>
 </html>
