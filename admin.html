@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Panel de administración de EcoPuntos.">
+  <title>EcoPuntos | Panel de administración</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <script src="js/centros-data.js" defer></script>
+  <script src="js/admin.js" defer></script>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <a class="brand" href="index.html"><span class="brand-icon">♻</span><span>EcoPuntos</span></a>
+      <p class="sidebar-label">MENÚ PRINCIPAL</p>
+      <nav class="side-nav" aria-label="Menú de administración">
+        <a class="active" href="#resumen"><span>▦</span> Resumen</a>
+        <a href="#centros"><span>⌖</span> Centros de reciclaje</a>
+        <a href="#entregas"><span>♻</span> Entregas</a>
+        <a href="#usuarios"><span>♙</span> Usuarios</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="admin-profile"><div class="avatar">A</div><div><strong>Administrador</strong><small>Panel de control</small></div></div>
+        <a class="back-link" href="index.html">← Volver al sitio</a>
+      </div>
+    </aside>
+
+    <main class="main-content" id="resumen">
+      <header class="topbar">
+        <div><p class="breadcrumb">EcoPuntos / Administración</p><h1>Panel de administración</h1></div>
+        <div class="topbar-right"><span class="status-dot"></span><span>Vista general</span><div class="top-avatar">A</div></div>
+      </header>
+
+      <section class="welcome-banner">
+        <div><p class="eyebrow">CENTRO DE CONTROL</p><h2>¡Bienvenido, administrador!</h2><p>Desde aquí puedes supervisar la actividad de EcoPuntos y gestionar sus centros de reciclaje.</p></div>
+        <div class="banner-art" aria-hidden="true">🌎<span>♻️</span></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Resumen de EcoPuntos">
+        <article class="stat-card"><div class="stat-icon green">⌖</div><p>Centros registrados</p><strong id="stat-centers">0</strong><small id="stat-active-centers">0 activos</small></article>
+        <article class="stat-card"><div class="stat-icon blue">♻</div><p>Entregas registradas</p><strong id="stat-deliveries">0</strong><small>En este navegador</small></article>
+        <article class="stat-card"><div class="stat-icon orange">♙</div><p>Usuarios registrados</p><strong id="stat-users">0</strong><small>Cuentas creadas</small></article>
+        <article class="stat-card"><div class="stat-icon purple">✓</div><p>Materiales disponibles</p><strong id="stat-materials">6</strong><small>Tipos de materiales</small></article>
+      </section>
+
+      <section class="content-section" id="centros">
+        <div class="section-heading"><div><p class="eyebrow">GESTIÓN</p><h2>Centros de reciclaje</h2><p>Administra los centros que aparecen en el catálogo público.</p></div><button class="primary-button" id="open-center-form" type="button">＋ Agregar centro</button></div>
+        <div class="toolbar"><label class="search-box">⌕ <input id="center-search" type="search" placeholder="Buscar centro por nombre o ubicación"></label><span class="muted" id="center-count">0 centros</span></div>
+        <div class="table-wrap"><table><thead><tr><th>Centro</th><th>Ubicación</th><th>Materiales</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="centers-table"></tbody></table></div>
+        <p class="empty-state" id="centers-empty" hidden>No se encontraron centros.</p>
+      </section>
+
+      <section class="content-section" id="entregas">
+        <div class="section-heading"><div><p class="eyebrow">ACTIVIDAD RECIENTE</p><h2>Últimas entregas</h2><p>Consulta los registros realizados por los usuarios.</p></div><span class="section-tag">Actualizado desde el navegador</span></div>
+        <div class="table-wrap"><table><thead><tr><th>Usuario</th><th>Centro</th><th>Material</th><th>Cantidad</th><th>Fecha</th></tr></thead><tbody id="deliveries-table"></tbody></table></div>
+        <p class="empty-state" id="deliveries-empty" hidden>Aún no hay entregas registradas.</p>
+      </section>
+
+      <section class="content-section" id="usuarios">
+        <div class="section-heading"><div><p class="eyebrow">COMUNIDAD</p><h2>Usuarios registrados</h2><p>Personas que han creado una cuenta en EcoPuntos.</p></div></div>
+        <div class="users-grid" id="users-grid"></div>
+        <p class="empty-state" id="users-empty" hidden>Aún no hay usuarios registrados.</p>
+      </section>
+
+      <footer class="admin-footer">EcoPuntos · Panel de administración · Proyecto académico</footer>
+    </main>
+  </div>
+
+  <dialog class="center-dialog" id="center-dialog">
+    <form id="center-form" method="dialog">
+      <div class="dialog-heading"><div><p class="eyebrow">GESTIÓN DE CENTROS</p><h2 id="dialog-title">Agregar centro</h2></div><button class="close-button" id="close-center-form" type="button" aria-label="Cerrar">×</button></div>
+      <label>Nombre del centro<input id="center-name" required maxlength="70" placeholder="Ej. Centro de reciclaje"></label>
+      <label>Ubicación<input id="center-location" required maxlength="100" placeholder="Ej. Monterrey, Nuevo León"></label>
+      <label>Descripción<textarea id="center-description" rows="3" placeholder="Describe brevemente el centro"></textarea></label>
+      <fieldset><legend>Materiales que recibe</legend>
+        <div class="material-options">
+          <label><input type="checkbox" value="plastico"> Plástico</label><label><input type="checkbox" value="papel"> Papel</label>
+          <label><input type="checkbox" value="carton"> Cartón</label><label><input type="checkbox" value="vidrio"> Vidrio</label>
+          <label><input type="checkbox" value="metal"> Metal</label><label><input type="checkbox" value="electronicos"> Electrónicos</label>
+        </div>
+      </fieldset>
+      <p class="form-message" id="center-form-message" role="status"></p>
+      <div class="dialog-actions"><button class="secondary-button" id="cancel-center-form" type="button">Cancelar</button><button class="primary-button" id="save-center" type="submit">Guardar centro</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
