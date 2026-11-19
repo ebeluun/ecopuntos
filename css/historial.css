@@ -1,0 +1,192 @@
+
+/* Historial de entregas - EcoPuntos */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f5f9f5;
+  color: #263b30;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-container {
+  width: min(100% - 32px, 900px);
+  margin: 0 auto;
+  padding: 40px 0;
+  flex: 1;
+}
+
+.intro-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.intro-icon {
+  font-size: 42px;
+}
+
+.intro-section h1 {
+  color: #15583e;
+  font-size: 32px;
+  margin: 12px 0;
+}
+
+.intro-section p {
+  color: #65776b;
+  line-height: 1.6;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.history-card {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px rgba(21, 88, 62, 0.08);
+}
+
+.history-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.history-heading h2 {
+  color: #15583e;
+  margin: 0;
+  font-size: 23px;
+}
+
+.history-heading p {
+  color: #65776b;
+  margin: 0;
+  font-size: 14px;
+}
+
+.search-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.search-group label {
+  color: #284c38;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.search-group input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #d4e2d7;
+  border-radius: 9px;
+  background-color: #ffffff;
+  color: #263b30;
+  font: inherit;
+  outline: none;
+}
+
+.search-group input:focus {
+  border-color: #21845a;
+  box-shadow: 0 0 0 3px rgba(33, 132, 90, 0.12);
+}
+
+.delivery-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e8e2;
+}
+
+.delivery-item:last-child {
+  border-bottom: none;
+}
+
+.delivery-info h3 {
+  color: #15583e;
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.delivery-info p {
+  color: #65776b;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.delivery-quantity {
+  background-color: #e6f3e9;
+  color: #15583e;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.empty-message {
+  text-align: center;
+  color: #65776b;
+  padding: 25px 10px;
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.back-link a {
+  display: inline-block;
+  background-color: #15583e;
+  color: white;
+  text-decoration: none;
+  padding: 13px 22px;
+  border-radius: 9px;
+  font-weight: bold;
+}
+
+.back-link a:hover {
+  background-color: #21845a;
+}
+
+.main-footer {
+  background-color: #15583e;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .page-container {
+    padding: 28px 0;
+  }
+
+  .intro-section h1 {
+    font-size: 26px;
+  }
+
+  .history-card {
+    padding: 22px 18px;
+  }
+
+  .history-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .delivery-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
