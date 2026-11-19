@@ -248,3 +248,21 @@ a:focus-visible {
     margin: 0 14px 14px;
   }
 }
+
+/* Dirección, horario y teléfono agregados desde el panel de administración */
+.detail-info {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 14px;
+  margin: 14px 0 0;
+}
+
+.detail-info dt {
+  font-weight: bold;
+  color: var(--green);
+}
+
+.detail-info dd {
+  margin: 0;
+  color: var(--text);
+}

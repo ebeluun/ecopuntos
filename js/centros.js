@@ -91,5 +91,8 @@ centersGrid.addEventListener("click", (event) => {
     "detalle-centro.html?id=" + encodeURIComponent(button.dataset.details);
 });
 
+// SCRUM-82: volver a mostrar el catálogo si el administrador cambió los centros.
+document.addEventListener("centros-actualizados", showCenters);
+
 // Mostrar los centros al cargar la página.
 showCenters();

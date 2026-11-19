@@ -244,3 +244,69 @@ footer {
         max-width: 42%;
     }
 }
+
+/* Estadísticas visuales (SCRUM-76) */
+.estadisticas-visuales {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 24px;
+}
+.estadisticas-visuales h2 {
+    color: #26734d;
+    margin-top: 0;
+}
+.graficas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+.grafica h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: #20352b;
+}
+.barras {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+.barra {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+}
+.barra-etiqueta {
+    font-size: 14px;
+    font-weight: bold;
+    color: #20352b;
+}
+.barra-pista {
+    display: block;
+    height: 12px;
+    background: #e2f3e8;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.barra-relleno {
+    display: block;
+    height: 100%;
+    background: #26734d;
+    border-radius: 6px;
+}
+.barra-valor {
+    font-size: 13px;
+    color: #526c5b;
+}
+.barra-vacia {
+    color: #526c5b;
+    font-size: 14px;
+}
+@media (max-width: 600px) {
+    .graficas {
+        grid-template-columns: 1fr;
+    }
+}
