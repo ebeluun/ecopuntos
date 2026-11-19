@@ -1,4 +1,3 @@
-
 // Historial de entregas - EcoPuntos
 
 // Leer un dato de localStorage sin romper la página si está dañado.
@@ -11,26 +10,19 @@ function leerDato(clave, valorPorDefecto) {
   }
 }
 
-// Obtener al usuario que inició sesión.
 const usuarioActivo = leerDato("usuarioActivo", null);
 
-// Sin sesión no hay historial que mostrar: enviar al inicio de sesión.
 if (!usuarioActivo || !usuarioActivo.correo) {
   window.location.replace("login.html");
 }
 
-// Obtener los elementos de la página.
 const listaEntregas = document.getElementById("lista-entregas");
 const buscadorEntregas = document.getElementById("buscador-entregas");
 const totalEntregas = document.getElementById("total-entregas");
 const mensajeVacio = document.getElementById("mensaje-vacio");
 const mensajeSinResultados = document.getElementById("mensaje-sin-resultados");
 
-// Obtener todas las entregas guardadas.
 const entregasGuardadas = leerDato("entregasEcoPuntos", []);
-
-// Mostrar solamente las entregas del usuario activo, de la más reciente a la más antigua.
-// El formulario de registro (main) guarda el dueño de cada entrega en "ownerEmail".
 const correoActivo = usuarioActivo && usuarioActivo.correo
   ? usuarioActivo.correo.toLowerCase()
   : "";
@@ -39,19 +31,19 @@ const entregasUsuario = (Array.isArray(entregasGuardadas) ? entregasGuardadas : 
   .filter((entrega) => (entrega.ownerEmail || "").toLowerCase() === correoActivo)
   .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
-// Formatear la fecha: 2026-11-18 -> 18/11/2026.
 function formatearFecha(fecha) {
   if (!fecha) return "Sin fecha";
   const partes = fecha.split("-");
-  return `${partes[2]}/${partes[1]}/${partes[0]}`;
+  if (partes.length !== 3) return "Sin fecha";
+  return partes[2] + "/" + partes[1] + "/" + partes[0];
 }
 
-// Mostrar las entregas.
+// Mostrar cada entrega en su propia tarjeta.
 function mostrarEntregas(entregas) {
-  listaEntregas.innerHTML = "";
+  listaEntregas.replaceChildren();
 
   totalEntregas.textContent =
-    `${entregas.length} ${entregas.length === 1 ? "entrega registrada" : "entregas registradas"}`;
+    entregas.length + (entregas.length === 1 ? " entrega registrada" : " entregas registradas");
 
   if (entregasUsuario.length === 0) {
     mensajeVacio.hidden = false;
@@ -72,40 +64,43 @@ function mostrarEntregas(entregas) {
     const tarjeta = document.createElement("article");
     tarjeta.className = "delivery-item";
 
-    const informacion = document.createElement("div");
-    informacion.className = "delivery-info";
+    const encabezado = document.createElement("div");
+    encabezado.className = "delivery-card-heading";
 
-    const titulo = document.createElement("h3");
-    titulo.textContent = entrega.material;
+    const material = document.createElement("h3");
+    material.textContent = entrega.material || "Material no especificado";
+
+    const fecha = document.createElement("time");
+    fecha.className = "delivery-date";
+    fecha.textContent = formatearFecha(entrega.date);
+    if (entrega.date) fecha.dateTime = entrega.date;
+
+    encabezado.append(material, fecha);
 
     const centro = document.createElement("p");
-    centro.textContent = `Centro: ${entrega.center}`;
+    centro.className = "delivery-center";
+    centro.textContent = "Centro: " + (entrega.center || "No especificado");
 
-    const fecha = document.createElement("p");
-    fecha.textContent = `Fecha: ${formatearFecha(entrega.date)}`;
+    const cantidad = document.createElement("p");
+    cantidad.className = "delivery-quantity";
+    cantidad.textContent = Number(entrega.quantity || 0) + " " +
+      (entrega.unit === "kg" ? "kg" : "piezas");
 
-    informacion.appendChild(titulo);
-    informacion.appendChild(centro);
-    informacion.appendChild(fecha);
+    tarjeta.append(encabezado, centro);
 
     if (entrega.notes) {
       const observaciones = document.createElement("p");
-      observaciones.textContent = `Observaciones: ${entrega.notes}`;
-      informacion.appendChild(observaciones);
+      observaciones.className = "delivery-notes";
+      observaciones.textContent = "Observaciones: " + entrega.notes;
+      tarjeta.appendChild(observaciones);
     }
 
-    const cantidad = document.createElement("div");
-    cantidad.className = "delivery-quantity";
-    cantidad.textContent = `${entrega.quantity} ${entrega.unit}`;
-
-    tarjeta.appendChild(informacion);
     tarjeta.appendChild(cantidad);
-
     listaEntregas.appendChild(tarjeta);
   });
 }
 
-// Buscar entregas por material, centro o fecha (como 18/11/2026 o 2026-11-18).
+// La búsqueda actual permite localizar por material, centro, fecha o cantidad.
 buscadorEntregas.addEventListener("input", () => {
   const busqueda = buscadorEntregas.value.toLowerCase().trim();
 
@@ -128,5 +123,4 @@ buscadorEntregas.addEventListener("input", () => {
   mostrarEntregas(resultados);
 });
 
-// Mostrar las entregas al abrir la página.
 mostrarEntregas(entregasUsuario);
