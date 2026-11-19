@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Consulta tu actividad y tus entregas de reciclaje en EcoPuntos.">
+    <meta name="description" content="Consulta y administra tus entregas de reciclaje en EcoPuntos.">
     <title>Mi perfil | EcoPuntos</title>
     <link rel="stylesheet" href="css/perfil.css">
     <link rel="stylesheet" href="css/header-usuario.css">
+    <script src="js/centros-data.js" defer></script>
     <script src="js/header-usuario.js" defer></script>
 </head>
 <body>
@@ -44,9 +45,11 @@
 
         <section class="entregas">
             <h2>Mis entregas</h2>
+            <p class="historial-ayuda">Puedes editar los datos de una entrega o eliminar un registro que ya no necesites.</p>
             <div class="lista-entregas" id="lista-entregas" aria-live="polite">
                 <p class="sin-entregas">Cargando tus entregas...</p>
             </div>
+            <p id="historial-message" class="historial-message" role="status" aria-live="polite"></p>
         </section>
 
         <div class="acciones-perfil">
@@ -55,6 +58,54 @@
         </div>
         <p class="aviso">Tu historial muestra únicamente las entregas registradas desde tu cuenta.</p>
     </main>
+
+    <dialog class="editar-dialog" id="editar-entrega-dialog" aria-labelledby="editar-entrega-title">
+        <form id="editar-entrega-form" class="editar-form">
+            <div class="editar-heading">
+                <div>
+                    <p class="editar-eyebrow">Mi historial</p>
+                    <h2 id="editar-entrega-title">Editar entrega</h2>
+                </div>
+                <button type="button" class="cerrar-dialog" id="cancelar-edicion" aria-label="Cerrar">×</button>
+            </div>
+
+            <label for="editar-centro">Centro de reciclaje</label>
+            <select id="editar-centro" name="center" required>
+                <option value="">Selecciona un centro</option>
+            </select>
+
+            <label for="editar-material">Material entregado</label>
+            <select id="editar-material" name="material" required disabled>
+                <option value="">Primero selecciona un centro</option>
+            </select>
+
+            <div class="editar-fila">
+                <div>
+                    <label for="editar-cantidad">Cantidad</label>
+                    <input type="number" id="editar-cantidad" name="quantity" min="0.01" step="0.01" required>
+                </div>
+                <div>
+                    <label for="editar-unidad">Unidad</label>
+                    <select id="editar-unidad" name="unit" required>
+                        <option value="kg">Kilogramos (kg)</option>
+                        <option value="piezas">Piezas</option>
+                    </select>
+                </div>
+            </div>
+
+            <label for="editar-fecha">Fecha de entrega</label>
+            <input type="date" id="editar-fecha" name="date" required>
+
+            <label for="editar-observaciones">Observaciones (opcional)</label>
+            <textarea id="editar-observaciones" name="notes" rows="3" maxlength="250"></textarea>
+
+            <p id="editar-error" class="editar-error" role="alert"></p>
+            <div class="editar-acciones">
+                <button type="button" class="boton-cancelar" id="descartar-edicion">Cancelar</button>
+                <button type="submit" class="boton-guardar">Guardar cambios</button>
+            </div>
+        </form>
+    </dialog>
 
     <footer>
         <p>Cada entrega cuenta para cuidar el planeta.</p>
