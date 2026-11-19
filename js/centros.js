@@ -2,7 +2,10 @@
 const centersGrid = document.getElementById("centers-grid");
 const searchInput = document.getElementById("search-centers");
 const filterButtons = document.querySelectorAll(".filter-button");
-const resultsMessage = document.getElementById("results-message");\nconst feedback=document.getElementById("centers-feedback"), centerDialog=document.getElementById("center-edit-dialog"), centerForm=document.getElementById("center-edit-form"), centerError=document.getElementById("center-edit-error");\nlet editingCenterId=null;\nconst labels={plastico:"Plástico",papel:"Papel",carton:"Cartón",vidrio:"Vidrio",metal:"Metal",electronicos:"Electrónicos"};
+const resultsMessage = document.getElementById("results-message");
+const feedback=document.getElementById("centers-feedback"), centerDialog=document.getElementById("center-edit-dialog"), centerForm=document.getElementById("center-edit-form"), centerError=document.getElementById("center-edit-error");
+let editingCenterId=null;
+const labels={plastico:"Plástico",papel:"Papel",carton:"Cartón",vidrio:"Vidrio",metal:"Metal",electronicos:"Electrónicos"};
 
 let activeFilter = "todos";
 
@@ -53,7 +56,8 @@ function showCenters() {
       detailsButton.textContent = "Ver detalles";
       detailsButton.dataset.details = center.id;
 
-      card.append(title, location, materialsTitle, materials, detailsButton);\n      if(getActiveUser()){const actions=document.createElement("div");actions.className="center-card-actions";const edit=document.createElement("button");edit.type="button";edit.textContent="Editar";edit.addEventListener("click",()=>openCenterEditor(center));const del=document.createElement("button");del.type="button";del.textContent="Eliminar";del.addEventListener("click",()=>deleteCenter(center.id));actions.append(edit,del);card.appendChild(actions);}
+      card.append(title, location, materialsTitle, materials, detailsButton);
+      if(getActiveUser()){const actions=document.createElement("div");actions.className="center-card-actions";const edit=document.createElement("button");edit.type="button";edit.textContent="Editar";edit.addEventListener("click",()=>openCenterEditor(center));const del=document.createElement("button");del.type="button";del.textContent="Eliminar";del.addEventListener("click",()=>deleteCenter(center.id));actions.append(edit,del);card.appendChild(actions);}
       centersGrid.appendChild(card);
     });
   }
@@ -103,5 +107,6 @@ centerDialog.addEventListener("click",e=>{if(e.target===centerDialog)closeCenter
 centerForm.addEventListener("submit",e=>{e.preventDefault();centerError.textContent="";if(!getActiveUser()||!centerForm.reportValidity())return;const name=centerForm.elements.name.value.trim(),location=centerForm.elements.location.value.trim(),icon=centerForm.elements.icon.value.trim(),description=centerForm.elements.description.value.trim(),materials=Array.from(centerForm.querySelectorAll('input[name="materials"]:checked')).map(x=>x.value);if(!materials.length){centerError.textContent="Selecciona al menos un material.";return;}const all=obtenerTodosLosCentros();if(all.some(c=>c.id!==editingCenterId&&c.name.toLowerCase()===name.toLowerCase())){centerError.textContent="Ya existe un centro con ese nombre.";return;}const next=all.map(c=>c.id===editingCenterId?{...c,name,location,icon,description,materials,materialText:materials.map(m=>labels[m]).join(", ")}:c);try{guardarCentros(next);centers.splice(0,centers.length,...obtenerCentrosPublicos());document.dispatchEvent(new CustomEvent("centros-actualizados"));closeCenterEditor();showCenterFeedback("Centro actualizado correctamente.","success");}catch{centerError.textContent="No se pudieron guardar los cambios."; }});
 function deleteCenter(id){if(!getActiveUser())return;const all=obtenerTodosLosCentros(),c=all.find(x=>x.id===id);if(!c||!confirm("¿Eliminar "+c.name+" del catálogo público? Sus entregas anteriores se conservarán."))return;try{guardarCentros(all.map(x=>x.id===id?{...x,active:false}:x));centers.splice(0,centers.length,...obtenerCentrosPublicos());showCenters();showCenterFeedback("Centro eliminado del catálogo público.","success");}catch{showCenterFeedback("No se pudo eliminar el centro.","error");}}
 function showCenterFeedback(message,type){feedback.textContent=message;feedback.className="centers-feedback "+type;}
-\n// Mostrar los centros al cargar la página.
+
+// Mostrar los centros al cargar la página.
 showCenters();

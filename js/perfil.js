@@ -16,11 +16,14 @@ function readDeliveries() {
   }
 }
 
-const activeUser = readActiveUser();\nconst editDialog=document.getElementById("editar-entrega-dialog"), editForm=document.getElementById("editar-entrega-form"), editCenter=document.getElementById("editar-centro"), editMaterial=document.getElementById("editar-material"), editError=document.getElementById("editar-error");\nlet editingDeliveryId=null;
+const activeUser = readActiveUser();
+const editDialog=document.getElementById("editar-entrega-dialog"), editForm=document.getElementById("editar-entrega-form"), editCenter=document.getElementById("editar-centro"), editMaterial=document.getElementById("editar-material"), editError=document.getElementById("editar-error");
+let editingDeliveryId=null;
 if (!activeUser || !activeUser.correo) {
   window.location.replace("login.html");
 } else {
-  renderUserProfile(activeUser, readDeliveries());\n  initDeliveryEditor();
+  renderUserProfile(activeUser, readDeliveries());
+  initDeliveryEditor();
 }
 
 function renderUserProfile(user, allDeliveries) {
@@ -94,7 +97,11 @@ function renderUserProfile(user, allDeliveries) {
     label.textContent = "Cantidad entregada";
     meta.append(quantity, label);
 
-    const actions=document.createElement("div"); actions.className="entrega-acciones";\n    const edit=document.createElement("button"); edit.type="button"; edit.textContent="Editar"; edit.addEventListener("click",()=>openDeliveryEditor(delivery));\n    const remove=document.createElement("button"); remove.type="button"; remove.textContent="Eliminar"; remove.addEventListener("click",()=>deleteDelivery(delivery.id));\n    actions.append(edit,remove); meta.appendChild(actions);\n    article.append(detail, meta);
+    const actions=document.createElement("div"); actions.className="entrega-acciones";
+    const edit=document.createElement("button"); edit.type="button"; edit.textContent="Editar"; edit.addEventListener("click",()=>openDeliveryEditor(delivery));
+    const remove=document.createElement("button"); remove.type="button"; remove.textContent="Eliminar"; remove.addEventListener("click",()=>deleteDelivery(delivery.id));
+    actions.append(edit,remove); meta.appendChild(actions);
+    article.append(detail, meta);
     list.appendChild(article);
   });
 }
@@ -122,7 +129,8 @@ function openDeliveryEditor(d){editingDeliveryId=d.id;const c=obtenerCentrosPubl
 function closeDeliveryEditor(){if(editDialog.open)editDialog.close();editingDeliveryId=null;editError.textContent="";}
 function deleteDelivery(id){const all=readDeliveries(),d=all.find(x=>x.id===id&&x.ownerEmail&&x.ownerEmail.toLowerCase()===activeUser.correo.toLowerCase());if(!d)return;if(!confirm("¿Eliminar esta entrega? Esta acción no se puede deshacer."))return;const next=all.filter(x=>x.id!==id);try{localStorage.setItem("entregasEcoPuntos",JSON.stringify(next));renderUserProfile(activeUser,next);}catch{alert("No se pudo eliminar el registro.");}}
 function todayLocal(){const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);}
-\n// SCRUM-76: gráficas de barras con los materiales reciclados y las entregas por mes.
+
+// SCRUM-76: gráficas de barras con los materiales reciclados y las entregas por mes.
 function renderStatistics(deliveries) {
   const materialsChart = document.getElementById("grafica-materiales");
   const monthsChart = document.getElementById("grafica-meses");

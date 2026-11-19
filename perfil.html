@@ -56,7 +56,8 @@
             </div>
         </section>
 
-        <section class="entregas">\n            <p class="historial-ayuda">Puedes editar los datos de una entrega o eliminar un registro que ya no necesites.</p>
+        <section class="entregas">
+            <p class="historial-ayuda">Puedes editar los datos de una entrega o eliminar un registro que ya no necesites.</p>
             <h2>Mis entregas</h2>
             <div class="lista-entregas" id="lista-entregas" aria-live="polite">
                 <p class="sin-entregas">Cargando tus entregas...</p>
@@ -70,10 +71,12 @@
         <p class="aviso">Tu historial muestra únicamente las entregas registradas desde tu cuenta.</p>
     </main>
 
-    <dialog class="editar-dialog" id="editar-entrega-dialog"><form id="editar-entrega-form" class="editar-form"><h2>Editar entrega</h2><label for="editar-centro">Centro</label><select id="editar-centro" required><option value="">Selecciona un centro</option></select><label for="editar-material">Material</label><select id="editar-material" required disabled></select><div class="editar-fila"><div><label for="editar-cantidad">Cantidad</label><input id="editar-cantidad" type="number" min="0.01" step="0.01" required></div><div><label for="editar-unidad">Unidad</label><select id="editar-unidad"><option value="kg">kg</option><option value="piezas">Piezas</option></select></div></div><label for="editar-fecha">Fecha</label><input id="editar-fecha" type="date" required><label for="editar-observaciones">Observaciones</label><textarea id="editar-observaciones" rows="3"></textarea><p id="editar-error" role="alert"></p><div class="editar-acciones"><button type="button" id="cancelar-edicion">Cancelar</button><button type="submit">Guardar cambios</button></div></form></dialog>\n    <footer>
+    <dialog class="editar-dialog" id="editar-entrega-dialog"><form id="editar-entrega-form" class="editar-form"><h2>Editar entrega</h2><label for="editar-centro">Centro</label><select id="editar-centro" required><option value="">Selecciona un centro</option></select><label for="editar-material">Material</label><select id="editar-material" required disabled></select><div class="editar-fila"><div><label for="editar-cantidad">Cantidad</label><input id="editar-cantidad" type="number" min="0.01" step="0.01" required></div><div><label for="editar-unidad">Unidad</label><select id="editar-unidad"><option value="kg">kg</option><option value="piezas">Piezas</option></select></div></div><label for="editar-fecha">Fecha</label><input id="editar-fecha" type="date" required><label for="editar-observaciones">Observaciones</label><textarea id="editar-observaciones" rows="3"></textarea><p id="editar-error" role="alert"></p><div class="editar-acciones"><button type="button" id="cancelar-edicion">Cancelar</button><button type="submit">Guardar cambios</button></div></form></dialog>
+    <footer>
         <p>Cada entrega cuenta para cuidar el planeta.</p>
     </footer>
 
-    <script src="js/centros-data.js"></script>\n    <script src="js/perfil.js"></script>
+    <script src="js/centros-data.js"></script>
+    <script src="js/perfil.js"></script>
 </body>
 </html>

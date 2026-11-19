@@ -58,13 +58,15 @@
 
       <p class="results-message" id="results-message" aria-live="polite"></p>
 
-      <p class="centers-feedback" id="centers-feedback" role="status" aria-live="polite"></p>\n      <div class="centers-grid" id="centers-grid">
+      <p class="centers-feedback" id="centers-feedback" role="status" aria-live="polite"></p>
+      <div class="centers-grid" id="centers-grid">
         <!-- Las tarjetas se generan desde js/centros.js con los datos de js/centros-data.js -->
       </div>
     </section>
   </main>
 
-  <dialog class="center-edit-dialog" id="center-edit-dialog"><form id="center-edit-form"><h2>Editar centro</h2><label for="center-name">Nombre</label><input id="center-name" name="name" maxlength="70" required><label for="center-location">Ubicación</label><input id="center-location" name="location" maxlength="100" required><label for="center-icon">Ícono</label><input id="center-icon" name="icon" maxlength="8" required><fieldset class="center-material-options"><legend>Materiales que recibe</legend><label><input type="checkbox" name="materials" value="plastico"> Plástico</label><label><input type="checkbox" name="materials" value="papel"> Papel</label><label><input type="checkbox" name="materials" value="carton"> Cartón</label><label><input type="checkbox" name="materials" value="vidrio"> Vidrio</label><label><input type="checkbox" name="materials" value="metal"> Metal</label><label><input type="checkbox" name="materials" value="electronicos"> Electrónicos</label></fieldset><label for="center-description">Descripción</label><textarea id="center-description" name="description" rows="3" maxlength="300" required></textarea><p id="center-edit-error" role="alert"></p><div class="center-edit-actions"><button type="button" id="cancel-center-edit">Cancelar</button><button type="submit">Guardar cambios</button></div></form></dialog>\n  <footer class="site-footer">
+  <dialog class="center-edit-dialog" id="center-edit-dialog"><form id="center-edit-form"><h2>Editar centro</h2><label for="center-name">Nombre</label><input id="center-name" name="name" maxlength="70" required><label for="center-location">Ubicación</label><input id="center-location" name="location" maxlength="100" required><label for="center-icon">Ícono</label><input id="center-icon" name="icon" maxlength="8" required><fieldset class="center-material-options"><legend>Materiales que recibe</legend><label><input type="checkbox" name="materials" value="plastico"> Plástico</label><label><input type="checkbox" name="materials" value="papel"> Papel</label><label><input type="checkbox" name="materials" value="carton"> Cartón</label><label><input type="checkbox" name="materials" value="vidrio"> Vidrio</label><label><input type="checkbox" name="materials" value="metal"> Metal</label><label><input type="checkbox" name="materials" value="electronicos"> Electrónicos</label></fieldset><label for="center-description">Descripción</label><textarea id="center-description" name="description" rows="3" maxlength="300" required></textarea><p id="center-edit-error" role="alert"></p><div class="center-edit-actions"><button type="button" id="cancel-center-edit">Cancelar</button><button type="submit">Guardar cambios</button></div></form></dialog>
+  <footer class="site-footer">
     <p>EcoPuntos | Cuidar el planeta está en nuestras manos</p>
   </footer>
 </body>
