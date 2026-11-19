@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Consulta tu historial de entregas en EcoPuntos.">
+  <title>Historial de entregas | EcoPuntos</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/historial.css">
+  <link rel="stylesheet" href="css/header-usuario.css">
+  <script src="js/historial.js" defer></script>
+  <script src="js/header-usuario.js" defer></script>
+</head>
+<body>
+
+  <header class="main-header">
+    <a href="index.html" class="logo">EcoPuntos</a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <a href="perfil.html">Mi perfil</a>
+      <a href="registro-entregas.html">Registro de entregas</a>
+      <a href="historial.html" aria-current="page">Historial</a>
+    </nav>
+  </header>
+
+  <main class="page-container">
+
+    <section class="intro-section">
+      <span class="intro-icon" aria-hidden="true">📋</span>
+      <h1>Mi historial de entregas</h1>
+      <p>
+        Consulta tus entregas registradas y revisa tu contribución
+        al cuidado del planeta.
+      </p>
+    </section>
+
+    <section class="history-card">
+
+      <div class="history-heading">
+        <h2>Mis entregas</h2>
+        <p id="total-entregas">0 entregas registradas</p>
+      </div>
+
+      <div class="search-group">
+        <label for="buscador-entregas">Buscar una entrega</label>
+        <input
+          type="search"
+          id="buscador-entregas"
+          placeholder="Busca por material, centro o fecha..."
+        >
+      </div>
+
+      <div id="lista-entregas" class="delivery-list"></div>
+
+      <p id="mensaje-vacio" class="empty-message" hidden>
+        Todavía no tienes entregas registradas.
+      </p>
+
+      <p id="mensaje-sin-resultados" class="empty-message" hidden>
+        No se encontraron entregas con esa búsqueda.
+      </p>
+
+    </section>
+
+    <div class="back-link">
+      <a href="registro-entregas.html">+ Registrar una nueva entrega</a>
+    </div>
+
+  </main>
+
+  <footer class="main-footer">
+    <p>© 2026 EcoPuntos | Cuidar el planeta está en tus manos.</p>
+  </footer>
+
+</body>
+</html>
