@@ -52,6 +52,33 @@
         >
       </div>
 
+      <section class="history-filters" aria-label="Filtros del historial">
+        <h3>Filtrar entregas</h3>
+        <div class="filter-fields">
+          <div>
+            <label for="filtro-material">Material</label>
+            <select id="filtro-material">
+              <option value="">Todos los materiales</option>
+              <option value="plastico">Plástico</option>
+              <option value="papel">Papel</option>
+              <option value="carton">Cartón</option>
+              <option value="vidrio">Vidrio</option>
+              <option value="metal">Metal</option>
+              <option value="electronicos">Electrónicos</option>
+            </select>
+          </div>
+          <div>
+            <label for="filtro-desde">Desde</label>
+            <input type="date" id="filtro-desde">
+          </div>
+          <div>
+            <label for="filtro-hasta">Hasta</label>
+            <input type="date" id="filtro-hasta">
+          </div>
+        </div>
+        <button type="button" id="limpiar-filtros" class="clear-filters">Limpiar filtros</button>
+      </section>
+
       <div id="lista-entregas" class="delivery-list"></div>
 
       <p id="mensaje-vacio" class="empty-message" hidden>
