@@ -42,7 +42,8 @@ function showCenterDetails(center) {
 
   const description = document.createElement("p");
   description.className = "detail-description";
-  description.textContent = center.description;
+  description.textContent =
+    center.description || "Este centro todavía no tiene descripción.";
 
   descriptionSection.append(
     descriptionTitle,
