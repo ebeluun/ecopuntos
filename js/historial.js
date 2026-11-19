@@ -100,27 +100,57 @@ function mostrarEntregas(entregas) {
   });
 }
 
-// La búsqueda actual permite localizar por material, centro, fecha o cantidad.
-buscadorEntregas.addEventListener("input", () => {
-  const busqueda = buscadorEntregas.value.toLowerCase().trim();
+// Aplicar juntos la búsqueda, el material y el rango de fechas.
+const filtroMaterial = document.getElementById("filtro-material");
+const filtroDesde = document.getElementById("filtro-desde");
+const filtroHasta = document.getElementById("filtro-hasta");
+const limpiarFiltros = document.getElementById("limpiar-filtros");
+
+function normalizarTexto(texto) {
+  return String(texto || "").toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "");
+}
+
+function aplicarFiltros() {
+  const busqueda = normalizarTexto(buscadorEntregas.value.trim());
+  const materialSeleccionado = filtroMaterial.value;
+  const desde = filtroDesde.value;
+  const hasta = filtroHasta.value;
 
   const resultados = entregasUsuario.filter((entrega) => {
-    const datos = [
-      entrega.material,
-      entrega.center,
-      entrega.date,
-      formatearFecha(entrega.date),
-      entrega.quantity,
-      entrega.unit,
-      entrega.notes
-    ];
+    const material = normalizarTexto(entrega.materialKey || entrega.material);
+    const coincideMaterial = !materialSeleccionado ||
+      material === materialSeleccionado ||
+      material === normalizarTexto(filtroMaterial.options[filtroMaterial.selectedIndex].text);
 
-    return datos.some((dato) =>
-      String(dato || "").toLowerCase().includes(busqueda)
+    const fecha = entrega.date || "";
+    const coincideDesde = !desde || fecha >= desde;
+    const coincideHasta = !hasta || fecha <= hasta;
+
+    const datos = [
+      entrega.material, entrega.center, entrega.date, formatearFecha(entrega.date),
+      entrega.quantity, entrega.unit, entrega.notes
+    ];
+    const coincideBusqueda = !busqueda || datos.some((dato) =>
+      normalizarTexto(dato).includes(busqueda)
     );
+
+    return coincideMaterial && coincideDesde && coincideHasta && coincideBusqueda;
   });
 
   mostrarEntregas(resultados);
+}
+
+buscadorEntregas.addEventListener("input", aplicarFiltros);
+filtroMaterial.addEventListener("change", aplicarFiltros);
+filtroDesde.addEventListener("change", aplicarFiltros);
+filtroHasta.addEventListener("change", aplicarFiltros);
+
+limpiarFiltros.addEventListener("click", () => {
+  buscadorEntregas.value = "";
+  filtroMaterial.value = "";
+  filtroDesde.value = "";
+  filtroHasta.value = "";
+  aplicarFiltros();
 });
 
 mostrarEntregas(entregasUsuario);
