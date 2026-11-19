@@ -1,4 +1,21 @@
 // Panel de administración de demostración: utiliza los datos guardados en este navegador.
+const CORREO_ADMINISTRADOR = "ebelun007@tecmilenio.mx";
+
+function esAdministrador() {
+  try {
+    const usuario = JSON.parse(localStorage.getItem("usuarioActivo") || "null");
+    return usuario && usuario.correo &&
+      usuario.correo.toLowerCase() === CORREO_ADMINISTRADOR;
+  } catch (error) {
+    return false;
+  }
+}
+
+// Solo la cuenta administradora puede abrir este panel.
+if (!esAdministrador()) {
+  alert("Esta sección es exclusiva para la cuenta administradora.");
+  window.location.replace("login.html");
+} else {
 const materialLabels = {
   plastico: "Plástico", papel: "Papel", carton: "Cartón",
   vidrio: "Vidrio", metal: "Metal", electronicos: "Electrónicos"
@@ -165,6 +182,14 @@ centerForm.addEventListener("submit", (event) => {
   }
 
   const list = obtenerTodosLosCentros();
+  const duplicate = list.some((center) =>
+    center.id !== editingCenterId &&
+    String(center.name || "").trim().toLowerCase() === name.toLowerCase()
+  );
+  if (duplicate) {
+    message.textContent = "Ya existe un centro con ese nombre.";
+    return;
+  }
   const data = {
     id: editingCenterId || "centro-" + Date.now(),
     name,
@@ -206,3 +231,5 @@ window.addEventListener("storage", (event) => {
 });
 
 renderDashboard();
+
+}

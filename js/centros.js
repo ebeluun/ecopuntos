@@ -57,7 +57,7 @@ function showCenters() {
       detailsButton.dataset.details = center.id;
 
       card.append(title, location, materialsTitle, materials, detailsButton);
-      if(getActiveUser()){const actions=document.createElement("div");actions.className="center-card-actions";const edit=document.createElement("button");edit.type="button";edit.textContent="Editar";edit.addEventListener("click",()=>openCenterEditor(center));const del=document.createElement("button");del.type="button";del.textContent="Eliminar";del.addEventListener("click",()=>deleteCenter(center.id));actions.append(edit,del);card.appendChild(actions);}
+      if(esAdministrador()){const actions=document.createElement("div");actions.className="center-card-actions";const edit=document.createElement("button");edit.type="button";edit.textContent="Editar";edit.addEventListener("click",()=>openCenterEditor(center));const del=document.createElement("button");del.type="button";del.textContent="Eliminar";del.addEventListener("click",()=>deleteCenter(center.id));actions.append(edit,del);card.appendChild(actions);}
       centersGrid.appendChild(card);
     });
   }
@@ -99,13 +99,13 @@ centersGrid.addEventListener("click", (event) => {
 document.addEventListener("centros-actualizados", showCenters);
 
 
-function getActiveUser(){try{const u=JSON.parse(localStorage.getItem("usuarioActivo")||"null");return u&&u.correo?u:null;}catch{return null;}}
-function openCenterEditor(c){if(!getActiveUser())return;editingCenterId=c.id;centerError.textContent="";centerForm.elements.name.value=c.name;centerForm.elements.location.value=c.location||"";centerForm.elements.icon.value=c.icon||"♻️";centerForm.elements.description.value=c.description||"";centerForm.querySelectorAll('input[name="materials"]').forEach(x=>x.checked=c.materials.includes(x.value));centerDialog.showModal();}
+function esAdministrador(){try{const u=JSON.parse(localStorage.getItem("usuarioActivo")||"null");return !!(u&&u.correo&&u.correo.toLowerCase()==="ebelun007@tecmilenio.mx");}catch{return false;}}
+function openCenterEditor(c){if(!esAdministrador())return;editingCenterId=c.id;centerError.textContent="";centerForm.elements.name.value=c.name;centerForm.elements.location.value=c.location||"";centerForm.elements.icon.value=c.icon||"♻️";centerForm.elements.description.value=c.description||"";centerForm.querySelectorAll('input[name="materials"]').forEach(x=>x.checked=c.materials.includes(x.value));centerDialog.showModal();}
 function closeCenterEditor(){if(centerDialog.open)centerDialog.close();editingCenterId=null;centerError.textContent="";}
 document.getElementById("cancel-center-edit").addEventListener("click",closeCenterEditor);
 centerDialog.addEventListener("click",e=>{if(e.target===centerDialog)closeCenterEditor();});
 centerForm.addEventListener("submit",e=>{e.preventDefault();centerError.textContent="";if(!getActiveUser()||!centerForm.reportValidity())return;const name=centerForm.elements.name.value.trim(),location=centerForm.elements.location.value.trim(),icon=centerForm.elements.icon.value.trim(),description=centerForm.elements.description.value.trim(),materials=Array.from(centerForm.querySelectorAll('input[name="materials"]:checked')).map(x=>x.value);if(!materials.length){centerError.textContent="Selecciona al menos un material.";return;}const all=obtenerTodosLosCentros();if(all.some(c=>c.id!==editingCenterId&&c.name.toLowerCase()===name.toLowerCase())){centerError.textContent="Ya existe un centro con ese nombre.";return;}const next=all.map(c=>c.id===editingCenterId?{...c,name,location,icon,description,materials,materialText:materials.map(m=>labels[m]).join(", ")}:c);try{guardarCentros(next);centers.splice(0,centers.length,...obtenerCentrosPublicos());document.dispatchEvent(new CustomEvent("centros-actualizados"));closeCenterEditor();showCenterFeedback("Centro actualizado correctamente.","success");}catch{centerError.textContent="No se pudieron guardar los cambios."; }});
-function deleteCenter(id){if(!getActiveUser())return;const all=obtenerTodosLosCentros(),c=all.find(x=>x.id===id);if(!c||!confirm("¿Eliminar "+c.name+" del catálogo público? Sus entregas anteriores se conservarán."))return;try{guardarCentros(all.map(x=>x.id===id?{...x,active:false}:x));centers.splice(0,centers.length,...obtenerCentrosPublicos());showCenters();showCenterFeedback("Centro eliminado del catálogo público.","success");}catch{showCenterFeedback("No se pudo eliminar el centro.","error");}}
+function deleteCenter(id){if(!esAdministrador())return;const all=obtenerTodosLosCentros(),c=all.find(x=>x.id===id);if(!c||!confirm("¿Eliminar "+c.name+" del catálogo público? Sus entregas anteriores se conservarán."))return;try{guardarCentros(all.map(x=>x.id===id?{...x,active:false}:x));centers.splice(0,centers.length,...obtenerCentrosPublicos());showCenters();showCenterFeedback("Centro eliminado del catálogo público.","success");}catch{showCenterFeedback("No se pudo eliminar el centro.","error");}}
 function showCenterFeedback(message,type){feedback.textContent=message;feedback.className="centers-feedback "+type;}
 
 // Mostrar los centros al cargar la página.
