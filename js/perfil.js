@@ -48,6 +48,8 @@ function renderUserProfile(user, allDeliveries) {
   if (kgElement) kgElement.textContent = formatQuantity(totalKg) + " kg";
   if (piecesElement) piecesElement.textContent = formatQuantity(totalPieces);
 
+  renderStatistics(userDeliveries);
+
   const list = document.getElementById("lista-entregas");
   list.replaceChildren();
 
@@ -94,6 +96,101 @@ function renderUserProfile(user, allDeliveries) {
 
     article.append(detail, meta);
     list.appendChild(article);
+  });
+}
+
+// SCRUM-76: gráficas de barras con los materiales reciclados y las entregas por mes.
+function renderStatistics(deliveries) {
+  const materialsChart = document.getElementById("grafica-materiales");
+  const monthsChart = document.getElementById("grafica-meses");
+  if (!materialsChart || !monthsChart) return;
+
+  // Agrupar por material: número de entregas, kilos y piezas.
+  const byMaterial = {};
+  deliveries.forEach((delivery) => {
+    const name = delivery.material || "Otro";
+    if (!byMaterial[name]) byMaterial[name] = { count: 0, kg: 0, pieces: 0 };
+    byMaterial[name].count += 1;
+    if (delivery.unit === "kg") byMaterial[name].kg += Number(delivery.quantity || 0);
+    else byMaterial[name].pieces += Number(delivery.quantity || 0);
+  });
+
+  const materialRows = Object.entries(byMaterial)
+    .sort((a, b) => b[1].count - a[1].count)
+    .map(([name, totals]) => {
+      const amounts = [];
+      if (totals.kg > 0) amounts.push(formatQuantity(totals.kg) + " kg");
+      if (totals.pieces > 0) amounts.push(formatQuantity(totals.pieces) + " piezas");
+      return {
+        label: name,
+        value: totals.count,
+        text: totals.count + (totals.count === 1 ? " entrega" : " entregas") +
+          (amounts.length ? " · " + amounts.join(" y ") : "")
+      };
+    });
+
+  drawBars(materialsChart, materialRows,
+    "Aún no hay materiales para mostrar. Registra una entrega para ver tu gráfica.");
+
+  // Entregas de los últimos 6 meses, incluido el actual.
+  const today = new Date();
+  const monthRows = [];
+  for (let offset = 5; offset >= 0; offset--) {
+    const month = new Date(today.getFullYear(), today.getMonth() - offset, 1);
+    const key = month.getFullYear() + "-" + String(month.getMonth() + 1).padStart(2, "0");
+    const count = deliveries.filter((delivery) => (delivery.date || "").startsWith(key)).length;
+    const monthName = month.toLocaleDateString("es-MX", { month: "short" }).replace(".", "");
+
+    monthRows.push({
+      label: monthName.charAt(0).toUpperCase() + monthName.slice(1) + " " + month.getFullYear(),
+      value: count,
+      text: count + (count === 1 ? " entrega" : " entregas")
+    });
+  }
+
+  const hasRecentDeliveries = monthRows.some((row) => row.value > 0);
+  drawBars(monthsChart, hasRecentDeliveries ? monthRows : [],
+    "No tienes entregas en los últimos 6 meses.");
+}
+
+// Dibujar una lista de barras horizontales; el ancho es proporcional al valor más alto.
+function drawBars(container, rows, emptyText) {
+  container.replaceChildren();
+
+  if (rows.length === 0) {
+    const empty = document.createElement("li");
+    empty.className = "barra-vacia";
+    empty.textContent = emptyText;
+    container.appendChild(empty);
+    return;
+  }
+
+  const max = Math.max(...rows.map((row) => row.value), 1);
+
+  rows.forEach((row) => {
+    const item = document.createElement("li");
+    item.className = "barra";
+
+    const label = document.createElement("span");
+    label.className = "barra-etiqueta";
+    label.textContent = row.label;
+
+    const track = document.createElement("span");
+    track.className = "barra-pista";
+    track.setAttribute("aria-hidden", "true");
+
+    const fill = document.createElement("span");
+    fill.className = "barra-relleno";
+    // Un mínimo de 3% para que una barra con valor se vea; las de 0 quedan vacías.
+    fill.style.width = row.value > 0 ? Math.max((row.value / max) * 100, 3) + "%" : "0";
+    track.appendChild(fill);
+
+    const value = document.createElement("span");
+    value.className = "barra-valor";
+    value.textContent = row.text;
+
+    item.append(label, track, value);
+    container.appendChild(item);
   });
 }
 

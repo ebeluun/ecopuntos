@@ -49,6 +49,28 @@ function showCenterDetails(center) {
     description
   );
 
+  // SCRUM-82: datos que el administrador puede agregar (dirección, horario, teléfono).
+  const extraInfo = [
+    ["Dirección", center.address],
+    ["Horario", center.schedule],
+    ["Teléfono", center.phone]
+  ].filter(([, value]) => value);
+
+  if (extraInfo.length > 0) {
+    const infoList = document.createElement("dl");
+    infoList.className = "detail-info";
+
+    extraInfo.forEach(([label, value]) => {
+      const term = document.createElement("dt");
+      term.textContent = label;
+      const data = document.createElement("dd");
+      data.textContent = value;
+      infoList.append(term, data);
+    });
+
+    descriptionSection.appendChild(infoList);
+  }
+
   const materialsSection = document.createElement("section");
   materialsSection.className = "detail-section";
 
@@ -58,11 +80,11 @@ function showCenterDetails(center) {
   const materialsList = document.createElement("div");
   materialsList.className = "material-tags";
 
-  // Separar "Vidrio, Metal y Plástico" en una etiqueta por material.
-  center.materialText.split(/, | y /).forEach((material) => {
+  // Una etiqueta por material.
+  center.materials.forEach((material) => {
     const tag = document.createElement("span");
     tag.className = "material-tag";
-    tag.textContent = material;
+    tag.textContent = nombresMateriales[material] || material;
 
     materialsList.appendChild(tag);
   });
