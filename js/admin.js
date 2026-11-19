@@ -53,6 +53,8 @@ function renderCenters(list) {
     row.innerHTML =
       '<td><span class="center-name">' + escapeHtml(center.name) + '</span><span class="center-sub">' + escapeHtml(center.id) + '</span></td>' +
       '<td>' + escapeHtml(center.location) + '</td>' +
+      '<td>' + escapeHtml(center.address || "Sin dirección registrada") + '</td>' +
+      '<td>' + escapeHtml(center.schedule || "Sin horario registrado") + '</td>' +
       '<td><div class="material-chips">' + (materials || '<span class="chip">Sin materiales</span>') + '</div></td>' +
       '<td><span class="state ' + (center.active === false ? "inactive" : "active") + '">' +
       (center.active === false ? "Inactivo" : "Activo") + '</span></td>' +
@@ -127,6 +129,8 @@ centerTable.addEventListener("click", (event) => {
     document.getElementById("save-center").textContent = "Guardar cambios";
     document.getElementById("center-name").value = center.name || "";
     document.getElementById("center-location").value = center.location || "";
+    document.getElementById("center-address").value = center.address || "";
+    document.getElementById("center-schedule").value = center.schedule || "";
     document.getElementById("center-description").value = center.description || "";
     centerForm.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
       checkbox.checked = (center.materials || []).includes(checkbox.value);
@@ -166,7 +170,10 @@ centerForm.addEventListener("submit", (event) => {
     name,
     icon: "♻️",
     location,
+    address: document.getElementById("center-address").value.trim(),
+    schedule: document.getElementById("center-schedule").value.trim(),
     materials,
+    materialText: materials.map((key) => materialLabels[key] || key).join(", "),
     description: document.getElementById("center-description").value.trim(),
     active: true
   };
