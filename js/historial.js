@@ -107,7 +107,7 @@ const filtroHasta = document.getElementById("filtro-hasta");
 const limpiarFiltros = document.getElementById("limpiar-filtros");
 
 function normalizarTexto(texto) {
-  return String(texto || "").toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "");
+  return String(texto || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 function aplicarFiltros() {
