@@ -1,8 +1,23 @@
 
 // Historial de entregas - EcoPuntos
 
+// Leer un dato de localStorage sin romper la página si está dañado.
+function leerDato(clave, valorPorDefecto) {
+  try {
+    const valor = JSON.parse(localStorage.getItem(clave));
+    return valor === null ? valorPorDefecto : valor;
+  } catch {
+    return valorPorDefecto;
+  }
+}
+
 // Obtener al usuario que inició sesión.
-const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+const usuarioActivo = leerDato("usuarioActivo", null);
+
+// Sin sesión no hay historial que mostrar: enviar al inicio de sesión.
+if (!usuarioActivo || !usuarioActivo.correo) {
+  window.location.replace("login.html");
+}
 
 // Obtener los elementos de la página.
 const listaEntregas = document.getElementById("lista-entregas");
@@ -12,18 +27,21 @@ const mensajeVacio = document.getElementById("mensaje-vacio");
 const mensajeSinResultados = document.getElementById("mensaje-sin-resultados");
 
 // Obtener todas las entregas guardadas.
-const entregasGuardadas =
-  JSON.parse(localStorage.getItem("entregasEcoPuntos")) || [];
+const entregasGuardadas = leerDato("entregasEcoPuntos", []);
 
-// Mostrar solamente las entregas del usuario activo.
-const entregasUsuario = usuarioActivo
-  ? entregasGuardadas.filter(
-      (entrega) => entrega.correoUsuario === usuarioActivo.correo
-    )
-  : [];
+// Mostrar solamente las entregas del usuario activo, de la más reciente a la más antigua.
+// El formulario de registro (main) guarda el dueño de cada entrega en "ownerEmail".
+const correoActivo = usuarioActivo && usuarioActivo.correo
+  ? usuarioActivo.correo.toLowerCase()
+  : "";
 
-// Formatear la fecha.
+const entregasUsuario = (Array.isArray(entregasGuardadas) ? entregasGuardadas : [])
+  .filter((entrega) => (entrega.ownerEmail || "").toLowerCase() === correoActivo)
+  .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+// Formatear la fecha: 2026-11-18 -> 18/11/2026.
 function formatearFecha(fecha) {
+  if (!fecha) return "Sin fecha";
   const partes = fecha.split("-");
   return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
@@ -87,7 +105,7 @@ function mostrarEntregas(entregas) {
   });
 }
 
-// Buscar entregas por material, centro o fecha.
+// Buscar entregas por material, centro o fecha (como 18/11/2026 o 2026-11-18).
 buscadorEntregas.addEventListener("input", () => {
   const busqueda = buscadorEntregas.value.toLowerCase().trim();
 
@@ -96,6 +114,7 @@ buscadorEntregas.addEventListener("input", () => {
       entrega.material,
       entrega.center,
       entrega.date,
+      formatearFecha(entrega.date),
       entrega.quantity,
       entrega.unit,
       entrega.notes

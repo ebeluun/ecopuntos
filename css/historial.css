@@ -190,3 +190,52 @@ body {
     flex-direction: column;
   }
 }
+
+/* Encabezado (mismo diseño que el registro de entregas) */
+.main-header {
+  min-height: 70px;
+  padding: 16px 8%;
+  background-color: #15583e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.logo {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.main-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.main-nav a:hover,
+.main-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+@media (max-width: 600px) {
+  .main-header {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .main-nav {
+    justify-content: center;
+    gap: 14px;
+  }
+}
