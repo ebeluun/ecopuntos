@@ -47,7 +47,7 @@
       <section class="content-section" id="centros">
         <div class="section-heading"><div><p class="eyebrow">GESTIÓN</p><h2>Centros de reciclaje</h2><p>Administra los centros que aparecen en el catálogo público.</p></div><button class="primary-button" id="open-center-form" type="button">＋ Agregar centro</button></div>
         <div class="toolbar"><label class="search-box">⌕ <input id="center-search" type="search" placeholder="Buscar centro por nombre o ubicación"></label><span class="muted" id="center-count">0 centros</span></div>
-        <div class="table-wrap"><table><thead><tr><th>Centro</th><th>Ubicación</th><th>Materiales</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="centers-table"></tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>Centro</th><th>Ubicación</th><th>Dirección</th><th>Horario</th><th>Materiales</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="centers-table"></tbody></table></div>
         <p class="empty-state" id="centers-empty" hidden>No se encontraron centros.</p>
       </section>
 
@@ -71,7 +71,9 @@
     <form id="center-form" method="dialog">
       <div class="dialog-heading"><div><p class="eyebrow">GESTIÓN DE CENTROS</p><h2 id="dialog-title">Agregar centro</h2></div><button class="close-button" id="close-center-form" type="button" aria-label="Cerrar">×</button></div>
       <label>Nombre del centro<input id="center-name" required maxlength="70" placeholder="Ej. Centro de reciclaje"></label>
-      <label>Ubicación<input id="center-location" required maxlength="100" placeholder="Ej. Monterrey, Nuevo León"></label>
+      <label>Ubicación general<input id="center-location" required maxlength="100" placeholder="Ej. Monterrey, Nuevo León"></label>
+      <label>Dirección completa<input id="center-address" maxlength="180" placeholder="Calle, número, colonia y código postal"></label>
+      <label>Horario de atención<input id="center-schedule" maxlength="120" placeholder="Ej. Lunes a viernes, 9:00 a 18:00"></label>
       <label>Descripción<textarea id="center-description" rows="3" placeholder="Describe brevemente el centro"></textarea></label>
       <fieldset><legend>Materiales que recibe</legend>
         <div class="material-options">
