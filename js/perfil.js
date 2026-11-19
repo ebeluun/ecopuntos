@@ -16,11 +16,11 @@ function readDeliveries() {
   }
 }
 
-const activeUser = readActiveUser();
+const activeUser = readActiveUser();\nconst editDialog=document.getElementById("editar-entrega-dialog"), editForm=document.getElementById("editar-entrega-form"), editCenter=document.getElementById("editar-centro"), editMaterial=document.getElementById("editar-material"), editError=document.getElementById("editar-error");\nlet editingDeliveryId=null;
 if (!activeUser || !activeUser.correo) {
   window.location.replace("login.html");
 } else {
-  renderUserProfile(activeUser, readDeliveries());
+  renderUserProfile(activeUser, readDeliveries());\n  initDeliveryEditor();
 }
 
 function renderUserProfile(user, allDeliveries) {
@@ -94,12 +94,35 @@ function renderUserProfile(user, allDeliveries) {
     label.textContent = "Cantidad entregada";
     meta.append(quantity, label);
 
-    article.append(detail, meta);
+    const actions=document.createElement("div"); actions.className="entrega-acciones";\n    const edit=document.createElement("button"); edit.type="button"; edit.textContent="Editar"; edit.addEventListener("click",()=>openDeliveryEditor(delivery));\n    const remove=document.createElement("button"); remove.type="button"; remove.textContent="Eliminar"; remove.addEventListener("click",()=>deleteDelivery(delivery.id));\n    actions.append(edit,remove); meta.appendChild(actions);\n    article.append(detail, meta);
     list.appendChild(article);
   });
 }
 
-// SCRUM-76: gráficas de barras con los materiales reciclados y las entregas por mes.
+
+function initDeliveryEditor(){
+ if(!editForm||typeof obtenerCentrosPublicos!=="function")return;
+ obtenerCentrosPublicos().forEach(c=>{const o=document.createElement("option");o.value=c.id;o.textContent=c.name;editCenter.appendChild(o);});
+ editCenter.addEventListener("change",()=>fillDeliveryMaterials(editCenter.value));
+ document.getElementById("cancelar-edicion").addEventListener("click",closeDeliveryEditor);
+ editForm.addEventListener("submit",e=>{
+  e.preventDefault();editError.textContent="";if(!editForm.reportValidity())return;
+  const all=readDeliveries(),i=all.findIndex(d=>d.id===editingDeliveryId&&d.ownerEmail&&d.ownerEmail.toLowerCase()===activeUser.correo.toLowerCase());
+  if(i<0){editError.textContent="No se encontró la entrega.";return;}
+  const c=obtenerCentrosPublicos().find(x=>x.id===editCenter.value),key=editMaterial.value,q=Number(document.getElementById("editar-cantidad").value),date=document.getElementById("editar-fecha").value;
+  if(!c||!c.materials.includes(key)){editError.textContent="Selecciona un material válido para el centro.";return;}
+  if(q<=0||!Number.isFinite(q)){editError.textContent="La cantidad debe ser mayor que cero.";return;}
+  if(date>todayLocal()){editError.textContent="La fecha no puede ser futura.";return;}
+  all[i]={...all[i],center:c.name,centerId:c.id,material:nombresMateriales[key]||key,materialKey:key,quantity:q,unit:document.getElementById("editar-unidad").value,date,notes:document.getElementById("editar-observaciones").value.trim()};
+  try{localStorage.setItem("entregasEcoPuntos",JSON.stringify(all));closeDeliveryEditor();renderUserProfile(activeUser,all);}catch{editError.textContent="No se pudieron guardar los cambios.";}
+ });
+}
+function fillDeliveryMaterials(id,key){const c=obtenerCentrosPublicos().find(x=>x.id===id);editMaterial.replaceChildren();const p=document.createElement("option");p.value="";p.textContent=c?"Selecciona material":"Selecciona centro";editMaterial.appendChild(p);if(!c){editMaterial.disabled=true;return;}c.materials.forEach(m=>{const o=document.createElement("option");o.value=m;o.textContent=nombresMateriales[m]||m;editMaterial.appendChild(o);});editMaterial.disabled=false;if(key)editMaterial.value=key;}
+function openDeliveryEditor(d){editingDeliveryId=d.id;const c=obtenerCentrosPublicos().find(x=>x.id===d.centerId)||obtenerCentrosPublicos().find(x=>x.name===d.center);editCenter.value=c?c.id:"";fillDeliveryMaterials(editCenter.value,d.materialKey);document.getElementById("editar-cantidad").value=d.quantity;document.getElementById("editar-unidad").value=d.unit||"kg";document.getElementById("editar-fecha").value=d.date||todayLocal();document.getElementById("editar-fecha").max=todayLocal();document.getElementById("editar-observaciones").value=d.notes||"";editError.textContent=c?"":"El centro original ya no está activo. Selecciona otro.";editDialog.showModal();}
+function closeDeliveryEditor(){if(editDialog.open)editDialog.close();editingDeliveryId=null;editError.textContent="";}
+function deleteDelivery(id){const all=readDeliveries(),d=all.find(x=>x.id===id&&x.ownerEmail&&x.ownerEmail.toLowerCase()===activeUser.correo.toLowerCase());if(!d)return;if(!confirm("¿Eliminar esta entrega? Esta acción no se puede deshacer."))return;const next=all.filter(x=>x.id!==id);try{localStorage.setItem("entregasEcoPuntos",JSON.stringify(next));renderUserProfile(activeUser,next);}catch{alert("No se pudo eliminar el registro.");}}
+function todayLocal(){const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);}
+\n// SCRUM-76: gráficas de barras con los materiales reciclados y las entregas por mes.
 function renderStatistics(deliveries) {
   const materialsChart = document.getElementById("grafica-materiales");
   const monthsChart = document.getElementById("grafica-meses");
