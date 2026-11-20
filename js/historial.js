@@ -1,156 +1,23 @@
-// Historial de entregas - EcoPuntos
-
-// Leer un dato de localStorage sin romper la página si está dañado.
-function leerDato(clave, valorPorDefecto) {
-  try {
-    const valor = JSON.parse(localStorage.getItem(clave));
-    return valor === null ? valorPorDefecto : valor;
-  } catch {
-    return valorPorDefecto;
-  }
-}
-
-const usuarioActivo = leerDato("usuarioActivo", null);
-
-if (!usuarioActivo || !usuarioActivo.correo) {
-  window.location.replace("login.html");
-}
-
-const listaEntregas = document.getElementById("lista-entregas");
-const buscadorEntregas = document.getElementById("buscador-entregas");
-const totalEntregas = document.getElementById("total-entregas");
-const mensajeVacio = document.getElementById("mensaje-vacio");
-const mensajeSinResultados = document.getElementById("mensaje-sin-resultados");
-
-const entregasGuardadas = leerDato("entregasEcoPuntos", []);
-const correoActivo = usuarioActivo && usuarioActivo.correo
-  ? usuarioActivo.correo.toLowerCase()
-  : "";
-
-const entregasUsuario = (Array.isArray(entregasGuardadas) ? entregasGuardadas : [])
-  .filter((entrega) => (entrega.ownerEmail || "").toLowerCase() === correoActivo)
-  .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-
-function formatearFecha(fecha) {
-  if (!fecha) return "Sin fecha";
-  const partes = fecha.split("-");
-  if (partes.length !== 3) return "Sin fecha";
-  return partes[2] + "/" + partes[1] + "/" + partes[0];
-}
-
-// Mostrar cada entrega en su propia tarjeta.
-function mostrarEntregas(entregas) {
-  listaEntregas.replaceChildren();
-
-  totalEntregas.textContent =
-    entregas.length + (entregas.length === 1 ? " entrega registrada" : " entregas registradas");
-
-  if (entregasUsuario.length === 0) {
-    mensajeVacio.hidden = false;
-    mensajeSinResultados.hidden = true;
-    return;
-  }
-
-  mensajeVacio.hidden = true;
-
-  if (entregas.length === 0) {
-    mensajeSinResultados.hidden = false;
-    return;
-  }
-
-  mensajeSinResultados.hidden = true;
-
-  entregas.forEach((entrega) => {
-    const tarjeta = document.createElement("article");
-    tarjeta.className = "delivery-item";
-
-    const encabezado = document.createElement("div");
-    encabezado.className = "delivery-card-heading";
-
-    const material = document.createElement("h3");
-    material.textContent = entrega.material || "Material no especificado";
-
-    const fecha = document.createElement("time");
-    fecha.className = "delivery-date";
-    fecha.textContent = formatearFecha(entrega.date);
-    if (entrega.date) fecha.dateTime = entrega.date;
-
-    encabezado.append(material, fecha);
-
-    const centro = document.createElement("p");
-    centro.className = "delivery-center";
-    centro.textContent = "Centro: " + (entrega.center || "No especificado");
-
-    const cantidad = document.createElement("p");
-    cantidad.className = "delivery-quantity";
-    cantidad.textContent = Number(entrega.quantity || 0) + " " +
-      (entrega.unit === "kg" ? "kg" : "piezas");
-
-    tarjeta.append(encabezado, centro);
-
-    if (entrega.notes) {
-      const observaciones = document.createElement("p");
-      observaciones.className = "delivery-notes";
-      observaciones.textContent = "Observaciones: " + entrega.notes;
-      tarjeta.appendChild(observaciones);
-    }
-
-    tarjeta.appendChild(cantidad);
-    listaEntregas.appendChild(tarjeta);
-  });
-}
-
-// Aplicar juntos la búsqueda, el material y el rango de fechas.
-const filtroMaterial = document.getElementById("filtro-material");
-const filtroDesde = document.getElementById("filtro-desde");
-const filtroHasta = document.getElementById("filtro-hasta");
-const limpiarFiltros = document.getElementById("limpiar-filtros");
-
-function normalizarTexto(texto) {
-  return String(texto || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
-function aplicarFiltros() {
-  const busqueda = normalizarTexto(buscadorEntregas.value.trim());
-  const materialSeleccionado = filtroMaterial.value;
-  const desde = filtroDesde.value;
-  const hasta = filtroHasta.value;
-
-  const resultados = entregasUsuario.filter((entrega) => {
-    const material = normalizarTexto(entrega.materialKey || entrega.material);
-    const coincideMaterial = !materialSeleccionado ||
-      material === materialSeleccionado ||
-      material === normalizarTexto(filtroMaterial.options[filtroMaterial.selectedIndex].text);
-
-    const fecha = entrega.date || "";
-    const coincideDesde = !desde || fecha >= desde;
-    const coincideHasta = !hasta || fecha <= hasta;
-
-    const datos = [
-      entrega.material, entrega.center, entrega.date, formatearFecha(entrega.date),
-      entrega.quantity, entrega.unit, entrega.notes
-    ];
-    const coincideBusqueda = !busqueda || datos.some((dato) =>
-      normalizarTexto(dato).includes(busqueda)
-    );
-
-    return coincideMaterial && coincideDesde && coincideHasta && coincideBusqueda;
-  });
-
-  mostrarEntregas(resultados);
-}
-
-buscadorEntregas.addEventListener("input", aplicarFiltros);
-filtroMaterial.addEventListener("change", aplicarFiltros);
-filtroDesde.addEventListener("change", aplicarFiltros);
-filtroHasta.addEventListener("change", aplicarFiltros);
-
-limpiarFiltros.addEventListener("click", () => {
-  buscadorEntregas.value = "";
-  filtroMaterial.value = "";
-  filtroDesde.value = "";
-  filtroHasta.value = "";
-  aplicarFiltros();
-});
-
-mostrarEntregas(entregasUsuario);
+// Historial personal con búsqueda, filtros y edición/eliminación.
+function readStore(key,fallback){try{const v=JSON.parse(localStorage.getItem(key));return v===null?fallback:v;}catch{return fallback;}}
+const user=readStore("usuarioActivo",null);
+if(!user?.correo)window.location.replace("login.html");
+const email=user?.correo?.toLowerCase()||"",list=document.getElementById("lista-entregas"),search=document.getElementById("buscador-entregas"),total=document.getElementById("total-entregas"),empty=document.getElementById("mensaje-vacio"),none=document.getElementById("mensaje-sin-resultados"),materialFilter=document.getElementById("filtro-material"),fromFilter=document.getElementById("filtro-desde"),toFilter=document.getElementById("filtro-hasta"),dialog=document.getElementById("editar-entrega-dialog"),form=document.getElementById("editar-entrega-form"),centerSelect=document.getElementById("editar-centro"),materialSelect=document.getElementById("editar-material"),editError=document.getElementById("editar-error");
+const labels={plastico:"Plástico",papel:"Papel",carton:"Cartón",vidrio:"Vidrio",metal:"Metal",electronicos:"Electrónicos"};let own=[],editingId=null;
+function today(){const d=new Date();return new Date(d-d.getTimezoneOffset()*60000).toISOString().slice(0,10);}
+function dateText(v){if(!v)return "Sin fecha";const p=v.split("-");return p.length===3?p[2]+"/"+p[1]+"/"+p[0]:"Sin fecha";}
+function norm(v){return String(v||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
+function reload(){own=readStore("entregasEcoPuntos",[]).filter(d=>d.ownerEmail?.toLowerCase()===email).sort((a,b)=>(b.date||"").localeCompare(a.date||""));applyFilters();}
+function render(items){list.replaceChildren();total.textContent=items.length+" de "+own.length+" entregas";
+empty.hidden=own.length>0;none.hidden=items.length>0||own.length===0;
+items.forEach(d=>{const card=document.createElement("article");card.className="delivery-item";const head=document.createElement("div");head.className="delivery-card-heading";const h=document.createElement("h3");h.textContent=d.material||"Material";const date=document.createElement("time");date.className="delivery-date";date.textContent=dateText(d.date);head.append(h,date);const c=document.createElement("p");c.className="delivery-center";c.textContent="Centro: "+(d.center||"No especificado");const q=document.createElement("p");q.className="delivery-quantity";q.textContent=Number(d.quantity||0)+" "+(d.unit==="kg"?"kg":"piezas");card.append(head,c,q);if(d.notes){const n=document.createElement("p");n.className="delivery-notes";n.textContent="Observaciones: "+d.notes;card.append(n);}const actions=document.createElement("div");actions.className="delivery-actions";const edit=document.createElement("button");edit.type="button";edit.className="delivery-edit";edit.textContent="Editar";edit.onclick=()=>openEditor(d);const del=document.createElement("button");del.type="button";del.className="delivery-delete";del.textContent="Eliminar";del.onclick=()=>removeDelivery(d.id);actions.append(edit,del);card.append(actions);list.append(card);});}
+function applyFilters(){const q=norm(search.value.trim()),m=materialFilter.value,from=fromFilter.value,to=toFilter.value;render(own.filter(d=>{const k=norm(d.materialKey||d.material),matchM=!m||k===m||norm(d.material)===norm(labels[m]);const dt=d.date||"",matchD=(!from||dt>=from)&&(!to||dt<=to);const matchQ=!q||[d.material,d.center,d.date,dateText(d.date),d.quantity,d.unit,d.notes].some(v=>norm(v).includes(q));return matchM&&matchD&&matchQ;}));}
+function publicCenters(){return typeof obtenerCentrosPublicos==="function"?obtenerCentrosPublicos():[];}
+function fillMaterials(id,selected){const c=publicCenters().find(x=>x.id===id);materialSelect.replaceChildren();const p=document.createElement("option");p.value="";p.textContent=c?"Selecciona material":"Selecciona centro";materialSelect.append(p);if(!c){materialSelect.disabled=true;return;}c.materials.forEach(k=>{const o=document.createElement("option");o.value=k;o.textContent=labels[k]||k;materialSelect.append(o);});materialSelect.disabled=false;if(selected&&c.materials.includes(selected))materialSelect.value=selected;}
+function openEditor(d){editingId=d.id;centerSelect.replaceChildren();publicCenters().forEach(c=>{const o=document.createElement("option");o.value=c.id;o.textContent=c.name;centerSelect.append(o);});const c=publicCenters().find(x=>x.id===d.centerId)||publicCenters().find(x=>x.name===d.center);if(c)centerSelect.value=c.id;fillMaterials(centerSelect.value,d.materialKey);document.getElementById("editar-cantidad").value=d.quantity||1;document.getElementById("editar-unidad").value=d.unit||"kg";document.getElementById("editar-fecha").value=d.date||today();document.getElementById("editar-fecha").max=today();document.getElementById("editar-observaciones").value=d.notes||"";editError.textContent=c?"":"El centro anterior ya no está disponible. Selecciona otro.";dialog.showModal();}
+function closeEditor(){dialog.close();editingId=null;editError.textContent="";}
+function removeDelivery(id){if(!confirm("¿Eliminar esta entrega? Esta acción no se puede deshacer."))return;const all=readStore("entregasEcoPuntos",[]),d=all.find(x=>x.id===id&&x.ownerEmail?.toLowerCase()===email);if(!d)return;try{localStorage.setItem("entregasEcoPuntos",JSON.stringify(all.filter(x=>x.id!==id)));reload();}catch{alert("No se pudo eliminar el registro.");}}
+centerSelect.addEventListener("change",()=>fillMaterials(centerSelect.value));
+document.getElementById("cerrar-editor").onclick=closeEditor;document.getElementById("cancelar-edicion").onclick=closeEditor;
+form.addEventListener("submit",e=>{e.preventDefault();editError.textContent="";if(!form.reportValidity())return;const all=readStore("entregasEcoPuntos",[]),i=all.findIndex(d=>d.id===editingId&&d.ownerEmail?.toLowerCase()===email);if(i<0){editError.textContent="No se encontró tu entrega.";return;}const c=publicCenters().find(x=>x.id===centerSelect.value),key=materialSelect.value,q=Number(document.getElementById("editar-cantidad").value),date=document.getElementById("editar-fecha").value;if(!c||!c.materials.includes(key)){editError.textContent="Selecciona un material aceptado por el centro.";return;}if(!Number.isFinite(q)||q<=0){editError.textContent="La cantidad debe ser mayor que cero.";return;}if(date>today()){editError.textContent="La fecha no puede ser futura.";return;}all[i]={...all[i],center:c.name,centerId:c.id,material:labels[key]||key,materialKey:key,quantity:q,unit:document.getElementById("editar-unidad").value,date,notes:document.getElementById("editar-observaciones").value.trim()};try{localStorage.setItem("entregasEcoPuntos",JSON.stringify(all));closeEditor();reload();}catch{editError.textContent="No se pudieron guardar los cambios.";}}); 
+search.addEventListener("input",applyFilters);[materialFilter,fromFilter,toFilter].forEach(x=>x.addEventListener("change",applyFilters));document.getElementById("limpiar-filtros").onclick=()=>{search.value="";materialFilter.value="";fromFilter.value="";toFilter.value="";applyFilters();};window.addEventListener("storage",e=>{if(e.key==="entregasEcoPuntos")reload();});reload();
