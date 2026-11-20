@@ -97,3 +97,40 @@ button:not(:disabled):hover, .action-button:hover, .primary-button:hover {
   .search-box { width: 100%; }
   .dialog-actions { flex-wrap: wrap; }
 }
+
+
+/* Estados vacíos para búsquedas y secciones sin registros. */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 170px;
+  margin: 14px 0 2px;
+  padding: 25px 18px;
+  border: 1px dashed #cbded1;
+  border-radius: 12px;
+  background: #f9fcfa;
+  color: #62756a;
+  text-align: center;
+}
+.empty-state[hidden] { display: none; }
+.empty-state-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e8f5ec;
+  color: #176b48;
+  font-size: 25px;
+}
+.empty-state strong { color: #254b38; font-size: 13px; }
+.empty-state p {
+  max-width: 390px;
+  margin: 0;
+  color: #78867e;
+  font-size: 12px;
+  line-height: 1.6;
+}
