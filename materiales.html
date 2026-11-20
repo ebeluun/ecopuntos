@@ -5,19 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Materiales reciclables | EcoPuntos</title>
+
     <link rel="stylesheet" href="css/materiales.css">
-  <link rel="stylesheet" href="css/header-usuario.css">
-  <script src="js/header-usuario.js" defer></script>
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/header-usuario.css">
+
+    <script src="js/header-usuario.js" defer></script>
 </head>
 <body>
 
-    <header class="header">
-        <div class="logo">EcoPuntos</div>
+    <!-- Encabezado compartido -->
+    <header class="site-header">
+        <div class="brand">EcoPuntos</div>
 
-        <nav>
+        <nav class="main-nav">
             <a href="index.html">Inicio</a>
             <a href="centros.html">Centros de reciclaje</a>
-            <a href="materiales.html" class="active">Materiales</a>
+            <a href="materiales.html" aria-current="page">Materiales</a>
         </nav>
     </header>
 
@@ -106,7 +110,8 @@
         </section>
     </main>
 
-    <footer>
+    <!-- Pie de página compartido -->
+    <footer class="site-footer">
         <p>EcoPuntos - Reciclar hoy para cuidar el mañana.</p>
     </footer>
 
