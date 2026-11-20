@@ -28,7 +28,21 @@ function showCenters() {
   if (filteredCenters.length === 0) {
     const message = document.createElement("p");
     message.className = "no-results";
-    message.textContent = "No se encontraron centros. Intenta con otra búsqueda.";
+    message.setAttribute("role", "status");
+    message.setAttribute("aria-live", "polite");
+    const icon = document.createElement("span");
+    icon.className = "no-results-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = "⌕";
+    const title = document.createElement("strong");
+    title.textContent = centers.length === 0
+      ? "Aún no hay centros disponibles"
+      : "No encontramos resultados";
+    const detail = document.createElement("span");
+    detail.textContent = centers.length === 0
+      ? "Pronto podrás consultar aquí los centros de reciclaje."
+      : "Intenta con otro nombre, ubicación o filtro de material.";
+    message.append(icon, title, detail);
     centersGrid.appendChild(message);
   } else {
     filteredCenters.forEach((center) => {
