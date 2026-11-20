@@ -75,14 +75,41 @@ function completarCentro(centro) {
   };
 }
 
+// Cachea la lectura del catálogo para evitar parsearlo repetidamente en cada tarjeta.
+let cacheCentrosTexto;
+let cacheCentrosLista = null;
+
+function clonarCentros(lista) {
+  return lista.map((centro) => ({
+    ...centro,
+    materials: [...(centro.materials || [])]
+  }));
+}
+
 function obtenerTodosLosCentros() {
+  let texto;
   try {
-    const guardados = JSON.parse(localStorage.getItem("centrosEcoPuntos"));
-    if (Array.isArray(guardados)) return guardados.map(completarCentro);
+    texto = localStorage.getItem("centrosEcoPuntos");
+  } catch (error) {
+    console.warn("No se pudo leer el catálogo guardado; se usarán los centros iniciales.", error);
+    return clonarCentros(centrosIniciales.map(completarCentro));
+  }
+
+  if (cacheCentrosLista && texto === cacheCentrosTexto) {
+    return clonarCentros(cacheCentrosLista);
+  }
+
+  let lista = centrosIniciales.map(completarCentro);
+  try {
+    const guardados = JSON.parse(texto || "null");
+    if (Array.isArray(guardados)) lista = guardados.map(completarCentro);
   } catch (error) {
     // Si los datos guardados están dañados, se usan los iniciales.
   }
-  return centrosIniciales.map(completarCentro);
+
+  cacheCentrosTexto = texto;
+  cacheCentrosLista = lista;
+  return clonarCentros(lista);
 }
 
 function guardarCentros(lista) {
@@ -92,6 +119,13 @@ function guardarCentros(lista) {
 // Solo los centros activos se muestran al público.
 function obtenerCentrosPublicos() {
   return obtenerTodosLosCentros().filter((centro) => centro.active);
+}
+
+// Nombre actualizado del centro, conservando el dato histórico si fue eliminado.
+function nombreCentroDeEntrega(entrega) {
+  const centro = obtenerTodosLosCentros().find((item) => item.id === entrega.centerId);
+  if (!centro) return entrega.center || "Centro no especificado";
+  return centro.active ? centro.name : centro.name + " (ya no disponible)";
 }
 
 const centers = obtenerCentrosPublicos();
