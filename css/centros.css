@@ -399,3 +399,79 @@ input:focus-visible {
 }
 .no-results strong { color: #155b43; font-size: 15px; }
 .no-results span:last-child { font-size: 13px; }
+
+
+/* SCRUM-94: sección de centros favoritos del usuario. */
+.favorites-section {
+  width: min(100% - 64px, 1000px);
+  margin: 28px auto 10px;
+  padding: 20px;
+  border: 1px solid #dce9df;
+  border-radius: 12px;
+  background: #f8fcf9;
+}
+
+.favorites-section h2 {
+  margin: 0 0 8px;
+  color: var(--green);
+  font-size: 21px;
+}
+
+#favorites-message {
+  margin: 0 0 14px;
+  color: #668c7a;
+  font-size: 13px;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.favorite-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid #dce9df;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.favorite-card strong {
+  color: var(--green);
+}
+
+.favorite-card p {
+  margin: 0;
+  color: #668c7a;
+  font-size: 13px;
+}
+
+.favorite-card button,
+.favorite-button,
+.favorites-login {
+  width: fit-content;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: 1px solid #b9d8c2;
+  border-radius: 8px;
+  background: #e5f2e8;
+  color: #155b43;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.favorite-button {
+  margin-top: 6px;
+}
+
+@media (max-width: 760px) {
+  .favorites-section {
+    width: calc(100% - 32px);
+    padding: 16px;
+  }
+}
