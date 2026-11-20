@@ -46,3 +46,54 @@ button:not(:disabled):hover, .action-button:hover, .primary-button:hover {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+
+/* Sprint 5: adaptación del panel administrativo a tabletas y celulares. */
+@media (max-width: 760px) {
+  .sidebar {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    min-height: auto;
+    padding: 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { padding: 0 8px 14px; }
+  .side-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .side-nav a {
+    flex: 1 1 145px;
+    padding: 10px;
+  }
+  .sidebar-bottom { margin-top: 12px; }
+  .admin-profile { padding: 10px 8px; }
+  .main-content {
+    margin-left: 0;
+    padding: 22px 18px;
+  }
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .users-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .welcome-banner { gap: 12px; padding: 22px; }
+  .banner-art { font-size: 48px; padding-right: 25px; }
+}
+@media (max-width: 520px) {
+  .main-content { padding: 16px 12px; }
+  .topbar, .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .topbar h1 { font-size: 21px; }
+  .topbar-right { align-self: flex-end; }
+  .welcome-banner { padding: 18px; }
+  .banner-art { display: none; }
+  .stats-grid, .users-grid { grid-template-columns: 1fr; }
+  .content-section { padding: 17px 14px; }
+  .toolbar { align-items: stretch; flex-direction: column; gap: 10px; }
+  .search-box { width: 100%; }
+  .dialog-actions { flex-wrap: wrap; }
+}
