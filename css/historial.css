@@ -113,18 +113,6 @@ body {
   border-bottom: none;
 }
 
-.delivery-info h3 {
-  color: #15583e;
-  margin: 0 0 8px;
-  font-size: 18px;
-}
-
-.delivery-info p {
-  color: #65776b;
-  margin: 5px 0;
-  font-size: 14px;
-}
-
 .delivery-quantity {
   background-color: #e6f3e9;
   color: #15583e;
@@ -267,7 +255,6 @@ body {
   flex-wrap: wrap;
 }
 
-.delivery-info h3,
 .delivery-card-heading h3 {
   color: #15583e;
   margin: 0;

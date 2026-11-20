@@ -75,14 +75,26 @@ function completarCentro(centro) {
   };
 }
 
+// SCRUM-93: se recuerda la última lectura para no convertir el mismo texto
+// muchas veces (por ejemplo, una vez por cada tarjeta del historial).
+let cacheCentrosTexto;
+let cacheCentrosLista = [];
+
 function obtenerTodosLosCentros() {
+  const texto = localStorage.getItem("centrosEcoPuntos");
+  if (texto === cacheCentrosTexto) return cacheCentrosLista.map((centro) => ({ ...centro }));
+
+  let lista = centrosIniciales.map(completarCentro);
   try {
-    const guardados = JSON.parse(localStorage.getItem("centrosEcoPuntos"));
-    if (Array.isArray(guardados)) return guardados.map(completarCentro);
+    const guardados = JSON.parse(texto);
+    if (Array.isArray(guardados)) lista = guardados.map(completarCentro);
   } catch (error) {
     // Si los datos guardados están dañados, se usan los iniciales.
   }
-  return centrosIniciales.map(completarCentro);
+
+  cacheCentrosTexto = texto;
+  cacheCentrosLista = lista;
+  return lista.map((centro) => ({ ...centro }));
 }
 
 function guardarCentros(lista) {
@@ -92,6 +104,15 @@ function guardarCentros(lista) {
 // Solo los centros activos se muestran al público.
 function obtenerCentrosPublicos() {
   return obtenerTodosLosCentros().filter((centro) => centro.active);
+}
+
+// SCRUM-92: nombre actual del centro de una entrega.
+// Si el administrador renombró el centro, se muestra el nombre nuevo;
+// si lo desactivó, se avisa; si ya no existe, se usa el nombre guardado.
+function nombreCentroDeEntrega(entrega) {
+  const centro = obtenerTodosLosCentros().find((item) => item.id === entrega.centerId);
+  if (!centro) return entrega.center || "Centro no especificado";
+  return centro.active ? centro.name : centro.name + " (ya no disponible)";
 }
 
 const centers = obtenerCentrosPublicos();

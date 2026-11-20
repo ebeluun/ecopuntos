@@ -140,8 +140,7 @@ main {
 .primary-button:focus-visible,
 .main-nav a:focus-visible,
 .nav-login:focus-visible,
-.card-link:focus-visible,
-.dialog-close:focus-visible {
+.card-link:focus-visible {
   outline: 3px solid #e6b94f;
   outline-offset: 3px;
 }
@@ -223,80 +222,6 @@ main {
   margin: 0;
 }
 
-.info-dialog {
-  width: min(90%, 430px);
-  padding: 30px;
-  border: 0;
-  border-radius: 12px;
-  color: var(--green);
-  text-align: center;
-  box-shadow: 0 16px 55px rgba(0, 0, 0, 0.22);
-}
-
-.info-dialog::backdrop {
-  background: rgba(10, 35, 26, 0.55);
-  backdrop-filter: blur(2px);
-}
-
-.dialog-close {
-  position: absolute;
-  top: 9px;
-  right: 13px;
-  border: 0;
-  background: transparent;
-  color: var(--green);
-  font-size: 27px;
-  cursor: pointer;
-}
-
-.dialog-icon {
-  font-size: 36px;
-}
-
-.info-dialog h2 {
-  margin: 10px 0;
-  font-family: Georgia, "Times New Roman", serif;
-}
-
-.info-dialog p {
-  color: #426b5d;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.login-form {
-  margin-top: 20px;
-  display: grid;
-  gap: 8px;
-  text-align: left;
-}
-
-.login-form label {
-  margin-top: 5px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.login-form input {
-  width: 100%;
-  padding: 11px;
-  border: 1px solid #b7d3c1;
-  border-radius: 5px;
-  font: inherit;
-}
-
-.form-button {
-  width: 100%;
-  min-height: 45px;
-  margin-top: 8px;
-  padding: 10px;
-}
-
-.info-dialog .form-note {
-  margin-bottom: 0;
-  font-size: 11px;
-}
-
 @media (max-width: 700px) {
   .site-header {
     align-items: flex-start;
@@ -310,10 +235,6 @@ main {
 
   .welcome {
     padding-top: 34px;
-  }
-
-  .desktop-break {
-    display: none;
   }
 
   .hero-action {
@@ -624,10 +545,6 @@ main {
   color: #fff;
   font-size: 11px;
   text-decoration: underline;
-}
-
-.login-form .form-button {
-  cursor: pointer;
 }
 
 @media (max-width: 700px) {
