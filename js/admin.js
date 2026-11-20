@@ -61,7 +61,17 @@ function renderDashboard() {
 function renderCenters(list) {
   centerTable.innerHTML = "";
   document.getElementById("center-count").textContent = list.length + (list.length === 1 ? " centro" : " centros");
-  document.getElementById("centers-empty").hidden = list.length > 0;
+  const centersEmpty = document.getElementById("centers-empty");
+  centersEmpty.hidden = list.length > 0;
+  if (list.length === 0) {
+    const searching = document.getElementById("center-search").value.trim().length > 0;
+    centersEmpty.querySelector("strong").textContent = searching
+      ? "No se encontraron resultados"
+      : "Aún no hay centros registrados";
+    centersEmpty.querySelector("p").textContent = searching
+      ? "Prueba con otro nombre o ubicación para encontrar un centro."
+      : "Agrega un centro para que aparezca en el catálogo de EcoPuntos.";
+  }
   list.forEach((center) => {
     const row = document.createElement("tr");
     const materials = (center.materials || []).map((key) =>
