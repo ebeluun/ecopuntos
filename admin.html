@@ -51,19 +51,19 @@
         <div class="section-heading"><div><p class="eyebrow">GESTIÓN</p><h2>Centros de reciclaje</h2><p>Administra los centros que aparecen en el catálogo público.</p></div><button class="primary-button" id="open-center-form" type="button">＋ Agregar centro</button></div>
         <div class="toolbar"><label class="search-box">⌕ <input id="center-search" type="search" placeholder="Buscar centro por nombre o ubicación"></label><span class="muted" id="center-count">0 centros</span></div>
         <div class="table-wrap"><table><thead><tr><th>Centro</th><th>Ubicación</th><th>Dirección</th><th>Horario</th><th>Materiales</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="centers-table"></tbody></table></div>
-        <p class="empty-state" id="centers-empty" hidden>No se encontraron centros.</p>
+        <div class="empty-state" id="centers-empty" role="status" hidden><span class="empty-state-icon" aria-hidden="true">⌕</span><strong>No hay centros para mostrar</strong><p>Cuando se registren centros, aparecerán en esta sección.</p></div>
       </section>
 
       <section class="content-section" id="entregas">
         <div class="section-heading"><div><p class="eyebrow">ACTIVIDAD RECIENTE</p><h2>Últimas entregas</h2><p>Consulta los registros realizados por los usuarios.</p></div><span class="section-tag">Actualizado desde el navegador</span></div>
         <div class="table-wrap"><table><thead><tr><th>Usuario</th><th>Centro</th><th>Material</th><th>Cantidad</th><th>Fecha</th></tr></thead><tbody id="deliveries-table"></tbody></table></div>
-        <p class="empty-state" id="deliveries-empty" hidden>Aún no hay entregas registradas.</p>
+        <div class="empty-state" id="deliveries-empty" role="status" hidden><span class="empty-state-icon" aria-hidden="true">♻</span><strong>Aún no hay entregas registradas</strong><p>Las entregas realizadas por los usuarios aparecerán aquí.</p></div>
       </section>
 
       <section class="content-section" id="usuarios">
         <div class="section-heading"><div><p class="eyebrow">COMUNIDAD</p><h2>Usuarios registrados</h2><p>Personas que han creado una cuenta en EcoPuntos.</p></div></div>
         <div class="users-grid" id="users-grid"></div>
-        <p class="empty-state" id="users-empty" hidden>Aún no hay usuarios registrados.</p>
+        <div class="empty-state" id="users-empty" role="status" hidden><span class="empty-state-icon" aria-hidden="true">♙</span><strong>Aún no hay usuarios registrados</strong><p>Cuando alguien cree una cuenta en EcoPuntos, sus datos aparecerán aquí.</p></div>
       </section>
 
       <footer class="admin-footer">EcoPuntos · Panel de administración · Proyecto académico</footer>
