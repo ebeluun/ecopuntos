@@ -37,3 +37,75 @@
 @media (max-width: 700px) {
   .user-session { margin: 5px 0 0; }
 }
+
+
+/* Sprint 5: estilos compartidos para mantener consistencia entre páginas. */
+:where(button, .primary-button, .secondary-button, .details-button,
+       .detail-button, .submit-button, .confirmation-close) {
+  transition: background-color .18s ease, color .18s ease,
+    border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+:where(button, input, select, textarea) {
+  font: inherit;
+}
+:where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  max-width: 100%;
+  border: 1px solid #cbded1;
+  border-radius: 9px;
+  background: #fff;
+  color: #20352b;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+:where(input:not([type="checkbox"]):not([type="radio"]), select, textarea):focus {
+  outline: none;
+  border-color: #26734d;
+  box-shadow: 0 0 0 3px rgba(38, 115, 77, .13);
+}
+:where(button, input, select, textarea, a):focus-visible {
+  outline: 3px solid #e6b94f;
+  outline-offset: 3px;
+}
+:where(button, .primary-button, .secondary-button, .details-button,
+       .detail-button, .submit-button, .confirmation-close):not(:disabled):hover {
+  filter: brightness(.96);
+  transform: translateY(-1px);
+}
+:where(button):disabled {
+  cursor: not-allowed;
+  opacity: .58;
+}
+:where(dialog) {
+  max-width: min(94vw, 620px);
+  max-height: 88vh;
+  overflow: auto;
+  border: 1px solid #dce9df;
+  border-radius: 16px;
+  color: #20352b;
+  box-shadow: 0 22px 70px rgba(12, 45, 29, .22);
+}
+:where(dialog)::backdrop {
+  background: rgba(13, 39, 28, .58);
+  backdrop-filter: blur(3px);
+}
+:where(.feature-card, .center-card, .delivery-item, .entrega,
+       .material-card, .user-card, .stat-card, .step-card,
+       .formulario, .history-card) {
+  box-shadow: 0 5px 18px rgba(21, 91, 67, .06);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+:where(.feature-card, .center-card, .delivery-item, .entrega,
+       .material-card, .user-card, .stat-card, .step-card):hover {
+  box-shadow: 0 10px 26px rgba(21, 91, 67, .11);
+}
+.user-session-profile:hover,
+.user-session-logout:hover {
+  opacity: 1;
+  filter: brightness(.94);
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(*, *::before, *::after) {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
