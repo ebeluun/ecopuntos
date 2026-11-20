@@ -1,19 +1,29 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión | EcoPuntos</title>
+
     <link rel="stylesheet" href="css/auth.css">
-  <link rel="stylesheet" href="css/header-usuario.css">
-  <script src="js/header-usuario.js" defer></script>
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/header-usuario.css">
+
+    <script src="js/header-usuario.js" defer></script>
 </head>
 <body>
 
-    <header class="encabezado">
-        <a href="index.html" class="logo">♻ EcoPuntos</a>
-        <nav>
+    <!-- Encabezado compartido -->
+    <header class="site-header">
+        <a href="index.html" class="brand">
+            <span class="brand-icon">♻</span>
+            EcoPuntos
+        </a>
+
+        <nav class="main-nav" aria-label="Navegación principal">
             <a href="index.html">Inicio</a>
+            <a href="centros.html">Centros</a>
             <a href="registro.html">Registrarse</a>
             <a href="perfil.html">Mi perfil</a>
         </nav>
@@ -24,20 +34,41 @@
             <h1>Acceso a EcoPuntos</h1>
 
             <form id="form-login" novalidate>
+
                 <label for="correo">Correo electrónico</label>
-                <input type="email" id="correo" name="correo"
-                    placeholder="Ingresa tu correo" autocomplete="email"
-                    spellcheck="false" required>
+                <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                    placeholder="Ingresa tu correo"
+                    autocomplete="email"
+                    spellcheck="false"
+                    required
+                >
 
                 <label for="contrasena">Contraseña</label>
-                <input type="password" id="contrasena" name="contrasena"
-                    placeholder="Ingresa tu contraseña" autocomplete="current-password"
-                    required>
+                <input
+                    type="password"
+                    id="contrasena"
+                    name="contrasena"
+                    placeholder="Ingresa tu contraseña"
+                    autocomplete="current-password"
+                    required
+                >
 
-                <a href="#" class="recuperar">¿Olvidaste tu contraseña?</a>
+                <a href="#" class="recuperar">
+                    ¿Olvidaste tu contraseña?
+                </a>
 
                 <button type="submit">Iniciar sesión</button>
-                <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
+
+                <p
+                    id="mensaje"
+                    class="mensaje"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
             </form>
 
             <p class="enlace-registro">
@@ -47,9 +78,12 @@
         </section>
     </main>
 
-    <footer>
-        EcoPuntos | ¡Cuidar el planeta está en nuestras manos!
+    <!-- Pie de página compartido -->
+    <footer class="site-footer">
+        <p>EcoPuntos | ¡Cuidar el planeta está en nuestras manos!</p>
     </footer>
+
     <script src="js/auth.js"></script>
+
 </body>
 </html>

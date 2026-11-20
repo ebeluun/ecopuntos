@@ -2,116 +2,184 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Consulta tu historial de entregas en EcoPuntos.">
-  <title>Historial de entregas | EcoPuntos</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/historial.css">
-  <link rel="stylesheet" href="css/header-usuario.css">
-  <script src="js/historial.js" defer></script>
-  <script src="js/header-usuario.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Consulta tu historial de entregas en EcoPuntos.">
+    <title>Historial de entregas | EcoPuntos</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/historial.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/header-usuario.css">
+
+    <script src="js/historial.js" defer></script>
+    <script src="js/header-usuario.js" defer></script>
 </head>
 <body>
 
-  <header class="main-header">
-    <a href="index.html" class="logo">EcoPuntos</a>
+    <!-- Encabezado compartido -->
+    <header class="site-header">
+        <a href="index.html" class="brand">EcoPuntos</a>
 
-    <nav class="main-nav" aria-label="Navegación principal">
-      <a href="index.html">Inicio</a>
-      <a href="perfil.html">Mi perfil</a>
-      <a href="registro-entregas.html">Registro de entregas</a>
-      <a href="historial.html" aria-current="page">Historial</a>
-    </nav>
-  </header>
+        <nav class="main-nav" aria-label="Navegación principal">
+            <a href="index.html">Inicio</a>
+            <a href="perfil.html">Mi perfil</a>
+            <a href="registro-entregas.html">Registro de entregas</a>
+            <a href="historial.html" aria-current="page">Historial</a>
+        </nav>
+    </header>
 
-  <main class="page-container">
+    <main class="page-container">
 
-    <section class="intro-section">
-      <span class="intro-icon" aria-hidden="true">📋</span>
-      <h1>Mi historial de entregas</h1>
-      <p>
-        Consulta tus entregas registradas y revisa tu contribución
-        al cuidado del planeta.
-      </p>
-    </section>
+        <section class="intro-section">
+            <span class="intro-icon" aria-hidden="true">📋</span>
+            <h1>Mi historial de entregas</h1>
+            <p>
+                Consulta tus entregas registradas y revisa tu contribución
+                al cuidado del planeta.
+            </p>
+        </section>
 
-    <section class="history-card">
+        <section class="history-card">
 
-      <div class="history-heading">
-        <h2>Mis entregas</h2>
-        <p id="total-entregas">0 entregas registradas</p>
-      </div>
+            <div class="history-heading">
+                <h2>Mis entregas</h2>
+                <p id="total-entregas">0 entregas registradas</p>
+            </div>
 
-      <div class="search-group">
-        <label for="buscador-entregas">Buscar una entrega</label>
-        <input
-          type="search"
-          id="buscador-entregas"
-          placeholder="Busca por material, centro o fecha..."
-        >
-      </div>
+            <div class="search-group">
+                <label for="buscador-entregas">Buscar una entrega</label>
+                <input
+                    type="search"
+                    id="buscador-entregas"
+                    placeholder="Busca por material, centro o fecha..."
+                >
+            </div>
 
-      <section class="history-filters" aria-label="Filtros del historial">
-        <h3>Filtrar entregas</h3>
-        <div class="filter-fields">
-          <div>
-            <label for="filtro-material">Material</label>
-            <select id="filtro-material">
-              <option value="">Todos los materiales</option>
-              <option value="plastico">Plástico</option>
-              <option value="papel">Papel</option>
-              <option value="carton">Cartón</option>
-              <option value="vidrio">Vidrio</option>
-              <option value="metal">Metal</option>
-              <option value="electronicos">Electrónicos</option>
-            </select>
-          </div>
-          <div>
-            <label for="filtro-desde">Desde</label>
-            <input type="date" id="filtro-desde">
-          </div>
-          <div>
-            <label for="filtro-hasta">Hasta</label>
-            <input type="date" id="filtro-hasta">
-          </div>
+            <section class="history-filters" aria-label="Filtros del historial">
+                <h3>Filtrar entregas</h3>
+
+                <div class="filter-fields">
+                    <div>
+                        <label for="filtro-material">Material</label>
+                        <select id="filtro-material">
+                            <option value="">Todos los materiales</option>
+                            <option value="plastico">Plástico</option>
+                            <option value="papel">Papel</option>
+                            <option value="carton">Cartón</option>
+                            <option value="vidrio">Vidrio</option>
+                            <option value="metal">Metal</option>
+                            <option value="electronicos">Electrónicos</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="filtro-desde">Desde</label>
+                        <input type="date" id="filtro-desde">
+                    </div>
+
+                    <div>
+                        <label for="filtro-hasta">Hasta</label>
+                        <input type="date" id="filtro-hasta">
+                    </div>
+                </div>
+
+                <button type="button" id="limpiar-filtros" class="clear-filters">
+                    Limpiar filtros
+                </button>
+            </section>
+
+            <div id="lista-entregas" class="delivery-list"></div>
+
+            <dialog id="editar-entrega-dialog" class="history-edit-dialog">
+                <form id="editar-entrega-form">
+
+                    <div class="edit-dialog-heading">
+                        <div>
+                            <p class="edit-eyebrow">MI HISTORIAL</p>
+                            <h2>Editar entrega</h2>
+                        </div>
+
+                        <button
+                            type="button"
+                            id="cerrar-editor"
+                            class="edit-close"
+                            aria-label="Cerrar"
+                        >×</button>
+                    </div>
+
+                    <label for="editar-centro">Centro de reciclaje</label>
+                    <select id="editar-centro" required></select>
+
+                    <label for="editar-material">Material</label>
+                    <select id="editar-material" required></select>
+
+                    <div class="edit-fields">
+                        <div>
+                            <label for="editar-cantidad">Cantidad</label>
+                            <input
+                                id="editar-cantidad"
+                                type="number"
+                                min="0.01"
+                                step="0.01"
+                                required
+                            >
+                        </div>
+
+                        <div>
+                            <label for="editar-unidad">Unidad</label>
+                            <select id="editar-unidad">
+                                <option value="kg">Kilogramos</option>
+                                <option value="piezas">Piezas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label for="editar-fecha">Fecha</label>
+                    <input type="date" id="editar-fecha" required>
+
+                    <label for="editar-observaciones">Observaciones</label>
+                    <textarea
+                        id="editar-observaciones"
+                        rows="3"
+                        maxlength="300"
+                    ></textarea>
+
+                    <p id="editar-error" class="edit-error" role="alert"></p>
+
+                    <div class="edit-actions">
+                        <button type="button" id="cancelar-edicion" class="edit-cancel">
+                            Cancelar
+                        </button>
+
+                        <button type="submit" class="edit-save">
+                            Guardar cambios
+                        </button>
+                    </div>
+
+                </form>
+            </dialog>
+
+            <p id="mensaje-vacio" class="empty-message" hidden>
+                Todavía no tienes entregas registradas.
+            </p>
+
+            <p id="mensaje-sin-resultados" class="empty-message" hidden>
+                No se encontraron entregas con esa búsqueda.
+            </p>
+
+        </section>
+
+        <div class="back-link">
+            <a href="registro-entregas.html">+ Registrar una nueva entrega</a>
         </div>
-        <button type="button" id="limpiar-filtros" class="clear-filters">Limpiar filtros</button>
-      </section>
 
-      <div id="lista-entregas" class="delivery-list"></div>
-      <dialog id="editar-entrega-dialog" class="history-edit-dialog">
-        <form id="editar-entrega-form">
-          <div class="edit-dialog-heading"><div><p class="edit-eyebrow">MI HISTORIAL</p><h2>Editar entrega</h2></div><button type="button" id="cerrar-editor" class="edit-close" aria-label="Cerrar">×</button></div>
-          <label for="editar-centro">Centro de reciclaje</label><select id="editar-centro" required></select>
-          <label for="editar-material">Material</label><select id="editar-material" required></select>
-          <div class="edit-fields"><div><label for="editar-cantidad">Cantidad</label><input id="editar-cantidad" type="number" min="0.01" step="0.01" required></div><div><label for="editar-unidad">Unidad</label><select id="editar-unidad"><option value="kg">Kilogramos</option><option value="piezas">Piezas</option></select></div></div>
-          <label for="editar-fecha">Fecha</label><input id="editar-fecha" type="date" required>
-          <label for="editar-observaciones">Observaciones</label><textarea id="editar-observaciones" rows="3" maxlength="300"></textarea>
-          <p id="editar-error" class="edit-error" role="alert"></p>
-          <div class="edit-actions"><button type="button" id="cancelar-edicion" class="edit-cancel">Cancelar</button><button type="submit" class="edit-save">Guardar cambios</button></div>
-        </form>
-      </dialog>
+    </main>
 
-      <p id="mensaje-vacio" class="empty-message" hidden>
-        Todavía no tienes entregas registradas.
-      </p>
-
-      <p id="mensaje-sin-resultados" class="empty-message" hidden>
-        No se encontraron entregas con esa búsqueda.
-      </p>
-
-    </section>
-
-    <div class="back-link">
-      <a href="registro-entregas.html">+ Registrar una nueva entrega</a>
-    </div>
-
-  </main>
-
-  <footer class="main-footer">
-    <p>© 2026 EcoPuntos | Cuidar el planeta está en tus manos.</p>
-  </footer>
+    <!-- Pie de página compartido -->
+    <footer class="site-footer">
+        <p>© 2026 EcoPuntos | Cuidar el planeta está en tus manos.</p>
+    </footer>
 
 </body>
 </html>
