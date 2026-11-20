@@ -94,7 +94,7 @@ function renderDeliveries(deliveries, users) {
       : "Sin fecha";
     row.innerHTML =
       '<td>' + escapeHtml(user ? user.nombre : delivery.ownerEmail || "Usuario") + '</td>' +
-      '<td>' + escapeHtml(delivery.center) + '</td>' +
+      '<td>' + escapeHtml(nombreCentroDeEntrega(delivery)) + '</td>' +
       '<td>' + escapeHtml(delivery.material) + '</td>' +
       '<td>' + escapeHtml(delivery.quantity) + " " + escapeHtml(delivery.unit === "kg" ? "kg" : "piezas") + '</td>' +
       '<td>' + escapeHtml(date) + '</td>';
