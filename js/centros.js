@@ -71,6 +71,13 @@ function showCenters() {
       detailsButton.dataset.details = center.id;
 
       card.append(title, location, materialsTitle, materials, detailsButton);
+
+      const favoriteButton = document.createElement("button");
+      favoriteButton.type = "button";
+      favoriteButton.className = "favorite-button";
+      favoriteButton.dataset.favorite = center.id;
+      favoriteButton.textContent = esFavorito(center.id) ? "★ Quitar de favoritos" : "☆ Agregar a favoritos";
+      card.appendChild(favoriteButton);
       if(esAdministrador()){const actions=document.createElement("div");actions.className="center-card-actions";const edit=document.createElement("button");edit.type="button";edit.textContent="Editar";edit.addEventListener("click",()=>openCenterEditor(center));const del=document.createElement("button");del.type="button";del.textContent="Eliminar";del.addEventListener("click",()=>deleteCenter(center.id));actions.append(edit,del);card.appendChild(actions);}
       centersGrid.appendChild(card);
     });
@@ -122,5 +129,118 @@ centerForm.addEventListener("submit",e=>{e.preventDefault();centerError.textCont
 function deleteCenter(id){if(!esAdministrador())return;const all=obtenerTodosLosCentros(),c=all.find(x=>x.id===id);if(!c||!confirm("¿Eliminar "+c.name+" del catálogo público? Sus entregas anteriores se conservarán."))return;try{guardarCentros(all.map(x=>x.id===id?{...x,active:false}:x));centers.splice(0,centers.length,...obtenerCentrosPublicos());showCenters();showCenterFeedback("Centro eliminado del catálogo público.","success");}catch{showCenterFeedback("No se pudo eliminar el centro.","error");}}
 function showCenterFeedback(message,type){feedback.textContent=message;feedback.className="centers-feedback "+type;}
 
-// Mostrar los centros al cargar la página.
+// SCRUM-94: favoritos independientes para cada cuenta.
+function obtenerUsuarioActivo() {
+  try {
+    return JSON.parse(localStorage.getItem("usuarioActivo") || "null");
+  } catch {
+    return null;
+  }
+}
+
+function leerFavoritos() {
+  try {
+    const favoritos = JSON.parse(localStorage.getItem("centrosFavoritosEcoPuntos") || "[]");
+    return Array.isArray(favoritos) ? favoritos : [];
+  } catch {
+    return [];
+  }
+}
+
+function guardarFavoritos(favoritos) {
+  localStorage.setItem("centrosFavoritosEcoPuntos", JSON.stringify(favoritos));
+}
+
+function esFavorito(centerId) {
+  const usuario = obtenerUsuarioActivo();
+  if (!usuario || !usuario.correo) return false;
+  return leerFavoritos().some(item =>
+    item.ownerEmail === usuario.correo.toLowerCase() && item.centerId === centerId
+  );
+}
+
+function renderFavoritos() {
+  const grid = document.getElementById("favorites-grid");
+  const message = document.getElementById("favorites-message");
+  const usuario = obtenerUsuarioActivo();
+  grid.replaceChildren();
+
+  if (!usuario || !usuario.correo) {
+    message.textContent = "Inicia sesión para guardar y consultar tus centros favoritos.";
+    const link = document.createElement("a");
+    link.href = "login.html";
+    link.textContent = "Iniciar sesión";
+    link.className = "favorites-login";
+    grid.appendChild(link);
+    return;
+  }
+
+  const email = usuario.correo.toLowerCase();
+  const ids = leerFavoritos()
+    .filter(item => item.ownerEmail === email)
+    .map(item => item.centerId);
+  const favoritos = obtenerTodosLosCentros().filter(center => ids.includes(center.id));
+
+  if (favoritos.length === 0) {
+    message.textContent = "Todavía no tienes centros favoritos. Agrégalos desde el catálogo.";
+    return;
+  }
+
+  message.textContent = "Tienes " + favoritos.length +
+    (favoritos.length === 1 ? " centro favorito." : " centros favoritos.");
+
+  favoritos.forEach(center => {
+    const card = document.createElement("article");
+    card.className = "favorite-card";
+    const name = document.createElement("strong");
+    name.textContent = center.icon + " " + center.name;
+    const location = document.createElement("p");
+    location.textContent = center.location || "Ubicación no especificada";
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.textContent = "Eliminar de favoritos";
+    remove.addEventListener("click", () => cambiarFavorito(center.id, false));
+    card.append(name, location, remove);
+    grid.appendChild(card);
+  });
+}
+
+function cambiarFavorito(centerId, agregar) {
+  const usuario = obtenerUsuarioActivo();
+  if (!usuario || !usuario.correo) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const email = usuario.correo.toLowerCase();
+  let favoritos = leerFavoritos().filter(item =>
+    !(item.ownerEmail === email && item.centerId === centerId)
+  );
+
+  if (agregar) favoritos.push({ ownerEmail: email, centerId });
+  try {
+    guardarFavoritos(favoritos);
+    renderFavoritos();
+    showCenters();
+  } catch {
+    showCenterFeedback("No se pudo actualizar tu lista de favoritos.", "error");
+  }
+}
+
+centersGrid.addEventListener("click", event => {
+  const button = event.target.closest("[data-favorite]");
+  if (!button) return;
+  const id = button.dataset.favorite;
+  cambiarFavorito(id, !esFavorito(id));
+});
+
+window.addEventListener("storage", event => {
+  if (event.key === "centrosFavoritosEcoPuntos" || event.key === "usuarioActivo") {
+    renderFavoritos();
+    showCenters();
+  }
+});
+
+// Mostrar el catálogo y los favoritos al cargar la página.
 showCenters();
+renderFavoritos();
