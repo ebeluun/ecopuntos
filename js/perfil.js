@@ -75,7 +75,7 @@ function renderUserProfile(user, allDeliveries) {
     material.textContent = delivery.material || "Material";
 
     const center = document.createElement("p");
-    center.textContent = delivery.center || "Centro no especificado";
+    center.textContent = nombreCentroDeEntrega(delivery);
 
     const date = document.createElement("p");
     date.textContent = formatDate(delivery.date);
