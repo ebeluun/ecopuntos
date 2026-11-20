@@ -243,8 +243,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // Redirigir al perfil del usuario.
-            window.location.href = "perfil.html";
+            // Enviar a cada tipo de cuenta a su sección correspondiente.
+            const esAdministrador = correoNormalizado === "ebelun007@tecmilenio.mx";
+            window.location.href = esAdministrador ? "admin.html" : "perfil.html";
         }
     });
 });
