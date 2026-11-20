@@ -158,9 +158,28 @@ centerTable.addEventListener("click", (event) => {
   if (toggleButton) {
     const center = centersList.find((item) => item.id === toggleButton.dataset.toggle);
     if (!center) return;
-    center.active = center.active === false;
-    guardarCentros(centersList);
-    renderDashboard();
+
+    const isActive = center.active !== false;
+    const action = isActive ? "desactivar" : "activar";
+    const explanation = isActive
+      ? "El centro dejará de aparecer en el catálogo público. Sus datos y las entregas relacionadas se conservarán."
+      : "El centro volverá a aparecer en el catálogo público.";
+
+    if (!confirm("¿Quieres " + action + " \"" + center.name + "\"?\\n\\n" + explanation)) return;
+
+    center.active = !isActive;
+    try {
+      guardarCentros(centersList);
+      renderDashboard();
+      const notice = document.getElementById("center-action-notice");
+      if (notice) {
+        notice.textContent = isActive
+          ? "Centro desactivado. Se conservaron sus datos e historial."
+          : "Centro activado y visible en el catálogo.";
+      }
+    } catch (error) {
+      alert("No se pudo actualizar el estado del centro. Inténtalo de nuevo.");
+    }
   }
 });
 
