@@ -6,3 +6,44 @@
 
 /* Campos adicionales de dirección y horario en el formulario de centros. */
 .center-dialog form>label{line-height:1.4}.center-dialog input::placeholder,.center-dialog textarea::placeholder{color:#a0aaa3}
+
+
+/* Sprint 5: refinamiento visual de controles y panel administrativo. */
+button, input, select, textarea { font: inherit; }
+button, .primary-button, .action-button, .secondary-button {
+  transition: background-color .18s ease, color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid #e6b94f;
+  outline-offset: 3px;
+}
+input:not([type="checkbox"]), select, textarea {
+  border-radius: 9px;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+input:not([type="checkbox"]):focus, select:focus, textarea:focus {
+  border-color: #26734d;
+  box-shadow: 0 0 0 3px rgba(38,115,77,.13);
+}
+button:not(:disabled):hover, .action-button:hover, .primary-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(.96);
+}
+.stat-card, .content-section, .user-card {
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.stat-card:hover, .user-card:hover {
+  box-shadow: 0 12px 28px rgba(21,91,67,.12);
+}
+.center-dialog {
+  width: min(94vw, 560px);
+  max-height: 88vh;
+  overflow: auto;
+  border: 1px solid #dce9df;
+  border-radius: 16px;
+  box-shadow: 0 22px 70px rgba(12,45,29,.22);
+}
+.center-dialog::backdrop { background: rgba(13,39,28,.58); backdrop-filter: blur(3px); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
