@@ -165,7 +165,7 @@ centerTable.addEventListener("click", (event) => {
       ? "El centro dejará de aparecer en el catálogo público. Sus datos y las entregas relacionadas se conservarán."
       : "El centro volverá a aparecer en el catálogo público.";
 
-    if (!confirm("¿Quieres " + action + " \"" + center.name + "\"?\\n\\n" + explanation)) return;
+    if (!confirm("¿Quieres " + action + " \"" + center.name + "\"?\n\n" + explanation)) return;
 
     center.active = !isActive;
     try {
