@@ -11,15 +11,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const navegaciones = document.querySelectorAll("header nav");
 
   navegaciones.forEach(function (nav) {
+    if (!usuarioActivo || !usuarioActivo.nombre || !usuarioActivo.correo) return;
     if (nav.querySelector(".user-session")) return;
 
-    // Sin sesión, se conservan los enlaces originales: Iniciar sesión y Crear cuenta.
-    if (!usuarioActivo || !usuarioActivo.nombre || !usuarioActivo.correo) return;
-
-    // Con sesión, se reemplazan los accesos de autenticación por el acceso al perfil.
+    // Ocultar los accesos de registro e inicio de sesión,
+    // pero conservar el enlace de cerrar sesión si ya existe.
     nav.querySelectorAll('a[href*="login.html"], a[href*="registro.html"], a[href*="#login-dialog"]')
       .forEach(function (link) {
-        link.hidden = true;
+        const esCerrarSesion = link.id === "cerrar-sesion" ||
+          link.textContent.trim().toLowerCase() === "cerrar sesión";
+
+        if (esCerrarSesion) {
+          link.classList.add("user-session-logout");
+          link.addEventListener("click", cerrarSesion);
+        } else {
+          link.hidden = true;
+        }
       });
 
     const session = document.createElement("span");
@@ -35,17 +42,24 @@ document.addEventListener("DOMContentLoaded", function () {
     profile.textContent = "Ver perfil";
     profile.setAttribute("aria-label", "Ver mi perfil");
 
-    const logout = document.createElement("a");
-    logout.className = "user-session-logout";
-    logout.href = "login.html";
-    logout.textContent = "Cerrar sesión";
-    logout.addEventListener("click", function (event) {
-      event.preventDefault();
-      localStorage.removeItem("usuarioActivo");
-      window.location.href = "index.html";
-    });
+    session.append(name, profile);
 
-    session.append(name, profile, logout);
+    // Crear el enlace de salida solo si la página no tiene uno.
+    if (!nav.querySelector(".user-session-logout")) {
+      const logout = document.createElement("a");
+      logout.className = "user-session-logout";
+      logout.href = "index.html";
+      logout.textContent = "Cerrar sesión";
+      logout.addEventListener("click", cerrarSesion);
+      session.appendChild(logout);
+    }
+
     nav.appendChild(session);
   });
+
+  function cerrarSesion(event) {
+    event.preventDefault();
+    localStorage.removeItem("usuarioActivo");
+    window.location.href = "index.html";
+  }
 });
