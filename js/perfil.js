@@ -239,11 +239,4 @@ function formatDate(value) {
 }
 
 // Cerrar sesión desde el perfil.
-const logoutButton = document.getElementById("cerrar-sesion");
-if (logoutButton) {
-  logoutButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    localStorage.removeItem("usuarioActivo");
-    window.location.href = "login.html";
-  });
-}
+// El cierre de sesión se controla desde js/header-usuario.js en todas las páginas.
